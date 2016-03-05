@@ -1,0 +1,63 @@
+@CHARSET "ISO-8859-1";
+
+/* Kaikkialla sama fonttityyli*/
+
+
+#raamit {margin:15px auto;
+		width: 976px;
+		border:solid 2px rgb(51,51,51);
+		padding:2px;
+		height:1550px;}
+		
+#header {height:200px;
+		background-color: red;}
+
+#paavalikko {
+			margin-right:150px;
+
+}
+
+#paavalikko li {float:right;
+width:10em;
+text-align:center;
+list-style:none;
+ border:solid 1px;
+background-color: green				  }
+				  
+#paavalikko a {text-decoration:none;}
+
+
+
+#sisältö  {margin-top: 150px;
+		
+}	
+
+
+
+#pylvas {
+	background-color: green;
+		width: 160px;
+		height: 1200px;
+		float: left;}
+
+h2 {margin-left: 260px;}
+
+#sisältö p {font-style: serif;
+color: black;
+margin-left: 260px;
+font-weight: bold}
+
+#tiedot input {margin-left:100px;}
+
+
+
+.numero {color: red}
+
+#raja {border-bottom: solid;}
+
+#footer {height: 130px;
+margin-top:515px;
+background-color: red;
+}
+
+#footer p {margin-left: 400px;}
