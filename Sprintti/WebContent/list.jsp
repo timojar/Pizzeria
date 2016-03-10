@@ -2,7 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
-<%@ page import="fi.omapizzeria.admin.bean.Pizza"%>
+<%@ page import="fi.omapizzeria.admin.bean.*"%>
 <%@ page import="java.text.DecimalFormat"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.HashMap"%>
@@ -17,12 +17,6 @@
 
 <title>Insert title here</title>
 
-<%
-	DecimalFormat desimaalit = new DecimalFormat("0.00");
-
-	List<Pizza> pizzalista = (ArrayList<Pizza>) request
-			.getAttribute("lista");
-%>
 
 </head>
 <body>
@@ -39,9 +33,13 @@
 			<li><a href="">Ravintolat</a>
 			<li><a href="">Ruokalista </a>
 			<li><a href="">Meille töihin </a>
-			<li><a href="">Yhteystiedot</a>
+			<li><a href="tayteController">Luo täyte</a>
 		</ul>
-		<div id=pylvas></div>
+		<div id="pylvas">
+		
+		<div id="column"></div>
+		
+		</div>
 
 
 		<div id=sisältö>
@@ -70,10 +68,10 @@
 				painamalla lähetetään pizzan id-numero parametrina controller-servlettiin
 				
 				--%>
-
-				<form action="controller" method="post">
+<br>
+				<form action="controller" method="post" id="delete">
 					<input type="hidden" name="tunnus" value="${pizzat.id }"> <input
-						type="submit" id="delete" value="poista">
+						type="submit"  value="poista">
 
 				</form>
 				<br>
@@ -86,12 +84,39 @@
 				<input type="text" name="nimi" id="pizzannimi">
 
 				<p>Pizzan hinta:</p>
-				<input type="text" name="hinta" id="pizzanhinta"> <input
-					type="submit" id="lahetys">
+				<input type="text" name="hinta" id="pizzanhinta">
+				<br>
+				<br>
+					<br>
+			<label>Valitse täytteet (max 6)</label>
+				<br>
+			
+			<c:forEach items="${taytelista}" var="tayte"> 
+		
+		<label> <input type="checkbox" name="${pizzatayte}" value="${tayte.tayteNimi}"> 
+		<c:out value="${tayte.tayteNimi}">
+		</c:out> </label>
+		
+			
+			</c:forEach>
+			
+				<br>
+				<br>
+				
+		
+				
+			 <input
+					type="submit" id="lahetys" value="Luo pizza">			
+				
 			</form>
 
 
-
+		<table>
+		<c:forEach begin="1" end ="${noofPages}" var="i">
+		
+		<td><a href="controller?page=${i}">${i}</a></td>
+		</c:forEach>
+		</table>
 
 
 		</div>

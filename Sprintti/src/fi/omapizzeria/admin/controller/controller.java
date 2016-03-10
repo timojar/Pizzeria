@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import fi.omapizzeria.admin.bean.Pizza;
+import fi.omapizzeria.admin.bean.*;
 
 /**
  * Servlet implementation class controller
@@ -34,7 +34,7 @@ public class controller extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+  
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -43,12 +43,40 @@ public class controller extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession sessio = request.getSession(false);
-		List<Pizza> pizzalista = null;
+		
 
+		int noofPizzas, pizzasperPage, page, nextIndex, noofPages;
+		
 		PizzaDAO kanta = new PizzaDAO();
-
-		pizzalista = kanta.haePizzat(pizzalista);
-
+		TayteDAO taytehallinta= new TayteDAO();
+		
+		 noofPizzas=kanta.getnoofPizzas();
+		pizzasperPage=5;
+		page=1;
+		try {
+		page=Integer.parseInt(request.getParameter("page"));}
+		
+		
+		catch (Exception e) {
+			
+		}
+		
+		if (request.getParameter("page")==null){page=1;
+		
+		}
+			
+		
+		  nextIndex=(page-1)*pizzasperPage;
+		  noofPages=noofPizzas/pizzasperPage+1;
+		  System.out.println(noofPages);
+		ArrayList<Pizza>pizzalista = kanta.haePizzat(nextIndex, pizzasperPage);
+		List<Tayte>taytelista=taytehallinta.haeTaytteet();
+		
+		
+		
+		
+		request.setAttribute("taytelista", taytelista);
+		request.setAttribute("noofPages", noofPages);
 		request.setAttribute("lista", pizzalista);
 		request.getRequestDispatcher("list.jsp").forward(request, response);
 
@@ -62,7 +90,7 @@ public class controller extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		double hinta;
-		List<Pizza> pizzalista = null;
+		ArrayList<Pizza> pizzalista;
 		DecimalFormat desimaalit = new DecimalFormat("0.00");
 
 		String nimi = request.getParameter("nimi");
@@ -109,9 +137,8 @@ public class controller extends HttpServlet {
 		}
 
 		if (nimi != null) {
-			pizzalista = kanta.haePizzat(pizzalista);
-			id = pizzalista.size() + 1;
-			kanta.lisaaPizza(id, nimi, hinta);
+		
+			kanta.lisaaPizza( nimi, hinta);
 		}
 
 		response.sendRedirect("/Sprintti/controller?added=true");
