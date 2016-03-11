@@ -19,6 +19,7 @@
 </div>
 
 <div id="sisalto"> 
+<img src="Kuvat/EtusivuPitsa.jpg">
 </div>
 
 <div id="footer">
