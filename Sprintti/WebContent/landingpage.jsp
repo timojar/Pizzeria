@@ -5,8 +5,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+
+<link href="tyyli.css" rel="stylesheet" type="text/css">
+
 </head>
+
 <body>
+
+<div id="raamit">
+
+<div id="header">
+<img src="Kuvat/Logo.png">
+</div>
+
+<div id="sisalto"> 
+</div>
+
+<div id="footer">
+<p> Late Night Show with Aarninsalo </p>
+</div>
+
+</div>
 
 </body>
 </html>

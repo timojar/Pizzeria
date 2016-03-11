@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 
 
-<link href="style.css" rel="stylesheet" type="text/css">
+<link href="tyyli.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -63,7 +63,7 @@
 </div>
 
 <div id="footer">
-<p> Late Night Shot with Aarninsalo </p>
+<p> Late Night Show with Aarninsalo </p>
 
 
 </div>
