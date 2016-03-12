@@ -63,6 +63,9 @@
 					<c:out value="${pizzat.hinta }"></c:out>
 				</p>
 
+<p>
+				<c:out value="${pizzat.kuvaus }"></c:out>
+				</p>
 
 				<%--Pizzanpoisto: Jokaisen pizzan kohdalla on poista-nappi, jota
 				painamalla lähetetään pizzan id-numero parametrina controller-servlettiin
@@ -76,6 +79,15 @@
 				</form>
 				<br>
 
+		<form action="controller" method="post" id="hide">
+		
+		<input type="hidden" name="hide" value="${pizzat.id }">
+					<input	type="submit"  value="piilota">
+
+				</form>
+				<br>
+		
+
 			</c:forEach>
 
 			<form method="post" action="controller" id="tiedot">
@@ -85,6 +97,11 @@
 
 				<p>Pizzan hinta:</p>
 				<input type="text" name="hinta" id="pizzanhinta">
+				<br>
+				<br>
+				
+				<p>Sisältö kuvaus:</p>
+				<input type="text" name="kuvaus" id="taytteet">
 				<br>
 				<br>
 					<br>
@@ -112,7 +129,7 @@
 
 
 		<table>
-		<c:forEach begin="1" end ="${noofPages}" var="i">
+		<c:forEach begin="${startindex}" end ="${noofPages}" var="i">
 		
 		<td><a href="controller?page=${i}">${i}</a></td>
 		</c:forEach>

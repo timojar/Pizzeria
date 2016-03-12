@@ -4,7 +4,7 @@ public class Pizza {
 	
 private int id;
 
-private String nimi;
+private String nimi, kuvaus, poisto;
 
 private double hinta;
 
@@ -17,6 +17,7 @@ nimi="";
 	
 hinta=0;
 
+kuvaus="";
 }
 
 public Pizza(int id, String nimi, double hinta){
@@ -28,6 +29,44 @@ this.nimi=nimi;
 this.hinta=hinta;
 	
 }
+
+
+
+public Pizza(int id, String nimi, double hinta, String kuvaus, String poisto){
+	
+this.id=id;
+
+this.nimi=nimi;
+
+this.hinta=hinta;
+this.kuvaus=kuvaus;
+
+this.poisto=poisto;
+	
+}
+
+
+public String getPoisto() {
+	return poisto;
+}
+
+public void setPoisto(String poisto) {
+	this.poisto = poisto;
+}
+
+public Pizza(int id, String nimi, double hinta, String kuvaus){
+	
+this.id=id;
+
+this.nimi=nimi;
+
+this.hinta=hinta;
+this.kuvaus=kuvaus;
+	
+}
+
+
+
 
 public Pizza(String nimi, double hinta){
 	
@@ -61,6 +100,11 @@ public double getHinta() {
 public void setHinta(double hinta) {
 	this.hinta = hinta;
 }
-	
+
+public String getKuvaus() {
+	return kuvaus;
+}
+
+
 
 }

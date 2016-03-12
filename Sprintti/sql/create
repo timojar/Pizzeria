@@ -1,0 +1,39 @@
+
+create table Pizza (
+id integer not null,
+
+nimi varchar(30) not null,
+
+hinta decimal (6,2) not null,
+
+kuvaus varchar(60) not null,
+poisto varchar(10) not null,
+
+ primary key(id) 
+
+);
+
+
+create table Tayte (
+tayteNimi varchar(30)  not null,
+
+saatavuus  integer not null,
+ primary key(tayteNimi)
+
+);
+
+
+
+create table Pizzatayte (
+
+tayteNimi varchar(30)  not null,
+id integer not null,
+
+lkm integer not null,
+
+ primary key(tayteNimi),
+
+  foreign key (tayteNimi) references Tayte (tayteNimi),
+foreign key (id) references Pizza (id)
+
+)

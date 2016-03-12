@@ -69,9 +69,7 @@ public  List<Tayte> haeTaytteet()
 		try {
 
 			String sql = "select * from Tayte"	                 ;
-			
-			System.out.println(sql);
-
+						
 			Statement haku = conn.createStatement();
 				
 			ResultSet hakutulokset = haku.executeQuery(sql);

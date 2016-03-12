@@ -13,15 +13,44 @@ import fi.omapizzeria.admin.bean.Pizza;
 
 public class PizzaDAO {
 
-	private static Pizza pizza;
+	private  Pizza pizza;
 
-	private static ArrayList<Pizza> pizzalista, selaus;
+	private  List<Pizza> pizzalista, selaus;
 	
 	private int noofPizzas , nextIndex, pizzasperPage;
 	
 	
 	
+	public void piilotaPizza(int poistoid){
 	
+Connection conn;		
+ConnectionFactory yhteys = new ConnectionFactory();	
+		
+conn = yhteys.getConnection();
+
+	try {
+		String hide = "Update Pizza set poisto = 'nosale' where id = ?";
+		
+		
+		PreparedStatement stmthide = conn.prepareStatement(hide);
+		stmthide.setInt(1, poistoid);
+		stmthide.executeUpdate();
+
+		System.out.println(poistoid);
+		
+	}
+	
+	catch (Exception e) {
+	e.printStackTrace();
+		System.out.println("Piilotus ei onnistunut");	
+		
+	}
+	
+	finally {
+		yhteys.suljeYhteys(conn);
+	}
+	
+	}
 	
 	
 	
@@ -70,7 +99,7 @@ public class PizzaDAO {
 	
 	
 
-	public  ArrayList<Pizza> haePizzat(int nextIndex, int pizzasperPage) 
+	public  List<Pizza> haePizzat(int nextIndex, int pizzasperPage) 
 	
 	
 	{
@@ -87,7 +116,7 @@ public class PizzaDAO {
 			String sql = "select SQL_CALC_FOUND_ROWS * from Pizza limit "+nextIndex+","+pizzasperPage
 	                 ;
 			
-			System.out.println(sql);
+			
 
 			Statement haku = conn.createStatement();
 				
@@ -100,8 +129,9 @@ public class PizzaDAO {
 				String nimi = hakutulokset.getString("nimi");
 
 				double hinta = hakutulokset.getDouble("hinta");
-
-				pizzalista.add(new Pizza(id, nimi, hinta));
+				String kuvaus = hakutulokset.getString("kuvaus");
+				
+				pizzalista.add(new Pizza(id, nimi, hinta,kuvaus));
 
 			}
 
@@ -124,7 +154,7 @@ public class PizzaDAO {
 	
 	
 	
-	public static void lisaaPizza(String nimi, double hinta) {
+	public  void lisaaPizza(String nimi, double hinta, String kuvaus) {
 
 		ConnectionFactory yhteys = new ConnectionFactory();
 		pizzalista = new ArrayList<Pizza>();
@@ -149,11 +179,12 @@ public class PizzaDAO {
 			
 			int id=pizzalkm+1;
 			
-			String sqlInsert = "INSERT INTO pizza(id, nimi, hinta) VALUES (?, ?, ?)";
+			String sqlInsert = "INSERT INTO pizza(id, nimi, hinta, kuvaus) VALUES (?, ?, ?,?)";
 			PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert);
 			stmtInsert.setInt(1, id);
 			stmtInsert.setString(2, nimi);
 			stmtInsert.setDouble(3, hinta);
+			stmtInsert.setString(4, kuvaus);
 			stmtInsert.executeUpdate();
 
 		}
@@ -174,7 +205,7 @@ public class PizzaDAO {
 	/**
 	 * pizzanpoisto: Otetaan Pizza id vastaan parametrina
 	 */
-	public static void poistaPizza(int id) {
+	public void poistaPizza(int id) {
 
 		ConnectionFactory yhteys = new ConnectionFactory();
 		Connection conn;
@@ -240,7 +271,7 @@ public class PizzaDAO {
 					int oldId = t + 1;
 					int newId = t;
 
-					System.out.println(newId + " " + oldId + " tilalle");
+					
 
 					String sqlUpdate = "update Pizza set id= ? where id=?";
 					PreparedStatement stmtUpdate = conn

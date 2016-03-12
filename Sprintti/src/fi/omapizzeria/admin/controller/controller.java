@@ -5,7 +5,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import dao.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.connector.Request;
 
 import fi.omapizzeria.admin.bean.*;
 
@@ -45,7 +49,7 @@ public class controller extends HttpServlet {
 		HttpSession sessio = request.getSession(false);
 		
 
-		int noofPizzas, pizzasperPage, page, nextIndex, noofPages;
+		int noofPizzas, pizzasperPage, page, nextIndex, noofPages, startindex;
 		
 		PizzaDAO kanta = new PizzaDAO();
 		TayteDAO taytehallinta= new TayteDAO();
@@ -65,16 +69,18 @@ public class controller extends HttpServlet {
 		
 		}
 			
-		
-		  nextIndex=(page-1)*pizzasperPage;
+		startindex=2;
+		 nextIndex=(page-1)*pizzasperPage;
 		  noofPages=noofPizzas/pizzasperPage+1;
-		  System.out.println(noofPages);
-		ArrayList<Pizza>pizzalista = kanta.haePizzat(nextIndex, pizzasperPage);
+		 
+		List<Pizza>pizzalista = kanta.haePizzat(nextIndex, pizzasperPage);
 		List<Tayte>taytelista=taytehallinta.haeTaytteet();
 		
+		if(noofPages>1){
+			startindex=1;
+		}
 		
-		
-		
+		request.setAttribute("startindex", startindex);
 		request.setAttribute("taytelista", taytelista);
 		request.setAttribute("noofPages", noofPages);
 		request.setAttribute("lista", pizzalista);
@@ -89,14 +95,14 @@ public class controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		double hinta;
+		double hinta=0;
 		ArrayList<Pizza> pizzalista;
-		DecimalFormat desimaalit = new DecimalFormat("0.00");
+		
 
 		String nimi = request.getParameter("nimi");
-
+		String kuvaus = request.getParameter("kuvaus");
 		String hintasana = request.getParameter("hinta");
-
+		String poisto= request.getParameter("hide");
 		try {
 			hinta = Double.parseDouble(hintasana);
 		}
@@ -130,7 +136,8 @@ public class controller extends HttpServlet {
 		/**
 		 * pizzanpoisto: Int-numero välitetään parametrina PizzaDAO-luokalle, joka lähettää käskyn tietokantaan.
 		 */
-
+   
+		
 
 		if (id > 0) {
 			kanta.poistaPizza(id);
@@ -138,11 +145,25 @@ public class controller extends HttpServlet {
 
 		if (nimi != null) {
 		
-			kanta.lisaaPizza( nimi, hinta);
+			kanta.lisaaPizza( nimi, hinta, kuvaus);
 		}
 
+		int	poistoid=1;
+	
+		if (request.getParameter("hide")!=null){
+		
+			try {
+				poistoid = Integer.parseInt(poisto);
+			kanta.piilotaPizza(poistoid);
+			}
+
+			catch (Exception e) {
+				
+
+			}}
+		
 		response.sendRedirect("/Sprintti/controller?added=true");
 
-	}
+	
 
-}
+}}
