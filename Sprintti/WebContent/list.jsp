@@ -31,7 +31,7 @@
 
 		<ul id=paavalikko>
 			<li><a href="">Ravintolat</a>
-			<li><a href="">Ruokalista </a>
+			<li><a href="menuController">Ruokalista </a>
 			<li><a href="">Meille töihin </a>
 			<li><a href="tayteController">Luo täyte</a>
 		</ul>
@@ -79,13 +79,27 @@
 				</form>
 				<br>
 
-		<form action="controller" method="post" id="hide">
-		
-		<input type="hidden" name="hide" value="${pizzat.id }">
-					<input	type="submit"  value="piilota">
 
-				</form>
-				<br>
+<c:choose>
+<c:when test="${pizzat.poisto != 'nosale'}">
+<form action="controller" method="post" id="hide">	
+<input type="hidden" name="hide" value="${pizzat.id }">		
+<input	type="submit"  value="piilota">
+</form>	
+</c:when>
+
+<c:when test="${pizzat.poisto == 'nosale'}">
+<form action="controller" method="post" id="reveal">	
+<input type="hidden" name="reveal" value="${pizzat.id }">		
+<input	type="submit"  value="Lisää">
+</form>	
+
+</c:when>
+
+
+</c:choose>
+
+			<br>
 		
 
 			</c:forEach>

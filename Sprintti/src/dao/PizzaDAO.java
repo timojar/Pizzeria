@@ -20,6 +20,44 @@ public class PizzaDAO {
 	private int noofPizzas , nextIndex, pizzasperPage;
 	
 	
+
+	
+	public void poistaPiiloitus(int paljastaid){
+		
+Connection conn;		
+ConnectionFactory yhteys = new ConnectionFactory();	
+String palautus=null;
+		
+conn = yhteys.getConnection();
+
+	try {
+		String hide = "Update Pizza set poisto = ? where id = ?";
+		
+		
+		PreparedStatement stmthide = conn.prepareStatement(hide);
+		stmthide.setString(1, palautus);
+		stmthide.setInt(2, paljastaid);
+		stmthide.executeUpdate();
+
+		System.out.println(paljastaid);
+		
+	}
+	
+	catch (Exception e) {
+	e.printStackTrace();
+		System.out.println("Palautus ei onnistunut");	
+		
+	}
+	
+	finally {
+		yhteys.suljeYhteys(conn);
+	}
+	
+	}
+	
+		
+	
+	
 	
 	public void piilotaPizza(int poistoid){
 	
@@ -130,8 +168,8 @@ conn = yhteys.getConnection();
 
 				double hinta = hakutulokset.getDouble("hinta");
 				String kuvaus = hakutulokset.getString("kuvaus");
-				
-				pizzalista.add(new Pizza(id, nimi, hinta,kuvaus));
+				String poisto = hakutulokset.getString("poisto");
+				pizzalista.add(new Pizza(id, nimi, hinta,kuvaus, poisto));
 
 			}
 

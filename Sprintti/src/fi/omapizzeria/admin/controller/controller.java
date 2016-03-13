@@ -103,6 +103,7 @@ public class controller extends HttpServlet {
 		String kuvaus = request.getParameter("kuvaus");
 		String hintasana = request.getParameter("hinta");
 		String poisto= request.getParameter("hide");
+		String paljasta= request.getParameter("reveal");
 		try {
 			hinta = Double.parseDouble(hintasana);
 		}
@@ -147,9 +148,10 @@ public class controller extends HttpServlet {
 		
 			kanta.lisaaPizza( nimi, hinta, kuvaus);
 		}
-
-		int	poistoid=1;
-	
+		int	poistoid, paljastaid;
+		poistoid=1;
+		paljastaid=1;
+		
 		if (request.getParameter("hide")!=null){
 		
 			try {
@@ -158,8 +160,19 @@ public class controller extends HttpServlet {
 			}
 
 			catch (Exception e) {
-				
+			
+			}}
+		
+		
+		if (request.getParameter("reveal")!=null){
+			
+			try {
+				paljastaid = Integer.parseInt(paljasta);
+			kanta.poistaPiiloitus(paljastaid);
+			}
 
+			catch (Exception e) {
+			
 			}}
 		
 		response.sendRedirect("/Sprintti/controller?added=true");
