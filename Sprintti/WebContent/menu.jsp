@@ -16,7 +16,7 @@
 <c:forEach items="${menu}" var="pizzat">
 
 <p>
-					<c:out value="${pizzat.id }"></c:out>
+					<c:out value="${pizzat.pizzaNo }"></c:out>
 				</p>
 
 				<p>

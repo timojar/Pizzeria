@@ -30,7 +30,9 @@ public  List<Pizza> haePizzat()
 		conn = yhteys.getConnection();
 
 		try {
-
+			
+			
+			
 			String sql = "select  * from Pizza ;";
 			
 			
@@ -41,15 +43,19 @@ public  List<Pizza> haePizzat()
 
 			while (hakutulokset.next()) {
 
+				/**
+				 * Pizzan piiloitus: haetaan kaikki pizzat myös kaikki atribuutit. Varsinkin piiloitus.atribuutti.
+				 */				
 				int id = hakutulokset.getInt("id");
 
 				String nimi = hakutulokset.getString("nimi");
 
 				double hinta = hakutulokset.getDouble("hinta");
 				String kuvaus = hakutulokset.getString("kuvaus");
-				
-				String piilotamerkinta = hakutulokset.getString("poisto");
-				
+				String piilotamerkinta = hakutulokset.getString("piiloitus");
+				/**
+				 * Pizzan piiloitus: Jos piilota kenttä on tyhjä, voidaan lisätä pizza ruokalistalle.
+				 */			
 				
 			if (piilotamerkinta==null){
 				menu.add(new Pizza(id, nimi, hinta,kuvaus));
@@ -68,7 +74,7 @@ public  List<Pizza> haePizzat()
 
 			e.printStackTrace();
 
-			System.out.println("Tietokantahaku aiheutti virheen");
+			System.out.println("Tietokantahaku aiheutti virheen MenuDao:ssa");
 
 		}
 
