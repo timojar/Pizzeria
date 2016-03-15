@@ -228,7 +228,7 @@ conn = yhteys.getConnection();
 			
 			int id=pizzalkm+1;
 			
-			String sqlInsert = "INSERT INTO pizza(id, nimi, hinta, kuvaus) VALUES (?, ?, ?,?)";
+			String sqlInsert = "INSERT INTO Pizza(id, nimi, hinta, kuvaus) VALUES (?, ?, ?,?)";
 			PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert);
 			stmtInsert.setInt(1, id);
 			stmtInsert.setString(2, nimi);
@@ -269,7 +269,7 @@ conn = yhteys.getConnection();
 		try {
 			selaus = new ArrayList<Pizza>();
 
-			String sqldelete = "delete from pizza where id=?";
+			String sqldelete = "delete from Pizza where id=?";
 			PreparedStatement stmtdelete = conn.prepareStatement(sqldelete);
 			stmtdelete.setInt(1, id);
 			stmtdelete.executeUpdate();
