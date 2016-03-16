@@ -2,9 +2,9 @@ package fi.omapizzeria.admin.bean;
 
 public class Pizza {
 	
-private int id;
+private int id, pizzaNo;
 
-private String nimi, kuvaus, poisto;
+private String nimi, kuvaus, piiloitus;
 
 private double hinta;
 
@@ -12,12 +12,14 @@ private double hinta;
 public Pizza(){
 	
 id=0;
-
+pizzaNo=0;
 nimi="";
 	
 hinta=0;
 
 kuvaus="";
+
+piiloitus="";
 }
 
 public Pizza(int id, String nimi, double hinta){
@@ -32,7 +34,7 @@ this.hinta=hinta;
 
 
 
-public Pizza(int id, String nimi, double hinta, String kuvaus, String poisto){
+public Pizza(int id, String nimi, double hinta, String kuvaus, String piiloitus){
 	
 this.id=id;
 
@@ -41,17 +43,17 @@ this.nimi=nimi;
 this.hinta=hinta;
 this.kuvaus=kuvaus;
 
-this.poisto=poisto;
+this.piiloitus=piiloitus;
 	
 }
 
 
-public String getPoisto() {
-	return poisto;
+public String getPiiloitus() {
+	return piiloitus;
 }
 
-public void setPoisto(String poisto) {
-	this.poisto = poisto;
+public void setPoisto(String piiloitus) {
+	this.piiloitus = piiloitus;
 }
 
 public Pizza(int id, String nimi, double hinta, String kuvaus){
@@ -64,6 +66,30 @@ this.hinta=hinta;
 this.kuvaus=kuvaus;
 	
 }
+
+
+public int getPizzaNo() {
+	return pizzaNo;
+}
+
+public void setPizzaNo(int pizzaNo) {
+	this.pizzaNo = pizzaNo;
+}
+
+public Pizza(int id, String nimi, double hinta, String kuvaus, int pizzaNo){
+	
+this.id=id;
+this.pizzaNo=pizzaNo;
+
+this.nimi=nimi;
+
+this.hinta=hinta;
+this.kuvaus=kuvaus;
+	
+}
+
+
+
 
 
 

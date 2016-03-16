@@ -39,7 +39,7 @@ public class menuController extends HttpServlet {
 	MenuDao menukanta= new MenuDao();
 	
 	Pizza pizza=null;
-	int id=0;
+	int pizzaNo, id;
 	String nimi, kuvaus;
 	double hinta;
 	List<Pizza>pizzalista=menukanta.haePizzat();
@@ -47,12 +47,12 @@ public class menuController extends HttpServlet {
 	for(int i=0; i<pizzalista.size(); i++){
 		
 	pizza=pizzalista.get(i);
-	
+	id=pizza.getId();
 	nimi=pizza.getNimi();
 	kuvaus=pizza.getKuvaus();
 	hinta=pizza.getHinta();
-	id=i+1;
-	pizzamenu.add(new Pizza( id,  nimi,  hinta,  kuvaus));
+	pizzaNo=i+1;
+	pizzamenu.add(new Pizza( id,  nimi,  hinta,  kuvaus, pizzaNo));
 		
 	}
 	

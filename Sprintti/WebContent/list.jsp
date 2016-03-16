@@ -79,19 +79,42 @@
 				</form>
 				<br>
 
-
+	<%--Pizzan piiloitus: piilota-nappi lähettää Pizza id-atribuutin arvon parametrina
+	 controller-luokkaan, jossa se käännetään int-tietotyypiksi.
+	 Käännettynä se menee PizzaDAO-luokkaan, jossa pizza 
+	 saa "nosale"-arvon tietokannan piilota-kenttään. MenuDao-luokka tuo niitä pizzoja menuController-luokkaan
+	 joissa ei ole merkintää piilota kentässä. Luokka "menuController" ohjaa pizzoja ruokalistaan.
+	 
+				--%>
+		
+				
 <c:choose>
-<c:when test="${pizzat.poisto != 'nosale'}">
+<%--Pizzan piiloitus: Jos pizzan  arvo tietokannan kentässä "piiloitus" ei ole "nosale" Pizzan kohdalla on 
+Piilota-nappi.
+				--%>
+<c:when test="${pizzat.piiloitus != 'nosale'}">
 <form action="controller" method="post" id="hide">	
 <input type="hidden" name="hide" value="${pizzat.id }">		
-<input	type="submit"  value="piilota">
+<input	type="submit"  value="Piilota">
 </form>	
 </c:when>
 
-<c:when test="${pizzat.poisto == 'nosale'}">
+<%--Pizzan paljastus: paljasta-nappi lähettää Pizza id-atribuutin arvon parametrina
+	 controller-luokkaan, jossa se käännetään int-tietotyypiksi.
+	 Käännettynä se menee PizzaDAO-luokkaan, jossa pizza 
+	 saa tyhjän arvon piilota-kenttään. 
+	 
+				--%>
+				
+				
+	<%--Pizzan paljastus: Jos pizzan  arvo tietokannan kentässä "piiloitus" on "nosale" Pizzan kohdalla on 
+Paljasta-nappi.
+				--%>			
+
+<c:when test="${pizzat.piiloitus == 'nosale'}">
 <form action="controller" method="post" id="reveal">	
 <input type="hidden" name="reveal" value="${pizzat.id }">		
-<input	type="submit"  value="Lisää">
+<input	type="submit"  value="Paljasta">
 </form>	
 
 </c:when>

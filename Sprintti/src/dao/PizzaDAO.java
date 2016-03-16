@@ -31,7 +31,7 @@ String palautus=null;
 conn = yhteys.getConnection();
 
 	try {
-		String hide = "Update Pizza set poisto = ? where id = ?";
+		String hide = "Update Pizza set piiloitus = ? where id = ?";
 		
 		
 		PreparedStatement stmthide = conn.prepareStatement(hide);
@@ -57,24 +57,35 @@ conn = yhteys.getConnection();
 	
 		
 	
+	/**
+	 * Pizzan piiloitus: Otetaan Pizzan id vastaan.
+	 */	
 	
 	
-	public void piilotaPizza(int poistoid){
+	public void piilotaPizza(int piiloitusid){
 	
 Connection conn;		
 ConnectionFactory yhteys = new ConnectionFactory();	
 		
 conn = yhteys.getConnection();
 
+
+
 	try {
-		String hide = "Update Pizza set poisto = 'nosale' where id = ?";
+		/**
+		 * Pizzan piiloitus: P‰ivitet‰‰n se pizza jonka tunnus on sama kuin metodissa saatu sama parametri.
+		 * piiloitus-kentt‰ saa arvon "nosale"
+		 */	
+		
+		
+		String hide = "Update Pizza set piiloitus  = 'nosale' where id = ?";
 		
 		
 		PreparedStatement stmthide = conn.prepareStatement(hide);
-		stmthide.setInt(1, poistoid);
+		stmthide.setInt(1, piiloitusid);
 		stmthide.executeUpdate();
 
-		System.out.println(poistoid);
+		System.out.println(piiloitusid);
 		
 	}
 	
@@ -168,8 +179,8 @@ conn = yhteys.getConnection();
 
 				double hinta = hakutulokset.getDouble("hinta");
 				String kuvaus = hakutulokset.getString("kuvaus");
-				String poisto = hakutulokset.getString("poisto");
-				pizzalista.add(new Pizza(id, nimi, hinta,kuvaus, poisto));
+				String piiloitus = hakutulokset.getString("piiloitus");
+				pizzalista.add(new Pizza(id, nimi, hinta,kuvaus, piiloitus));
 
 			}
 
@@ -177,7 +188,7 @@ conn = yhteys.getConnection();
 
 			e.printStackTrace();
 
-			System.out.println("Tietokantahaku aiheutti virheen");
+			System.out.println("Tietokantahaku aiheutti virheen PizzaDAO:ssa");
 
 		}
 
@@ -217,7 +228,7 @@ conn = yhteys.getConnection();
 			
 			int id=pizzalkm+1;
 			
-			String sqlInsert = "INSERT INTO pizza(id, nimi, hinta, kuvaus) VALUES (?, ?, ?,?)";
+			String sqlInsert = "INSERT INTO Pizza(id, nimi, hinta, kuvaus) VALUES (?, ?, ?,?)";
 			PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert);
 			stmtInsert.setInt(1, id);
 			stmtInsert.setString(2, nimi);
@@ -258,7 +269,7 @@ conn = yhteys.getConnection();
 		try {
 			selaus = new ArrayList<Pizza>();
 
-			String sqldelete = "delete from pizza where id=?";
+			String sqldelete = "delete from Pizza where id=?";
 			PreparedStatement stmtdelete = conn.prepareStatement(sqldelete);
 			stmtdelete.setInt(1, id);
 			stmtdelete.executeUpdate();

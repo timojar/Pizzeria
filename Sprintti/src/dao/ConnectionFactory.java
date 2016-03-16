@@ -15,15 +15,12 @@ public class ConnectionFactory {
 	
 	public static Connection getConnection() {
 		
-		Connection conn=null;
-
-		
+	
+		Connection conn = null;
 		String username = "a1500863";
 
 		String password = "kiHIwZ57b";
 		String url = "jdbc:mysql://localhost:3306/a1500863";
-
-		
 		
 		
 		try {
