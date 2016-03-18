@@ -37,3 +37,5 @@ lkm integer not null,
 foreign key (id) references Pizza (id)
 
 )
+
+testi
