@@ -38,4 +38,77 @@ foreign key (id) references Pizza (id)
 
 )
 
-testi1
+CREATE TABLE Tilaus
+(
+numero INTEGER NOT NULL,
+asiakasnumero INTEGER,
+tilausajankohta DATE,
+toimitusajankohta DATE,
+toimitustapa VARCHAR(15),
+maksutapa VARCHAR(15), 			//TARKISTA??? : D) )D )D) :)
+hinta DECIMAL(5,2)
+PRIMARY KEY (numero),
+FOREIGN KEY (asiakasnumero)
+) ENGINE=InnoDB;
+
+CREATE TABLE Tilausrivi
+(
+pizzaid INTEGER NOT NULL,		
+tilausNro INTEGER NOT NULL,
+lkm INTEGER,				// ettei ois kuitekkii not nullei?!?!?!? xD
+hinta INTEGER
+PRIMARY KEY (pizzaid, tilausNro),
+FOREIGN KEY (pizzaid) REFERENCES	// muokkausta needed!
+) ENGINE=InnoDB;
+
+CREATE TABLE Juoma
+(
+id INTEGER NOT NULL,
+nimi VARCHAR(15),
+hinta INTEGER,
+kuvalinkki VARCHAR(1000),		// wtf is dis
+PRIMARY KEY(id)
+) ENGINE=InnoDB;
+
+CREATE TABLE Pizza
+(
+id INTEGER NOT NULL,
+nimi VARCHAR(15),
+hinta DECIMAL(5,2),
+sisältökuvaus VARCHAR(15),
+kuvalinkki VARCHAR(1000),		// wtf is dis
+piilotamerkintä VARCHAR(15),
+PRIMARY KEY(id)
+)ENGINE=InnoDB;
+
+CREATE TABLE PizzaTäyte
+(
+täytenimi VARCHAR(15) NOT NULL,
+pizzaId INTEGER NOT NULL,
+lkm INTEGER
+PRIMARY KEY(taytenimi, pizzaId),
+FOREIGN KEY(pizzaId) REFERENCES Pizza (id),
+FOREIGN KEY(täytenimi) REFERENCES Täyte(nimi)
+)ENGINE=InnoDB;
+
+CREATE TABLE Täyte
+(
+nimi VARCHAR(15) NOT NULL,
+saatavuus VARCHAR(15) NOT NULL,		// Vai numeroina INT? NOT NULL???
+PRIMARY KEY(nimi)
+)ENGINE=InnoDB;
+
+CREATE TABLE Admin
+(
+id INTEGER NOT NULL,
+salasana VARCHAR(15),
+käyttäjätunnus VARCHAR(15),
+PRIMARY KEY(id)
+)ENGINE=InnoDB;
+
+CREATE TABLE Tuote
+(
+id INTEGER NOT NULL,
+hinta DECIMAL(5,2)
+kuvalinkki VARCHAR(15)
+)ENGINE=InnoDB;
