@@ -1,11 +1,12 @@
 @CHARSET "ISO-8859-1";
 
-/*body {background-image: url("Kuvat/blurred-wallpaper.jpg")
+body {
+	background-image: url("Kuvat/LightBackground.jpg")
+	
 
-Taustakuvaa saa muuttaa vapaasti -- teemaan sopiva oltava
+	/*Taustakuvaa saa muuttaa vapaasti -- teemaan sopiva oltava
 
 */
-
 }
 
 #raamit {
@@ -23,13 +24,10 @@ Taustakuvaa saa muuttaa vapaasti -- teemaan sopiva oltava
 
 h1 {
 	font-family: 'Pacifico', cursive;
-	float:center;
+	float: center;
 }
 
-
-
 #nav1 {
-	
 	float: left;
 	border-right-style: solid;
 	width: 200px;

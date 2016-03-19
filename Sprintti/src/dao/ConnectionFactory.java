@@ -5,24 +5,14 @@ import java.sql.DriverManager;
 
 public class ConnectionFactory {
 
-	 
-
-
-	
-	
-	
-	
-	
 	public static Connection getConnection() {
-		
-	
+
 		Connection conn = null;
 		String username = "a1500863";
 
 		String password = "kiHIwZ57b";
 		String url = "jdbc:mysql://localhost:3306/a1500863";
-		
-		
+
 		try {
 
 			Class.forName("org.mariadb.jdbc.Driver").newInstance();
@@ -37,15 +27,10 @@ public class ConnectionFactory {
 
 		}
 
-return conn;		
-		
+		return conn;
+
 	}
 
-	
-	
-	
-	
-	
 	public static void suljeYhteys(Connection conn) {
 
 		try {
@@ -60,8 +45,7 @@ return conn;
 
 		catch (Exception e) {
 
-			System.out
-					.println("Tietokantayhteys ei jostain syyst‰ suostu menem‰‰n kiinni.");
+			System.out.println("Tietokantayhteys ei jostain syyst‰ suostu menem‰‰n kiinni.");
 		}
 
 	}

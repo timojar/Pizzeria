@@ -1,4 +1,5 @@
 package test;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -9,61 +10,48 @@ import dao.*;
 import fi.omapizzeria.admin.bean.Pizza;
 
 public class Yhteys {
-	
-public static void main (String [] args)	{
 
-	
-List<Pizza>pizzalista= new ArrayList<Pizza>();
+	public static void main(String[] args) {
 
-ConnectionFactory yhteys=new ConnectionFactory();
-Connection conn;
+		List<Pizza> pizzalista = new ArrayList<Pizza>();
 
-conn=yhteys.getConnection();
+		ConnectionFactory yhteys = new ConnectionFactory();
+		Connection conn;
 
-try {
+		conn = yhteys.getConnection();
 
-	String sql = "select * from Pizza";
+		try {
 
-	Statement haku = conn.createStatement();
+			String sql = "select * from Pizza";
 
-	ResultSet hakutulokset = haku.executeQuery(sql);
+			Statement haku = conn.createStatement();
 
-	while (hakutulokset.next()) {
+			ResultSet hakutulokset = haku.executeQuery(sql);
 
-		int id = hakutulokset.getInt("id");
+			while (hakutulokset.next()) {
 
-		String nimi = hakutulokset.getString("nimi");
+				int id = hakutulokset.getInt("id");
 
-		double hinta = hakutulokset.getDouble("hinta");
+				String nimi = hakutulokset.getString("nimi");
 
-		
+				double hinta = hakutulokset.getDouble("hinta");
 
-		
-		
-		System.out.println(id+" "+nimi+" "+hinta);
+				System.out.println(id + " " + nimi + " " + hinta);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			System.out.println("Tietokantahaku aiheutti virheen");
+
+		}
+
+		finally {
+
+			yhteys.suljeYhteys(conn);
+		}
+
 	}
-
-} catch (Exception e) {
-
-	e.printStackTrace();
-
-	System.out.println("Tietokantahaku aiheutti virheen");
-
-}
-
-
-
-finally{
-	
-	
-	
-	
-	yhteys.suljeYhteys(conn);
-}
-
-	
-}
-	
-	
 
 }

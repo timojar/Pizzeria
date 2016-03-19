@@ -9,91 +9,71 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 
 public class DBTest {
-	
-	
-public static void main (String [] args){
-	
-	
-	
-String username= "root";
 
-String password= "";
+	public static void main(String[] args) {
 
-String url="jdbc:mysql://localhost:3306/tilaus?useSSL=false";
-	
+		String username = "root";
 
-int id=2;
+		String password = "";
 
-String nimi="testaus";
+		String url = "jdbc:mysql://localhost:3306/tilaus?useSSL=false";
 
+		int id = 2;
 
-double hinta=3;
+		String nimi = "testaus";
 
-Connection yhteys=null;
+		double hinta = 3;
 
+		Connection yhteys = null;
 
-try {
+		try {
 
-Class.forName("com.mysql.jdbc.Driver").newInstance();
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-yhteys=DriverManager.getConnection(url,username,password);
+			yhteys = DriverManager.getConnection(url, username, password);
 
+		} catch (Exception e) {
 
+			e.printStackTrace();
 
+			System.out.println("Ei yhteytt‰");
 
-	
+		}
 
-	
-}
-catch (Exception e)	{
-	
-e.printStackTrace();
+		try {
+			String sqlInsert = "INSERT INTO pizza(id, nimi, hinta) VALUES (?, ?, ?)";
+			PreparedStatement stmtInsert = yhteys.prepareStatement(sqlInsert);
+			stmtInsert.setInt(1, id);
+			stmtInsert.setString(2, nimi);
+			stmtInsert.setDouble(3, hinta);
+			stmtInsert.executeUpdate();
 
-System.out.println("Ei yhteytt‰");
-	
-	
-}
+		}
 
+		catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Lis‰minen ei onnistunut");
+		}
 
-try{
-	String sqlInsert = "INSERT INTO pizza(id, nimi, hinta) VALUES (?, ?, ?)";
-	PreparedStatement stmtInsert = yhteys.prepareStatement(sqlInsert);
-	stmtInsert.setInt(1, id);
-	stmtInsert.setString(2, nimi);
-	stmtInsert.setDouble(3, hinta);
-	stmtInsert.executeUpdate();
+		finally {
 
+			try {
 
-}
+				if (yhteys != null && !yhteys.isClosed()) {
 
-catch (SQLException e){
-	e.printStackTrace();
-	System.out.println("Lis‰minen ei onnistunut");	
-}
-	
-finally{
-	
-try	{
-	
-	if(yhteys!=null && !yhteys.isClosed()){
-	
-	yhteys.close();	
-		
+					yhteys.close();
+
+				}
+
+			}
+
+			catch (Exception e) {
+
+				System.out.println("Tietokantayhteys ei jostain syyst‰ suostu menem‰‰n kiinni.");
+			}
+
+		}
+
 	}
-	
-}
-
-catch(Exception e){
-	
-System.out.println("Tietokantayhteys ei jostain syyst‰ suostu menem‰‰n kiinni.");
-}
-	
-	
-}
-
-
-
-
-}
 
 }
