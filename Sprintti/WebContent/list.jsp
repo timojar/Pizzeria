@@ -138,7 +138,7 @@ Paljasta-nappi.
 
 			</c:forEach>
 
-			<form method="post" action="controller" id="tiedot">
+			<form method="post" action="lisaaPitsa" id="tiedot">
 
 				<p>Pizzan nimi:</p>
 				<input type="text" name="nimi" id="pizzannimi">
