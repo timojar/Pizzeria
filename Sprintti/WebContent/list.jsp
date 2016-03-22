@@ -83,7 +83,7 @@
 				
 				--%>
 <br>
-				<form action="controller" method="post" id="delete">
+				<form action="poistaPizza" method="post" id="delete">
 					<input type="hidden" name="tunnus" value="${pizzat.id }"> <input
 						type="submit"  value="poista">
 
