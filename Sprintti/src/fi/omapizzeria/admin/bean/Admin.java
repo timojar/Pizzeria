@@ -2,6 +2,7 @@ package fi.omapizzeria.admin.bean;
 
 public class Admin {
 
+	private int id;
 	private String Kayttajanimi;
 	private String Salasana;
 	
@@ -9,8 +10,16 @@ public class Admin {
 		
 	}
 	public Admin(String Kayttajanimi, String Salasana){
+		this.id = id;
 		this.Kayttajanimi = Kayttajanimi;
 		this.Salasana = Salasana;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getKayttajanimi() {
 		return Kayttajanimi;
@@ -26,8 +35,8 @@ public class Admin {
 	}
 	@Override
 	public String toString() {
-		return "Admin [Kayttajanimi=" + Kayttajanimi + ", Salasana=" + Salasana
-				+ "]";
+		return "Admin [id=" + id + ", Kayttajanimi=" + Kayttajanimi + ", Salasana=" + Salasana + "]";
 	}
+
 	
 }

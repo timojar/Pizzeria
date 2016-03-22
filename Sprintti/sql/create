@@ -2,8 +2,8 @@
 CREATE TABLE Admin
 (
 id INTEGER NOT NULL,
-salasana VARCHAR(15) NOT NULL,
-käyttäjätunnus VARCHAR(15) NOT NULL,
+Kayttajanimi VARCHAR(15) NOT NULL,
+Salasana VARCHAR(15) NOT NULL,
 PRIMARY KEY(id)
 );
 

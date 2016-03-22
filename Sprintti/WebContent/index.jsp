@@ -15,7 +15,7 @@
 	rel="stylesheet">
 <!--Import materialize.css-->
 <link type="text/css" rel="stylesheet" href="materialize.min.css"
-	media="screen,projection" />
+	me"WebContent/index.jsp"dia="screen,projection" />
 
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -123,13 +123,14 @@
 	<div class="navbar-fixed">
 		<nav>
 		<div class="nav-wrapper green accent-4">
-			<a href="#" class="brand-logo center"><img src="Kuvat/Logo.png"
+			<a href="index.jsp" class="brand-logo center"><img src="Kuvat/Logo.png"
 				alt=pizza height="76" width="160"></a>
 			<ul id="nav-mobile" class="left hide-on-med-and-down">
-				<li><a href="sass.html">Menu</a></li>
-				<li><a href="badges.html">Order Online</a></li>
-				<li><a href="collapsible.html">About</a></li>
+				<li><a href="menu.jsp">Menu</a></li>
+				<li><a href="#">Order Online</a></li>
+				<li><a href="#">About</a></li>
 				<li><a href="#">Group Dining</a>
+				<li><a href="Login.jsp" class="waves-effect waves-light btn-large">Log in</a></li>
 			</ul>
 		</div>
 		</nav>
@@ -143,9 +144,7 @@
 					Vuodesta 1800.</i></h5>
 			</div>
 			<div class="row center">
-				<a href="http://materializecss.com/getting-started.html"
-					id="download-button"
-					class="btn-large waves-effect green accent-4">Siirry
+				<a href="list.jsp" id="download-button"	class="btn-large waves-effect green accent-4">Siirry
 					ruokalistaan</a>
 			</div>
 			<br> <br>
