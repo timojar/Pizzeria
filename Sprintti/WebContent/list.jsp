@@ -104,7 +104,7 @@
 Piilota-nappi.
 				--%>
 <c:when test="${pizzat.piiloitus != 'nosale'}">
-<form action="controller" method="post" id="hide">	
+<form action="piilotaPaljastapizza" method="post" id="hide">	
 <input type="hidden" name="hide" value="${pizzat.id }">		
 <input	type="submit"  value="Piilota">
 </form>	
@@ -123,7 +123,7 @@ Paljasta-nappi.
 				--%>			
 
 <c:when test="${pizzat.piiloitus == 'nosale'}">
-<form action="controller" method="post" id="reveal">	
+<form action="piilotaPaljastapizza" method="post" id="reveal">	
 <input type="hidden" name="reveal" value="${pizzat.id }">		
 <input	type="submit"  value="Paljasta">
 </form>	

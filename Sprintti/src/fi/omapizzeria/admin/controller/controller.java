@@ -163,6 +163,8 @@ public class controller extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		System.out.println("Piilotiusu");
+		
 		ArrayList<Pizza> pizzalista;
 		
 
@@ -207,52 +209,6 @@ public class controller extends HttpServlet {
 	
 		
 		
-		/**
-		 * Pizzan piiloitus: Pizzan id otetaan vastaan parametrina merkkijono-muodossa. 
-		 */	
-				
-		
-		String piiloitus= request.getParameter("hide");
-		String paljasta= request.getParameter("reveal");
-			
-		
-			
-		
-		int	piiloitusid, paljastaid;
-		piiloitusid=1;
-		paljastaid=1;
-		
-		
-		/**
-		 * Pizzan piiloitus: Jos saatu parametri ei ole tyhj‰, Se k‰‰nnet‰‰n Merkkijonosta int-numeroon ja
-		 *  v‰litet‰‰n metodissa "piilotaPizza(piiloitusid)" parametrina.
-		 */	
-		PizzaDAO kanta = new PizzaDAO();
-		
-		
-		
-		if (request.getParameter("hide")!=null){
-		
-			try {
-				piiloitusid = Integer.parseInt(piiloitus);
-			kanta.piilotaPizza(piiloitusid);
-			}
-
-			catch (Exception e) {
-			
-			}}
-		
-		
-		if (request.getParameter("reveal")!=null){
-			
-			try {
-				paljastaid = Integer.parseInt(paljasta);
-			kanta.poistaPiiloitus(paljastaid);
-			}
-
-			catch (Exception e) {
-			
-			}}
 		
 		response.sendRedirect("/Sprintti/controller?added=true");
 
