@@ -212,21 +212,17 @@ conn = yhteys.getConnection();
 
 		conn = yhteys.getConnection();
 
-		int pizzalkm=0;
-		
 		
 		
 		try {
 			
-			String sql = "select * from Pizza";
-			Statement lkmHaku = conn.createStatement();
-			ResultSet lkm = lkmHaku.executeQuery(sql);	
+			selaus=selaaPizzat();
 			
-			while (lkm.next()) {
-			 pizzalkm=lkm.getRow();
-			}
+			Pizza p=selaus.get(selaus.size()-1);
 			
-			int id=pizzalkm+1;
+			
+			int id=p.getId()+1;
+			
 			
 			String sqlInsert = "INSERT INTO Pizza(id, nimi, hinta, kuvaus) VALUES (?, ?, ?,?)";
 			PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert);
@@ -274,71 +270,8 @@ conn = yhteys.getConnection();
 			stmtdelete.setInt(1, id);
 			stmtdelete.executeUpdate();
 
-			/**
-			 * pizzanpoisto: Haetaan pizzalista tietokannasta selaamalla, jotta
-			 * voidaan j‰rjestell‰ id-numeroita uudelleen.
-			 */
-
-			String sql = "select * from Pizza";
-
-			Statement haku = conn.createStatement();
-
-			ResultSet hakutulokset = haku.executeQuery(sql);
-
-			while (hakutulokset.next()) {
-
-				id = hakutulokset.getInt("id");
-
-				String nimi = hakutulokset.getString("nimi");
-
-				double hinta = hakutulokset.getDouble("hinta");
-
-				selaus.add(new Pizza(id, nimi, hinta));
-
-			}
-
-			/**
-			 * pizzanpoisto: K‰yd‰‰n pizzat loopissa l‰pi. odlID ottaa seuraavan
-			 * numeron ja laittaa sit‰ edellisen numeron tilalle
-			 */
-
-			int t = 0;
-
-			while (t < selaus.size()) {
-
-				t++;
-
-				/**
-				 * Edelliset tunnukset ei muutu, koska id on primary key ja
-				 * kahta samaa tunnusta ei voi olla. Se aiheuttaa poikkeuksen ja
-				 * se poikkeus saadaan catch-lauseella kiinni. T‰m‰n ansioista
-				 * ohjelma ei kaadu vaan jatkaa muiden tunnuksien muuttamista.
-				 * 
-				 */
-
-				try {
-					int oldId = t + 1;
-					int newId = t;
-
-					
-
-					String sqlUpdate = "update Pizza set id= ? where id=?";
-					PreparedStatement stmtUpdate = conn
-							.prepareStatement(sqlUpdate);
-					stmtUpdate.setInt(1, newId);
-					stmtUpdate.setInt(2, oldId);
-					stmtUpdate.executeUpdate();
-
-				}
-
-				catch (Exception e) {
-					System.out.println("Edellinen tunnus on jo k‰ytˆss‰!");
-
-					e.printStackTrace();
-
-				}
-
-			}
+			
+			
 
 		}
 
@@ -352,6 +285,63 @@ conn = yhteys.getConnection();
 			yhteys.suljeYhteys(conn);
 		}
 
+		
+	
+		
+		
+	}
+	
+	private List<Pizza> selaaPizzat(){
+
+		Connection conn;
+		
+		ConnectionFactory yhteys = new ConnectionFactory();	
+		
+		conn = yhteys.getConnection();
+		
+		selaus=new ArrayList();
+		
+		try {
+			String sql = "select * from Pizza";
+
+			Statement pizzaHaku = conn.createStatement();
+
+			ResultSet pizzat = pizzaHaku.executeQuery(sql);	
+			
+			
+			
+			while (pizzat.next()) {
+				
+				System.out.println("testi");
+					
+				int id = pizzat.getInt("id");
+
+				String nimi = pizzat.getString("nimi");
+
+				double hinta = pizzat.getDouble("hinta");	
+				selaus.add(new Pizza(id, nimi, hinta));
+				
+			}
+			
+			
+			
+		}
+		
+		catch (Exception e){
+		System.out.println("Virhe");	
+			
+			
+			
+		}
+		
+		finally{
+			yhteys.suljeYhteys(conn);
+		}
+			
+		
+		
+		
+	return selaus;	
 	}
 
 }

@@ -27,10 +27,21 @@
 	<div id=raamit>
 
 
-		<div id=header></div>
+		<div id=header>
+		
+		<form  method="post" action="logout" id="logout">
+			
+			
+			<input type="hidden" name="logout">
+			<label><c:out value="${user}"></c:out></label>
+			<input type="submit" value="Kirjaudu ulos">
+			</form>
+		
+		
+		</div>
 
 		<ul id=paavalikko>
-			<li><a href="">Ravintolat</a>
+			<li><a href="controller">Näytä kaikki pizzat</a>
 			<li><a href="menuController">Ruokalista </a>
 			<li><a href="">Meille töihin </a>
 			<li><a href="tayteController">Luo täyte</a>

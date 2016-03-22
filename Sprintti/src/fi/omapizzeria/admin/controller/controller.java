@@ -15,6 +15,7 @@ import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,9 +47,74 @@ public class controller extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession sessio = request.getSession(false);
 		
+		AdminDao admintiedot= new AdminDao();
+		
+		boolean vahvistus=false;
+		String Kayttajanimi="";
+		String Salasana="";
+		
+		
+		HttpSession sessio = request.getSession(false);
+		Cookie[] cookies= request.getCookies();
+		if(cookies!=null){
+			
+			for(int i=0; i<cookies.length; i++){
+				
+				
+				if("kayttunnus".equals(cookies[i].getName())){
+					Kayttajanimi=cookies[i].getValue();
+				}
+				
+				
+				if("password".equals(cookies[i].getName())){
+					Salasana=cookies[i].getValue();
+				}
+				
+				
+			}
+		}
+		System.out.println("testi2121 "+Kayttajanimi);
+		
+		if(Salasana.equals("") && Kayttajanimi.equals("")){
+		try {
+			
+	    Kayttajanimi=(String)sessio.getAttribute("tunnus");
+		Salasana=(String)sessio.getAttribute("salasana");
+		
+		
+		}
+		catch(Exception e){
+			
+		}
+		}
+		
+		try {
 
+			
+			vahvistus=admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
+				
+				if(vahvistus==true){
+					
+								
+			
+					System.out.println("Testi");
+				}
+		
+				else {
+					request.getRequestDispatcher("Login.jsp").forward(request, response);
+				}
+	
+		
+		}
+		
+		catch (Exception e) {
+			e.printStackTrace();
+			request.getRequestDispatcher("Login.jsp").forward(request, response);	
+		}
+		
+		
+		
 		int noofPizzas, pizzasperPage, page, nextIndex, noofPages, startindex;
 		
 		PizzaDAO kanta = new PizzaDAO();
@@ -86,6 +152,7 @@ public class controller extends HttpServlet {
 		request.setAttribute("lista", pizzalista);
 		request.getRequestDispatcher("list.jsp").forward(request, response);
 
+
 	}
 
 	/**
@@ -95,64 +162,62 @@ public class controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		double hinta=0;
+		
 		ArrayList<Pizza> pizzalista;
 		
 
+		AdminDao admintiedot= new AdminDao();
 
-/**
- * Pizzan piiloitus: Pizzan id otetaan vastaan parametrina merkkijono-muodossa. 
- */	
+		String Salasana=request.getParameter("Salasana");
+		String Kayttajanimi=request.getParameter("Kayttajanimi");
+		String muisti=request.getParameter("memory");
+		Boolean vahvistus=false;
 		
-		String nimi = request.getParameter("nimi");
-		String kuvaus = request.getParameter("kuvaus");
-		String hintasana = request.getParameter("hinta");
-		String piiloitus= request.getParameter("hide");
-		String paljasta= request.getParameter("reveal");
-		try {
-			hinta = Double.parseDouble(hintasana);
-		}
-
-		catch (Exception e) {
-			hinta = 0;
-
-		}
-
-/**
- * pizzanpoisto: Pizzan id otetaan vastaan parametrina. Se k‰‰nnet‰‰n Merkkijonosta int-numeroon
- */
-
-		String tunnus = request.getParameter("tunnus");
-		int id = 0;
-		if (tunnus != null) {
-			try {
-				id = Integer.parseInt(tunnus);
-
+		HttpSession sessio = request.getSession(false);
+		
+		
+		if(request.getParameter("Kayttajanimi")!=null){
+			vahvistus=admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);}
+	
+		if(vahvistus==true){
+			
+			System.out.println("Cookie tstaus");
+			 sessio = request.getSession(true);	
+			 sessio.setAttribute("tunnus", Kayttajanimi);
+				sessio.setAttribute("salasana", Salasana);
+			if(muisti!=null){
+				
+			Cookie ck=new Cookie("kayttunnus", Kayttajanimi);
+			ck.setMaxAge(60*60*24*365);
+			response.addCookie(ck);
+			
+			ck=new Cookie("password", Salasana);
+			ck.setMaxAge(60*60*24*365);
+			response.addCookie(ck);
+				
 			}
-
-			catch (Exception e) {
-				System.out.println("Virhe");
-
-			}
-
+			
 		}
-
-		PizzaDAO kanta = new PizzaDAO();
+		
+		else {
+			request.getRequestDispatcher("Login.jsp").forward(request, response);
+			
+		}
+		
+	
+		
 		
 		/**
-		 * pizzanpoisto: Int-numero v‰litet‰‰n parametrina PizzaDAO-luokalle, joka l‰hett‰‰ k‰skyn tietokantaan.
-		 */
-   
+		 * Pizzan piiloitus: Pizzan id otetaan vastaan parametrina merkkijono-muodossa. 
+		 */	
+				
 		
-
-		if (id > 0) {
-			kanta.poistaPizza(id);
-		}
-
-		if (nimi != null) {
+		String piiloitus= request.getParameter("hide");
+		String paljasta= request.getParameter("reveal");
+			
 		
-			kanta.lisaaPizza( nimi, hinta, kuvaus);
-		}
+			
+		
 		int	piiloitusid, paljastaid;
 		piiloitusid=1;
 		paljastaid=1;
@@ -162,6 +227,9 @@ public class controller extends HttpServlet {
 		 * Pizzan piiloitus: Jos saatu parametri ei ole tyhj‰, Se k‰‰nnet‰‰n Merkkijonosta int-numeroon ja
 		 *  v‰litet‰‰n metodissa "piilotaPizza(piiloitusid)" parametrina.
 		 */	
+		PizzaDAO kanta = new PizzaDAO();
+		
+		
 		
 		if (request.getParameter("hide")!=null){
 		

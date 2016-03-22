@@ -50,8 +50,8 @@
 			<div class="row">
 				<div class="input-field col s3">
 					<i class="material-icons prefix">account_circle</i> <input
-						name="Kayttajanimi" type="text" length="15" value=""
-						class="validate"> <label for="first_name">Käyttäjänimi</label>
+						name="Kayttajanimi" type="text" length="15" 
+						class="validate" required > <label for="first_name">Käyttäjänimi</label>
 				</div>
 
 			</div>
@@ -59,14 +59,14 @@
 			<div class="row">
 				<div class="input-field col s3">
 					<i class="material-icons prefix">vpn_key</i> <input id="password"
-						type="password" length="15" name="Salasana" class="validate">
+						type="password" length="15" name="Salasana" class="validate" required>
 					<label for="password">Salasana</label>
 				</div>
 			</div>
 			<p class="Muista minut">
 			<p>
 				<input type="checkbox" class="filled-in" id="filled-in-box"
-					checked="checked" /> <label for="filled-in-box">Muista
+					checked="checked" name="memory"> <label for="filled-in-box">Muista
 					minut</label>
 			</p>
 			<button class="btn waves-effect waves-light" type="submit"

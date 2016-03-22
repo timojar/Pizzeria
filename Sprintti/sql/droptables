@@ -1,0 +1,16 @@
+
+drop table PizzaTayte;
+
+drop table Tilausrivi;
+
+drop table Tilaus;
+
+drop table Asiakas;
+
+drop table Pizza;
+
+drop table Tayte ;
+
+
+drop table Admin
+
