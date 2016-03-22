@@ -27,6 +27,7 @@ public class ConnectionFactory {
 		try {
 
 			Class.forName("org.mariadb.jdbc.Driver");
+
 			conn = DriverManager.getConnection(url, username, password);
 
 		} catch (Exception e) {
