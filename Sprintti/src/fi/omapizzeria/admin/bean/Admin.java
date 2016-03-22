@@ -1,5 +1,6 @@
 package fi.omapizzeria.admin.bean;
 
+
 public class Admin {
 
 	private int id;

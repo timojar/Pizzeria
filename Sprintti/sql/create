@@ -9,9 +9,9 @@ PRIMARY KEY(id)
 
 
 create table Tayte (
-tayteNimi varchar(30)  not null,
-saatavuus  integer not null,
- primary key(tayteNimi)
+tayteNimi VARCHAR(30)  NOT NULL,
+saatavuus  INTEGER NOT NULL,
+ PRIMARY KEY(tayteNimi)
 );
 
 

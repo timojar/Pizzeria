@@ -40,8 +40,8 @@
 	<div class="navbar-fixed">
 		<nav>
 		<div class="nav-wrapper green accent-4">
-			<a href="index.jsp" class="brand-logo center"><img src="Kuvat/Logo.png"
-				alt=pizza height="76" width="160"></a>
+			<a href="index.jsp" class="brand-logo center"><img
+				src="Kuvat/Logo.png" alt=pizza height="76" width="160"></a>
 			<ul id="nav-mobile" class="left hide-on-med-and-down">
 				<li><a href="menu.jsp">Menu</a></li>
 				<li><a href="#">Order Online</a></li>
@@ -62,8 +62,8 @@
 			<div class="row">
 				<div class="input-field col s3">
 					<i class="material-icons prefix">account_circle</i> <input
-						name="Kayttajanimi" type="text" length="15" 
-						class="validate" required > <label for="first_name">K‰ytt‰j‰nimi</label>
+						name="Kayttajanimi" type="text" length="15" class="validate"
+						required> <label for="first_name">K‰ytt‰j‰nimi</label>
 				</div>
 
 			</div>
@@ -71,8 +71,8 @@
 			<div class="row">
 				<div class="input-field col s3">
 					<i class="material-icons prefix">vpn_key</i> <input id="password"
-						type="password" length="15" name="Salasana" class="validate" required>
-					<label for="password">Salasana</label>
+						type="password" length="15" name="Salasana" class="validate"
+						required> <label for="password">Salasana</label>
 				</div>
 			</div>
 			<p class="Muista minut">
@@ -81,6 +81,7 @@
 					checked="checked" name="memory"> <label for="filled-in-box">Muista
 					minut</label>
 			</p>
+			<br>
 			<button class="btn waves-effect waves-light" type="submit"
 				name="commit">
 				Kirjaudu sis‰‰n <i class="material-icons right"></i>
@@ -88,7 +89,7 @@
 		</form>
 	</div>
 
-<footer class="page-footer green accent-4">
+	<footer class="page-footer green accent-4">
 	<div class="container">
 		<div class="row">
 			<div class="col l6 s12">
@@ -121,7 +122,7 @@
 	</div>
 	</footer>
 
-<!--  Scripts-->
+	<!--  Scripts-->
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="js/materialize.js"></script>
 	<script src="js/init.js"></script>

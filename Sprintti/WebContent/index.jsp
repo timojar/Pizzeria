@@ -123,14 +123,15 @@
 	<div class="navbar-fixed">
 		<nav>
 		<div class="nav-wrapper green accent-4">
-			<a href="index.jsp" class="brand-logo center"><img src="Kuvat/Logo.png"
-				alt=pizza height="76" width="160"></a>
+			<a href="index.jsp" class="brand-logo center"><img
+				src="Kuvat/Logo.png" alt=pizza height="76" width="160"></a>
 			<ul id="nav-mobile" class="left hide-on-med-and-down">
 				<li><a href="menu.jsp">Menu</a></li>
 				<li><a href="#">Order Online</a></li>
 				<li><a href="#">About</a></li>
 				<li><a href="#">Group Dining</a>
-				<li><a href="Login.jsp" class="waves-effect waves-light btn-large">Log in</a></li>
+				<li><a href="Login.jsp"
+					class="waves-effect waves-light btn-large">Log in</a></li>
 			</ul>
 		</div>
 		</nav>
@@ -140,11 +141,13 @@
 			<br> <br>
 			<h1 class="header center orange-text">Castello è Fiori</h1>
 			<div class="row center">
-				<h5 class="header col s12 light"><i>Moderni, mutta perinteinen.
-					Vuodesta 1800.</i></h5>
+				<h5 class="header col s12 light">
+					<i>Moderni, mutta perinteinen. Vuodesta 1800.</i>
+				</h5>
 			</div>
 			<div class="row center">
-				<a href="list.jsp" id="download-button"	class="btn-large waves-effect green accent-4">Siirry
+				<a href="list.jsp" id="download-button"
+					class="btn-large waves-effect green accent-4">Siirry
 					ruokalistaan</a>
 			</div>
 			<br> <br>
@@ -174,7 +177,8 @@
 			<li><img src="Kuvat/Wines_3.jpg"> <!-- random image -->
 				<div class="caption center-align">
 					<h3>Aito firenzen henki</h3>
-					<h5 class="light grey-text text-lighten-3">Nauti aidoista italialaisista viineistä</h5>
+					<h5 class="light grey-text text-lighten-3">Nauti aidoista
+						italialaisista viineistä</h5>
 				</div></li>
 		</ul>
 	</div>
@@ -192,12 +196,10 @@
 						<h5 class="center">Sijainti</h5>
 
 						<p class="light">
-							<br>
-							<br> <b>Castello è Fiori sijaitsee helppojen kulkuyhteyksien
-								päässä, Pasilan sydämessä.<br>
-							<br> Osoite: Ratapihantie 13, 00520 Helsinki
-							</b><br>
-							<br>
+							<br> <br> <b>Castello è Fiori sijaitsee helppojen
+								kulkuyhteyksien päässä, Pasilan sydämessä.<br> <br>
+								Osoite: Ratapihantie 13, 00520 Helsinki
+							</b><br> <br>
 							<iframe
 								src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d991.3802553818812!2d24.93392552634419!3d60.201246179597305!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0000000000000000%3A0xda28003f60191bc5!2sHaaga-Helia+ammattikorkeakoulu!5e0!3m2!1sfi!2sfi!4v1457958126559"
 								width="300" height="200" frameborder="0" style="border: 0"
@@ -214,16 +216,15 @@
 						<h5 class="center">Aukioloajat</h5>
 
 						<p class="light">
-							<br>
-							<br> <b>Olemme avoinna seuraavina kellonaikoina: <br>
-							<br>
+							<br> <br> <b>Olemme avoinna seuraavina
+								kellonaikoina: <br> <br>
 
 								<div class="row">
 									<div class="col s12 m5">
 										<div class="card-panel green accent-4">
 											<span class="white-text"> Ma-Pe 10:00-23:00<br>
-												La 11.00-22.00<br> Su 12.00-18.00<br>
-											<br></b> </span>
+												La 11.00-22.00<br> Su 12.00-18.00<br> <br>
+							</b> </span>
 					</div>
 				</div>
 			</div>
@@ -243,23 +244,19 @@
 			<h5 class="center">Ota yhteyttä</h5>
 
 			<p class="light">
-				<br>
-				<br>
-				<b>Löydät meidät yleisimmistä sosiaalisen median sivustoista,
-					mukaan lukien Facebookista ja Instagramista. Voit myös ottaa meihin
-					suoraan yhteyttä.<br>
-				<br> <!--	<b>Facebook</b> <a href="https://facebook.com/" target="_blank"><i class="small material-icons">forum</i></a><br><br>
+				<br> <br> <b>Löydät meidät yleisimmistä sosiaalisen
+					median sivustoista, mukaan lukien Facebookista ja Instagramista.
+					Voit myös ottaa meihin suoraan yhteyttä.<br> <br> <!--	<b>Facebook</b> <a href="https://facebook.com/" target="_blank"><i class="small material-icons">forum</i></a><br><br>
 							 <b>Instagram</b> <a href="https://www.instagram.com/" target="_blank"><i class="small material-icons">forum</i></a><br><br>
 							  <b>Linkedin</b> <a href="https://www.instagram.com/" target="_blank"><i class="small material-icons">forum</i></a></p>
-							  --> <br>
-				<br>
+							  --> <br> <br> <br> <a
+					class="waves-effect green accent-4 btn"><i
+						class="material-icons left">cloud</i>Facebook</a><br>
 				<br> <a class="waves-effect green accent-4 btn"><i
-						class="material-icons left">cloud</i>Facebook</a><br><br> <a
-					class="waves-effect green accent-4 btn"><i
-						class="material-icons left">cloud</i>Instagram</a>
-				<br><br> <a class="waves-effect green accent-4 btn"><i
-						class="material-icons left">cloud</i>Linkedin</a><br><br> <a
-					class="waves-effect green accent-4 btn"><i
+						class="material-icons left">cloud</i>Instagram</a> <br>
+				<br> <a class="waves-effect green accent-4 btn"><i
+						class="material-icons left">cloud</i>Linkedin</a><br>
+				<br> <a class="waves-effect green accent-4 btn"><i
 						class="material-icons left">cloud</i>Twitter</a>
 		</div>
 	</div>
