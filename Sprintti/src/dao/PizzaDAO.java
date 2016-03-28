@@ -9,18 +9,112 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.PreparedStatement;
 
-import fi.omapizzeria.admin.bean.Pizza;
+import fi.omapizzeria.admin.bean.*;
 
 public class PizzaDAO {
 
 	private  Pizza pizza;
-
+	private Tayte t;
 	private  List<Pizza> pizzalista, selaus;
 	
-	private int noofPizzas , nextIndex, pizzasperPage;
+	private int noofPizzas, nextIndex, pizzasperPage, pizzaindex;
 	
+	
+	public Pizza bringPizza(int pizzaId){
+		
+		System.out.println("ID"+pizzaId);
+		Connection conn;		
+		ConnectionFactory yhteys = new ConnectionFactory();	
+		conn = yhteys.getConnection();
+		Pizza pizza=null;
+		try {
+			
+			String sql = "select * from Pizza where id = "+pizzaId;
+ 
+			Statement pizzaHaku = conn.createStatement();
+
+			ResultSet pizzat = pizzaHaku.executeQuery(sql);	
+			int e=0;
+			
+			
+			while (pizzat.next()) {
+				
+				int id = pizzat.getInt("id");
+
+				String nimi = pizzat.getString("nimi");
+
+				double hinta = pizzat.getDouble("hinta");
+				String kuvaus = pizzat.getString("kuvaus");
+				String piiloitus = pizzat.getString("piiloitus");
+				
+				System.out.println(nimi);
+			pizza=new Pizza(id, nimi, hinta, kuvaus);
+				
+				
+				
+			}
+			
+			
+		}
+		
+		catch(Exception e){
+		e.printStackTrace();	
+		}
+		
+		finally{
+			
+			yhteys.suljeYhteys(conn);
+		}
+		
+		
+		
+	return pizza;	
+	}
 	
 
+	public int haePizzaIndex(int pizzaid){
+		Connection conn;		
+		ConnectionFactory yhteys = new ConnectionFactory();	
+		conn = yhteys.getConnection();
+		
+		try{
+			
+			
+			String sql = "select * from Pizza";
+
+			Statement pizzaHaku = conn.createStatement();
+
+			ResultSet pizzat = pizzaHaku.executeQuery(sql);	
+			int e=0;
+			
+			
+			while (pizzat.next()) {
+			e++;	
+				
+			if(pizzaid==pizzat.getInt("id")) {
+			
+			pizzaindex=e;	
+				
+			}
+				
+			}
+				
+			
+			
+			
+		}
+		
+		catch(Exception e){
+			
+		}
+		
+		finally{
+		yhteys.suljeYhteys(conn);	
+		}
+		
+	
+		return pizzaindex;
+	};
 	
 	public void poistaPiiloitus(int paljastaid){
 		
@@ -203,25 +297,39 @@ conn = yhteys.getConnection();
 	
 	
 	
-	public  void lisaaPizza(String nimi, double hinta, String kuvaus) {
+	public  void lisaaPizza(String nimi, double hinta, String kuvaus, List<Tayte> taytelista) {
 
 		ConnectionFactory yhteys = new ConnectionFactory();
 		pizzalista = new ArrayList<Pizza>();
-
+		
 		Connection conn;
-
+		Tayte t=taytelista.get(0);
 		conn = yhteys.getConnection();
-
+		int id;
+		String tayte=t.getTayteNimi();
+		for(int i=1; i<taytelista.size()-1; i++){
+			t=taytelista.get(i);
+			tayte=tayte+", "+t.getTayteNimi();
+		}
+		
+		t=taytelista.get(taytelista.size()-1);
+		tayte=tayte+" ja "+t.getTayteNimi();
+		System.out.println(tayte);
+		
+		
 		
 		
 		try {
 			
 			selaus=selaaPizzat();
-			
+			if(selaus.size()>1){
 			Pizza p=selaus.get(selaus.size()-1);
 			
 			
-			int id=p.getId()+1;
+			 id=p.getId()+1;}
+			else{
+			 id=1;	
+			}
 			
 			
 			String sqlInsert = "INSERT INTO Pizza(id, nimi, hinta, kuvaus) VALUES (?, ?, ?,?)";
@@ -229,7 +337,7 @@ conn = yhteys.getConnection();
 			stmtInsert.setInt(1, id);
 			stmtInsert.setString(2, nimi);
 			stmtInsert.setDouble(3, hinta);
-			stmtInsert.setString(4, kuvaus);
+			stmtInsert.setString(4, tayte);
 			stmtInsert.executeUpdate();
 
 		}

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import fi.omapizzeria.admin.bean.*;
 
 public class AdminDao {
@@ -21,7 +22,8 @@ public class AdminDao {
 		Connection conn;
 
 		conn = yhteys.getConnection();
-
+		
+		
 		try {
 
 			String sql = "select  * from Admin ;";
@@ -32,11 +34,12 @@ public class AdminDao {
 
 			while (hakutulokset.next()) {
 
-				int id = hakutulokset.getInt("id");
+		
 
 				if (Kayttajanimi.equals(hakutulokset.getString("Kayttajanimi"))
 						&& Salasana.equals(hakutulokset.getString("Salasana"))) {
-						
+					System.out.println("testi2121 "+Kayttajanimi);
+
 					vahvistus=true;
 				}
 

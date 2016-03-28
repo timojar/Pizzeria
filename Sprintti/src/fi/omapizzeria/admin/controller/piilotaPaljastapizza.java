@@ -49,10 +49,11 @@ public class piilotaPaljastapizza extends HttpServlet {
 		
 			
 		
-		int	piiloitusid, paljastaid;
+		int	piiloitusid, paljastaid, page, pizzaid;
 		piiloitusid=1;
 		paljastaid=1;
-		
+		page=1;
+		pizzaid=0;
 		
 		/**
 		 * Pizzan piiloitus: Jos saatu parametri ei ole tyhj‰, Se k‰‰nnet‰‰n Merkkijonosta int-numeroon ja
@@ -67,6 +68,9 @@ public class piilotaPaljastapizza extends HttpServlet {
 			try {
 				piiloitusid = Integer.parseInt(piiloitus);
 			kanta.piilotaPizza(piiloitusid);
+			pizzaid=piiloitusid;
+			;
+			
 			}
 
 			catch (Exception e) {
@@ -79,15 +83,28 @@ public class piilotaPaljastapizza extends HttpServlet {
 			try {
 				paljastaid = Integer.parseInt(paljasta);
 			kanta.poistaPiiloitus(paljastaid);
+			pizzaid=paljastaid;
 			}
 
 			catch (Exception e) {
 			
 			}}
 		
-		System.out.println(piiloitus);
+		int pizzaindex=kanta.haePizzaIndex(pizzaid);
+		int jakojaannos=pizzaindex%5;
 		
-		response.sendRedirect("/Sprintti/controller?added=true");
+		if (jakojaannos==0){
+			pizzaindex=pizzaindex-1;
+		}
+		
+		
+		System.out.println(kanta.haePizzaIndex(pizzaid));
+		page=pizzaindex/5+1;
+		
+		request.setAttribute("visible", "visible");
+		
+		
+		response.sendRedirect("/Sprintti/controller?page="+page);
 		
 	}
 

@@ -134,7 +134,12 @@ Paljasta-nappi.
 </c:choose>
 
 			<br>
+		<form action="MuokkaaPizza" method="get">
 		
+		<input type="hidden" name="muokkausid" value="${pizzat.id }">		
+<input	type="submit"  value="muokkaa">
+		
+		</form>
 
 			</c:forEach>
 
@@ -158,7 +163,7 @@ Paljasta-nappi.
 			
 			<c:forEach items="${taytelista}" var="tayte"> 
 		
-		<label> <input type="checkbox" name="${pizzatayte}" value="${tayte.tayteNimi}"> 
+		<label> <input type="checkbox" name="taytteet" value="${tayte.tayteNimi}"> 
 		<c:out value="${tayte.tayteNimi}">
 		</c:out> </label>
 		

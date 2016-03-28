@@ -24,6 +24,15 @@ this.saatavuus=saatavuus;
 	
 }
 
+public Tayte(String tayteNimi){
+	
+this.tayteNimi=tayteNimi;
+
+
+	
+}
+
+
 
 public String getTayteNimi() {
 	return tayteNimi;

@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -74,7 +75,7 @@ public class controller extends HttpServlet {
 				
 			}
 		}
-		System.out.println("testi2121 "+Kayttajanimi);
+		
 		
 		if(Salasana.equals("") && Kayttajanimi.equals("")){
 		try {
@@ -135,6 +136,12 @@ public class controller extends HttpServlet {
 		
 		}
 			
+		ServletContext context=getServletContext();
+		String v=(String)request.getAttribute("visible");
+		
+		
+			System.out.println(v);
+	
 		startindex=2;
 		 nextIndex=(page-1)*pizzasperPage;
 		  noofPages=noofPizzas/pizzasperPage+1;
@@ -179,6 +186,8 @@ public class controller extends HttpServlet {
 		
 		
 		if(request.getParameter("Kayttajanimi")!=null){
+			
+			
 			vahvistus=admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);}
 	
 		if(vahvistus==true){

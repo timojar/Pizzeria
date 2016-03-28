@@ -8,23 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import dao.PizzaDAO;
-import fi.omapizzeria.admin.bean.Tayte;
+import fi.omapizzeria.admin.bean.Pizza;
 
 /**
- * Servlet implementation class lisaaPitsa
+ * Servlet implementation class MuokkaaPizza
  */
-@WebServlet("/lisaaPitsa")
-public class lisaaPitsa extends HttpServlet {
+@WebServlet("/MuokkaaPizza")
+public class MuokkaaPizza extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public lisaaPitsa() {
+    public MuokkaaPizza() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +31,32 @@ public class lisaaPitsa extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		PizzaDAO kanta = new PizzaDAO();
+		int pizzaId=0;
+		String idstr=request.getParameter("muokkausid");
+	
+		try {
+			pizzaId=Integer.parseInt(idstr);
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			
+					}
+		
+		Pizza pizza=kanta.bringPizza(pizzaId);
+	System.out.println(pizza.getNimi());
+		
+		request.setAttribute("pizza", "pizza");
+		
+		
+
+		
+		
+		
+		
+		
 	}
 
 	/**
@@ -41,39 +64,12 @@ public class lisaaPitsa extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Tayte>taytelista=new ArrayList<Tayte>();
-		double hinta=0;
-		String nimi = request.getParameter("nimi");
-		String kuvaus = request.getParameter("kuvaus");
-		String hintasana = request.getParameter("hinta");
-		String tayteNimi;
-		String [] taytteet=request.getParameterValues("taytteet");
-		
-		
-		for(int i=0; i<taytteet.length; i++){
-			tayteNimi=taytteet[i];
-			taytelista.add(new Tayte(tayteNimi));
-		}
 		
 		PizzaDAO kanta = new PizzaDAO();
 		
-		try {
-			hinta = Double.parseDouble(hintasana);
-		}
-
-		catch (Exception e) {
-			hinta = 0;
-
-		}
 		
 		
-		if (nimi != null) {
-			
-			kanta.lisaaPizza( nimi, hinta, kuvaus, taytelista);
-		}	
 		
-		
-		response.sendRedirect("/Sprintti/controller?added=true");
 		
 	}
 
