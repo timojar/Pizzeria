@@ -48,7 +48,7 @@ public class PizzaDAO {
 				String piiloitus = pizzat.getString("piiloitus");
 				
 				System.out.println(nimi);
-			pizza=new Pizza(id, nimi, hinta, kuvaus);
+			pizza=new Pizza(id, nimi, hinta, kuvaus, piiloitus);
 				
 				
 				
@@ -179,7 +179,7 @@ conn = yhteys.getConnection();
 		stmthide.setInt(1, piiloitusid);
 		stmthide.executeUpdate();
 
-		System.out.println(piiloitusid);
+		
 		
 	}
 	
@@ -297,7 +297,7 @@ conn = yhteys.getConnection();
 	
 	
 	
-	public  void lisaaPizza(String nimi, double hinta, String kuvaus, List<Tayte> taytelista) {
+	public  void lisaaPizza(String nimi, double hinta, List<Tayte> taytelista) {
 
 		ConnectionFactory yhteys = new ConnectionFactory();
 		pizzalista = new ArrayList<Pizza>();
@@ -307,6 +307,7 @@ conn = yhteys.getConnection();
 		conn = yhteys.getConnection();
 		int id;
 		String tayte=t.getTayteNimi();
+		if(taytelista.size()>1){
 		for(int i=1; i<taytelista.size()-1; i++){
 			t=taytelista.get(i);
 			tayte=tayte+", "+t.getTayteNimi();
@@ -314,15 +315,15 @@ conn = yhteys.getConnection();
 		
 		t=taytelista.get(taytelista.size()-1);
 		tayte=tayte+" ja "+t.getTayteNimi();
-		System.out.println(tayte);
 		
+		}
 		
 		
 		
 		try {
 			
 			selaus=selaaPizzat();
-			if(selaus.size()>1){
+			if(selaus.size()>0){
 			Pizza p=selaus.get(selaus.size()-1);
 			
 			
@@ -354,10 +355,83 @@ conn = yhteys.getConnection();
 		}
 
 	}
+	
 
-	/**
-	 * pizzanpoisto: Otetaan Pizza id vastaan parametrina
-	 */
+	public void muokkaaPizza(int id, String nimi, double hinta, String kuvaus, List<Tayte> taytelista, boolean check){
+		
+		ConnectionFactory yhteys = new ConnectionFactory();
+	
+		
+		Connection conn;
+		
+		conn = yhteys.getConnection();
+		
+		
+		
+		if (check==true) {
+			
+			
+			Tayte t=taytelista.get(0);
+			
+			String tayte=t.getTayteNimi();
+			if(taytelista.size()>1){
+			
+			for(int i=1; i<taytelista.size()-1; i++){
+				t=taytelista.get(i);
+				tayte=tayte+", "+t.getTayteNimi();
+			}
+			
+			t=taytelista.get(taytelista.size()-1);
+			tayte=tayte+" ja "+t.getTayteNimi();
+			}	
+			kuvaus=tayte;
+			
+		}
+		
+		
+		
+		
+		
+		
+	
+	try {
+		
+String newName = "Update Pizza set nimi = ? where id = ?";
+String newPrice = "Update Pizza set hinta  = ?  where id = ?";
+String newDesc = "Update Pizza set kuvaus = ?  where id = ?";
+		
+		PreparedStatement stmName = conn.prepareStatement(newName);
+		stmName.setString(1, nimi);
+		stmName.setInt(2, id);
+		stmName.executeUpdate();
+
+		PreparedStatement stmtPrice = conn.prepareStatement(newPrice);
+		stmtPrice.setDouble(1,hinta);
+		stmtPrice.setInt(2, id);
+		stmtPrice.executeUpdate();
+
+		
+		PreparedStatement stmtDesc = conn.prepareStatement(newDesc);
+		stmtDesc.setString(1,kuvaus);
+		stmtDesc.setInt(2, id);
+		stmtDesc.executeUpdate();
+
+		System.out.println(nimi);
+		
+		
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+		// TODO: handle exception
+	}	
+		
+	finally {
+		yhteys.suljeYhteys(conn);
+	}
+		
+	}
+	
+	
 	public void poistaPizza(int id) {
 
 		ConnectionFactory yhteys = new ConnectionFactory();

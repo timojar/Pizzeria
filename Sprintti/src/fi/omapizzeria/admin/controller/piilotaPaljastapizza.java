@@ -104,7 +104,7 @@ public class piilotaPaljastapizza extends HttpServlet {
 		request.setAttribute("visible", "visible");
 		
 		
-		response.sendRedirect("/Sprintti/controller?page="+page);
+		response.sendRedirect("/Sprintti/MuokkaaPizza"); 
 		
 	}
 

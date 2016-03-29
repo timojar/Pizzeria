@@ -77,6 +77,8 @@
 <p>
 				<c:out value="${pizzat.kuvaus }"></c:out>
 				</p>
+				
+				<c:if test="${pizzat.piiloitus == 'nosale'}"> <p>Ei ole myynnissä</p></c:if>
 
 				<%--Pizzanpoisto: Jokaisen pizzan kohdalla on poista-nappi, jota
 				painamalla lähetetään pizzan id-numero parametrina controller-servlettiin
@@ -98,40 +100,6 @@
 	 
 				--%>
 		
-				
-<c:choose>
-<%--Pizzan piiloitus: Jos pizzan  arvo tietokannan kentässä "piiloitus" ei ole "nosale" Pizzan kohdalla on 
-Piilota-nappi.
-				--%>
-<c:when test="${pizzat.piiloitus != 'nosale'}">
-<form action="piilotaPaljastapizza" method="post" id="hide">	
-<input type="hidden" name="hide" value="${pizzat.id }">		
-<input	type="submit"  value="Piilota">
-</form>	
-</c:when>
-
-<%--Pizzan paljastus: paljasta-nappi lähettää Pizza id-atribuutin arvon parametrina
-	 controller-luokkaan, jossa se käännetään int-tietotyypiksi.
-	 Käännettynä se menee PizzaDAO-luokkaan, jossa pizza 
-	 saa tyhjän arvon piilota-kenttään. 
-	 
-				--%>
-				
-				
-	<%--Pizzan paljastus: Jos pizzan  arvo tietokannan kentässä "piiloitus" on "nosale" Pizzan kohdalla on 
-Paljasta-nappi.
-				--%>			
-
-<c:when test="${pizzat.piiloitus == 'nosale'}">
-<form action="piilotaPaljastapizza" method="post" id="reveal">	
-<input type="hidden" name="reveal" value="${pizzat.id }">		
-<input	type="submit"  value="Paljasta">
-</form>	
-
-</c:when>
-
-
-</c:choose>
 
 			<br>
 		<form action="MuokkaaPizza" method="get">
@@ -145,23 +113,24 @@ Paljasta-nappi.
 
 			<form method="post" action="lisaaPitsa" id="tiedot">
 
+
+
 				<p>Pizzan nimi:</p>
-				<input type="text" name="nimi" id="pizzannimi">
+				<input type="text" name="nimi" id="pizzannimi" required>
 
 				<p>Pizzan hinta:</p>
-				<input type="text" name="hinta" id="pizzanhinta">
+				<input type="text" name="hinta" id="pizzanhinta" required>
 				<br>
 				<br>
 				
-				<p>Sisältö kuvaus:</p>
-				<input type="text" name="kuvaus" id="taytteet">
-				<br>
-				<br>
-					<br>
+			
 			<label>Valitse täytteet (max 6)</label>
 				<br>
 			
 			<c:forEach items="${taytelista}" var="tayte"> 
+			
+			
+			
 		
 		<label> <input type="checkbox" name="taytteet" value="${tayte.tayteNimi}"> 
 		<c:out value="${tayte.tayteNimi}">

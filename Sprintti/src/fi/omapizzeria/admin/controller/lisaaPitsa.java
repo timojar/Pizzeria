@@ -49,7 +49,7 @@ public class lisaaPitsa extends HttpServlet {
 		String tayteNimi;
 		String [] taytteet=request.getParameterValues("taytteet");
 		
-		
+	
 		for(int i=0; i<taytteet.length; i++){
 			tayteNimi=taytteet[i];
 			taytelista.add(new Tayte(tayteNimi));
@@ -69,7 +69,7 @@ public class lisaaPitsa extends HttpServlet {
 		
 		if (nimi != null) {
 			
-			kanta.lisaaPizza( nimi, hinta, kuvaus, taytelista);
+			kanta.lisaaPizza( nimi, hinta,  taytelista);
 		}	
 		
 		

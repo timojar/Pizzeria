@@ -1,78 +1,52 @@
 
-CREATE TABLE Admin
-(
-id INTEGER NOT NULL,
-Kayttajanimi VARCHAR(15) NOT NULL,
-Salasana VARCHAR(15) NOT NULL,
-PRIMARY KEY(id)
+create table Pizza (
+id integer not null,
+
+nimi varchar(30) not null,
+
+hinta decimal (6,2) not null,
+
+kuvaus varchar(60) not null,
+piiloitus varchar(10) ,
+
+ primary key(id) 
+
 );
 
 
 create table Tayte (
-tayteNimi VARCHAR(30)  NOT NULL,
-saatavuus  INTEGER NOT NULL,
- PRIMARY KEY(tayteNimi)
+tayteNimi varchar(30)  not null,
+
+saatavuus  integer not null,
+ primary key(tayteNimi)
+
 );
 
 
-CREATE TABLE Pizza
-(
-id INTEGER NOT NULL,
-nimi VARCHAR(15),
-hinta DECIMAL(6,2),
-sisältökuvaus VARCHAR(15),
-kuvalinkki VARCHAR(1000),		
-piiloitus VARCHAR(15),
-PRIMARY KEY(id)
-);
 
+create table Pizzatayte (
 
-CREATE TABLE PizzaTayte
-(
-tayteNimi VARCHAR(15) NOT NULL,
-pizzaId INTEGER NOT NULL,
-lkm INTEGER,
-PRIMARY KEY(tayteNimi, pizzaId),
-FOREIGN KEY(pizzaId) REFERENCES Pizza (id),
-FOREIGN KEY(tayteNimi) REFERENCES Tayte(tayteNimi)
-)
-;
+tayteNimi varchar(30)  not null,
+id integer not null,
 
-CREATE TABLE Asiakas(
-asiakasnumero INTEGER NOT NULL,
-etunimi VARCHAR(30) NOT NULL,
-sukunimi VARCHAR(40) NOT NULL,
-email VARCHAR(50) NOT NULL,
-salasana VARCHAR(15) NOT NULL,
+lkm integer not null,
 
-primary key(asiakasnumero)
+ primary key(tayteNimi),
+
+  foreign key (tayteNimi) references Tayte (tayteNimi),
+foreign key (id) references Pizza (id)
+
 )
 
 ;
 
-CREATE TABLE Tilaus
-(
-numero INTEGER NOT NULL,
-asiakasnumero INTEGER,
-tilausajankohta DATE,
-toimitusajankohta DATE,
-toimitustapa VARCHAR(35),
-maksutapa VARCHAR(35), 			
-hinta DECIMAL(5,2),
-PRIMARY KEY (numero),
-FOREIGN KEY (asiakasnumero) REFERENCES Asiakas (asiakasnumero)
-) 
-;
 
-CREATE TABLE Tilausrivi
-(
-pizzaid INTEGER NOT NULL,		
-tilausNro INTEGER NOT NULL,
-lkm INTEGER	NOT NULL,			
-hinta DECIMAL(6,2),
-PRIMARY KEY (pizzaid, tilausNro),
-FOREIGN KEY (pizzaid) REFERENCES Pizza(id),
-FOREIGN KEY (tilausNro) REFERENCES Tilaus(numero)
-	
+create table Admin(
+Kayttajanimi varchar(120)  not null,
+Salasana varchar(10) not null,
+
+primary key (Kayttajanimi)
+
+
+
 )
-

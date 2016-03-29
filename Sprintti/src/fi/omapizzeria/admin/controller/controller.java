@@ -99,7 +99,7 @@ public class controller extends HttpServlet {
 					
 								
 			
-					System.out.println("Testi");
+					
 				}
 		
 				else {
@@ -136,7 +136,7 @@ public class controller extends HttpServlet {
 		
 		}
 			
-		ServletContext context=getServletContext();
+	
 		String v=(String)request.getAttribute("visible");
 		
 		
@@ -192,7 +192,7 @@ public class controller extends HttpServlet {
 	
 		if(vahvistus==true){
 			
-			System.out.println("Cookie tstaus");
+			
 			 sessio = request.getSession(true);	
 			 sessio.setAttribute("tunnus", Kayttajanimi);
 				sessio.setAttribute("salasana", Salasana);
