@@ -183,16 +183,16 @@
 
 
 <c:if test="${noofPages > 1}">
-		<c:forEach begin="${startindex}" end ="${noofPages}" var="i">
+		
 		
 	
  <ul class="pagination">
-    
+    <c:forEach begin="${startindex}" end ="${noofPages}" var="i">
     <li class="waves-effect"><a href="controller?page=${i}">${i}</a></li>
-   
+   </c:forEach>
   </ul>
 
-</c:forEach>
+
 
 </c:if>
 
