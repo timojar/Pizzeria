@@ -88,7 +88,7 @@
 <br>
 
  <div class="row">
-    <form class="col s12" action="tayteController" method="post">>
+    <form class="col s12" action="tayteController" method="post">
       <div class="row">
         <div class="input-field col s3">
           <i class="material-icons prefix">assignment</i>

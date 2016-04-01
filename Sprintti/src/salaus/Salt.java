@@ -1,6 +1,6 @@
 package salaus;
 
-import java.security.SecureRandom;
+/*import java.security.SecureRandom;
 import java.util.Random;
 
 public class Salt {
@@ -20,3 +20,4 @@ public static void main (String[] args){
 	
 
 }
+*/

@@ -131,7 +131,7 @@
 				<li><a href="#">About</a></li>
 				<li><a href="#">Group Dining</a>
 				<li><a href="Login.jsp"
-					class="waves-effect waves-light btn-large">Log in</a></li>
+					class="waves-effect waves-light btn">Log in</a></li>
 			</ul>
 		</div>
 		</nav>

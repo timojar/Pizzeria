@@ -12,10 +12,32 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
+<!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <link href="styles.css" rel="stylesheet" type="text/css">
+<link href="tyyli.css" rel="stylesheet" type="text/css">
 
-<title>Insert title here</title>
+	<!-- CSS  -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet">
+	<link href="materialize.css" type="text/css" rel="stylesheet"
+		media="screen,projection" />
+	<link href="style.css" type="text/css" rel="stylesheet"
+		media="screen,projection" />
+	<link href='https://fonts.googleapis.com/css?family=Pacifico'
+		rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Oswald'
+		rel='stylesheet' type='text/css'>
+		 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+
+<title>Lista</title>
 
 
 </head>
@@ -24,39 +46,42 @@
 
 
 
-	<div id=raamit>
+	
 
 
-		<div id=header>
-		
-		<form  method="post" action="logout" id="logout">
-			
-			
-			<input type="hidden" name="logout">
-			<label><c:out value="${user}"></c:out></label>
-			<input type="submit" value="Kirjaudu ulos">
-			</form>
 		
 		
+	
+		
+		
+		
+
+		<div class="navbar-fixed">
+		<nav>
+		<div class="nav-wrapper green accent-4">
+			<a href="index.jsp" class="brand-logo center"><img
+				src="Kuvat/Logo.png" alt=pizza height="76" width="160"></a>
+			<ul id="nav-mobile" class="left hide-on-med-and-down">
+				<li><a href="menu.jsp">Menu</a></li>
+				<li><a href="#">Order Online</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Group Dining</a>
+				<li><a href="Login.jsp"
+					class="waves-effect waves-light btn">Log in</a></li>
+			</ul>
 		</div>
-
-		<ul id=paavalikko>
-			<li><a href="controller">Näytä kaikki pizzat</a>
-			<li><a href="menuController">Ruokalista </a>
-			<li><a href="">Meille töihin </a>
-			<li><a href="tayteController">Luo täyte</a>
-		</ul>
-		<div id="pylvas">
+		</nav>
+	</div>
 		
-		<div id="column"></div>
 		
-		</div>
+		
+		
 
 
 		<div id=sisältö>
 
 
-			<h2>Pizza lista</h2>
+			<h2>Pizzalista</h2>
 
 			<c:out value="${aloitusaika }"></c:out>
 			<c:if test="${not empty param.added}">Uuden pizzan lisääminen onnistui!</c:if>
@@ -111,19 +136,20 @@
 
 			</c:forEach>
 
-			<form method="post" action="lisaaPitsa" id="tiedot">
+<div class="row">
+			<form method="post"  class="col s-12" action="lisaaPitsa" id="tiedot">
 
 
 
 				<p>Pizzan nimi:</p>
-				<input type="text" name="nimi" id="pizzannimi" required>
+				<input type="text" class="input-field col s6" name="nimi" id="pizzannimi" required>
 
 				<p>Pizzan hinta:</p>
-				<input type="text" name="hinta" id="pizzanhinta" required>
+				<input type="text"  class="input-field col s6" name="hinta" id="pizzanhinta" required>
 				<br>
 				<br>
 				
-			
+		
 			<label>Valitse täytteet (max 6)</label>
 				<br>
 			
@@ -131,11 +157,13 @@
 			
 			
 			
-		
+	
 		<label> <input type="checkbox" name="taytteet" value="${tayte.tayteNimi}"> 
 		<c:out value="${tayte.tayteNimi}">
 		</c:out> </label>
-		
+		      <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+      <label for="filled-in-box"></label>
+     
 			
 			</c:forEach>
 			
@@ -157,20 +185,52 @@
 		</c:forEach>
 		</table>
 
-
 		</div>
 
+</div>
 
+<form  method="post" action="logout" id="logout">
+			
+			
+			<input type="hidden" name="logout">
+			<label><c:out value="${user}"></c:out></label>
+			<input class="btn waves-effect waves-light" type="submit" value="Kirjaudu ulos">
+			</form>
 
+		
 
-
-		<div id=footer>
-
-			<p>http://localhost:8080/PizzeriaAdmin/list.jsp</p>
-
+	<footer class="page-footer green accent-4">
+	<div class="container">
+		<div class="row">
+			<div class="col l6 s12">
+				<h5 class="white-text">Tietoa yrityksestä</h5>
+				<p class="grey-text text-lighten-4">Castello è Fiori on
+					perinteinen italialaishenkinen Pizzaravintola, jolla on perinteet
+					syvällä Italian historiassa. Perustettu vuonna 1800, perustamme
+					suosiomme perinteisiin ja aitoihin italialaisiin makuelämyksiin.
+					Tule ja koe aitoa Venetsialaista henkeä mainion viinin kera.</p>
+			</div>
+			<div class="col l4 offset-l2 s12">
+				<h5 class="white-text">Links</h5>
+				<ul>
+					<li><a class="grey-text text-lighten-3" href="#!">Menu</a></li>
+					<li><a class="grey-text text-lighten-3" href="#!">Group
+							dining</a></li>
+					<li><a class="grey-text text-lighten-3" href="#!">Order
+							online</a></li>
+					<li><a class="grey-text text-lighten-3" href="#!">Social
+							media</a></li>
+				</ul>
+			</div>
 		</div>
-
 	</div>
+	<div class="footer-copyright">
+		<div class="container">
+			© 2016 Late Night Show with Aarninsalo <a
+				class="grey-text text-lighten-4 right" href="#!">More Links</a>
+		</div>
+	</div>
+	</footer>
 
 
 
