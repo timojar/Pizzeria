@@ -162,6 +162,7 @@ public class controller extends HttpServlet {
 			startindex=1;
 		}
 		
+		request.setAttribute("currentpage", page);
 		request.setAttribute("startindex", startindex);
 		request.setAttribute("taytelista", taytelista);
 		request.setAttribute("noofPages", noofPages);

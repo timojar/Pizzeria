@@ -188,7 +188,17 @@
 	
  <ul class="pagination">
     <c:forEach begin="${startindex}" end ="${noofPages}" var="i">
+    <c:choose>
+    
+    <c:when test="${i==currentpage}">
+    <li class="active"><a href="controller?page=${i}">${i}</a></li>
+    </c:when>
+    <c:when test="${i!=currentpage}">
     <li class="waves-effect"><a href="controller?page=${i}">${i}</a></li>
+    </c:when>
+    
+    </c:choose>
+   
    </c:forEach>
   </ul>
 
