@@ -81,7 +81,11 @@
 		<div id=sis‰ltˆ>
 
 
-			<h2>Pizzalista</h2>
+
+
+
+
+	<h2>Pizza lista</h2>
 
 			<c:out value="${aloitusaika }"></c:out>
 			<c:if test="${not empty param.added}">Uuden pizzan lis‰‰minen onnistui!</c:if>
@@ -136,34 +140,29 @@
 
 			</c:forEach>
 
-<div class="row">
-			<form method="post"  class="col s-12" action="lisaaPitsa" id="tiedot">
+			<form method="post" action="lisaaPitsa" id="tiedot">
 
 
 
 				<p>Pizzan nimi:</p>
-				<input type="text" class="input-field col s6" name="nimi" id="pizzannimi" required>
+				<input type="text" name="nimi" id="pizzannimi" required>
 
 				<p>Pizzan hinta:</p>
-				<input type="text"  class="input-field col s6" name="hinta" id="pizzanhinta" required>
+				<input type="text" name="hinta" id="pizzanhinta" required>
 				<br>
 				<br>
 				
-		
+			
 			<label>Valitse t‰ytteet (max 6)</label>
 				<br>
 			
 			<c:forEach items="${taytelista}" var="tayte"> 
-			
-			
-			
-	
-		<label> <input type="checkbox" name="taytteet" value="${tayte.tayteNimi}"> 
-		<c:out value="${tayte.tayteNimi}">
-		</c:out> </label>
-		      <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-      <label for="filled-in-box"></label>
-     
+						
+		<p>
+      <input type="checkbox" id="${tayte.tayteNimi}" name="taytteet" value="${tayte.tayteNimi}"/>
+      
+      <label for="${tayte.tayteNimi}"><c:out value="${tayte.tayteNimi}"> </c:out></label>
+    </p>
 			
 			</c:forEach>
 			
@@ -178,27 +177,26 @@
 			</form>
 
 
-		<table>
+	<br>
+	
+	<br>	
+
+
+<c:if test="${noofPages > 1}">
 		<c:forEach begin="${startindex}" end ="${noofPages}" var="i">
 		
-		<td><a href="controller?page=${i}">${i}</a></td>
-		</c:forEach>
-		</table>
+	
+ <ul class="pagination">
+    
+    <li class="waves-effect"><a href="controller?page=${i}">${i}</a></li>
+   
+  </ul>
 
-		</div>
+</c:forEach>
+
+</c:if>
 
 </div>
-
-<form  method="post" action="logout" id="logout">
-			
-			
-			<input type="hidden" name="logout">
-			<label><c:out value="${user}"></c:out></label>
-			<input class="btn waves-effect waves-light" type="submit" value="Kirjaudu ulos">
-			</form>
-
-		
-
 	<footer class="page-footer green accent-4">
 	<div class="container">
 		<div class="row">

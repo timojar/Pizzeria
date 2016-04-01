@@ -141,10 +141,19 @@ public class controller extends HttpServlet {
 		
 		
 			System.out.println(v);
-	
+			noofPages=0;
 		startindex=2;
 		 nextIndex=(page-1)*pizzasperPage;
-		  noofPages=noofPizzas/pizzasperPage+1;
+		 double jakojaanos=(double)noofPizzas%pizzasperPage; 
+		 System.out.println("jakojäännös "+jakojaanos);
+		 if(jakojaanos>0){
+			 
+			
+		  noofPages=noofPizzas/pizzasperPage+1;}
+		 
+		 else if(jakojaanos==0)
+		 
+		 {noofPages=noofPizzas/pizzasperPage;}
 		 
 		List<Pizza>pizzalista = kanta.haePizzat(nextIndex, pizzasperPage);
 		List<Tayte>taytelista=taytehallinta.haeTaytteet();

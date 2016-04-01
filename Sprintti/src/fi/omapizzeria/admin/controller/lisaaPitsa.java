@@ -53,6 +53,8 @@ public class lisaaPitsa extends HttpServlet {
 		for(int i=0; i<taytteet.length; i++){
 			tayteNimi=taytteet[i];
 			taytelista.add(new Tayte(tayteNimi));
+			System.out.println(tayteNimi);
+			
 		}
 		
 		PizzaDAO kanta = new PizzaDAO();

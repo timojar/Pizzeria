@@ -102,12 +102,13 @@ public class MuokkaaPizza extends HttpServlet {
 		Pizza pizza=null;
 		
 		List<Tayte>taytelista=new ArrayList<Tayte>();
+		boolean numerotarkistus=true;
 		double hinta=0;
 		int pizzaId=0;
 		String tayteNimi;
 		String idstr=request.getParameter("id");
 		String nimi=request.getParameter("nimi").trim();
-		String hintastr= request.getParameter("hinta");
+		String hintastr= request.getParameter("hinta").trim();
 		String kuvaus="";
 		boolean check=true;
 		
@@ -126,7 +127,7 @@ String [] taytteet=request.getParameterValues("taytteet");
 	hinta=Double.parseDouble(hintastr);
 		
 	} catch (Exception e) {
-		
+		numerotarkistus=false;
 	}
 	
 	
@@ -147,7 +148,7 @@ String [] taytteet=request.getParameterValues("taytteet");
 		if(taytelista.size()==0){
 		
 		taytelista.add(new Tayte("kebab"));	
-		System.out.println("Ei toimi prkl");
+		
 		check=false;
 			
 		}
@@ -165,7 +166,7 @@ String [] taytteet=request.getParameterValues("taytteet");
 			}
 			
 			
-			if(hintastr==null){
+			if(hintastr.equals("") || numerotarkistus==false){
 			hinta=pizza.getHinta();
 			}
 			
