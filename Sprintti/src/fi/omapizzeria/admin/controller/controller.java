@@ -40,7 +40,7 @@ public class controller extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-  
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -48,127 +48,115 @@ public class controller extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		AdminDao admintiedot= new AdminDao();
-		
-		boolean vahvistus=false;
-		String Kayttajanimi="";
-		String Salasana="";
-		
-		
+
+		AdminDao admintiedot = new AdminDao();
+
+		boolean vahvistus = false;
+		String Kayttajanimi = "";
+		String Salasana = "";
+
 		HttpSession sessio = request.getSession(false);
-		Cookie[] cookies= request.getCookies();
-		if(cookies!=null){
-			
-			for(int i=0; i<cookies.length; i++){
-				
-				
-				if("kayttunnus".equals(cookies[i].getName())){
-					Kayttajanimi=cookies[i].getValue();
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+
+			for (int i = 0; i < cookies.length; i++) {
+
+				if ("kayttunnus".equals(cookies[i].getName())) {
+					Kayttajanimi = cookies[i].getValue();
 				}
-				
-				
-				if("password".equals(cookies[i].getName())){
-					Salasana=cookies[i].getValue();
+
+				if ("password".equals(cookies[i].getName())) {
+					Salasana = cookies[i].getValue();
 				}
-				
-				
+
 			}
 		}
-		
-		
-		if(Salasana.equals("") && Kayttajanimi.equals("")){
-		try {
-			
-	    Kayttajanimi=(String)sessio.getAttribute("tunnus");
-		Salasana=(String)sessio.getAttribute("salasana");
-		
-		
+
+		if (Salasana.equals("") && Kayttajanimi.equals("")) {
+			try {
+
+				Kayttajanimi = (String) sessio.getAttribute("tunnus");
+				Salasana = (String) sessio.getAttribute("salasana");
+
+			} catch (Exception e) {
+
+			}
 		}
-		catch(Exception e){
-			
-		}
-		}
-		
+
 		try {
 
-			
-			vahvistus=admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
-				
-				if(vahvistus==true){
-					
-								
-			
-					
-				}
-		
-				else {
-					request.getRequestDispatcher("Login.jsp").forward(request, response);
-				}
-	
-		
+			vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
+
+			if (vahvistus == true) {
+
+			}
+
+			else if(vahvistus == false) {
+				request.getRequestDispatcher("Login.jsp").forward(request,
+						response);
+			}
+
 		}
-		
+
 		catch (Exception e) {
 			e.printStackTrace();
-			request.getRequestDispatcher("Login.jsp").forward(request, response);	
+			request.getRequestDispatcher("Login.jsp")
+					.forward(request, response);
 		}
-		
-		
-		
+
 		int noofPizzas, pizzasperPage, page, nextIndex, noofPages, startindex;
-		
+
 		PizzaDAO kanta = new PizzaDAO();
-		TayteDAO taytehallinta= new TayteDAO();
-		
-		 noofPizzas=kanta.getnoofPizzas();
-		pizzasperPage=5;
-		page=1;
+		TayteDAO taytehallinta = new TayteDAO();
+
+		noofPizzas = kanta.getnoofPizzas();
+		pizzasperPage = 5;
+		page = 1;
 		try {
-		page=Integer.parseInt(request.getParameter("page"));}
-		
-		
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+
 		catch (Exception e) {
-			
+
 		}
-		
-		if (request.getParameter("page")==null){page=1;
-		
+
+		if (request.getParameter("page") == null) {
+			page = 1;
+
 		}
-			
-	
-		String v=(String)request.getAttribute("visible");
-		
-		
-			System.out.println(v);
-			noofPages=0;
-		startindex=2;
-		 nextIndex=(page-1)*pizzasperPage;
-		 double jakojaanos=(double)noofPizzas%pizzasperPage; 
-		 System.out.println("jakojäännös "+jakojaanos);
-		 if(jakojaanos>0){
-			 
-			
-		  noofPages=noofPizzas/pizzasperPage+1;}
-		 
-		 else if(jakojaanos==0)
-		 
-		 {noofPages=noofPizzas/pizzasperPage;}
-		 
-		List<Pizza>pizzalista = kanta.haePizzat(nextIndex, pizzasperPage);
-		List<Tayte>taytelista=taytehallinta.haeTaytteet();
-		
-		if(noofPages>1){
-			startindex=1;
+
+		String v = (String) request.getAttribute("visible");
+
+		System.out.println(v);
+		noofPages = 0;
+		startindex = 2;
+		nextIndex = (page - 1) * pizzasperPage;
+		double jakojaanos = (double) noofPizzas % pizzasperPage;
+		System.out.println("jakojäännös " + jakojaanos);
+		if (jakojaanos > 0) {
+
+			noofPages = noofPizzas / pizzasperPage + 1;
 		}
-		
+
+		else if (jakojaanos == 0)
+
+		{
+			noofPages = noofPizzas / pizzasperPage;
+		}
+
+		List<Pizza> pizzalista = kanta.haePizzat(nextIndex, pizzasperPage);
+		List<Tayte> taytelista = taytehallinta.haeTaytteet();
+
+		if (noofPages > 1) {
+			startindex = 1;
+		}
+
 		request.setAttribute("currentpage", page);
 		request.setAttribute("startindex", startindex);
 		request.setAttribute("taytelista", taytelista);
 		request.setAttribute("noofPages", noofPages);
 		request.setAttribute("lista", pizzalista);
 		request.getRequestDispatcher("list.jsp").forward(request, response);
-
 
 	}
 
@@ -179,58 +167,51 @@ public class controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		System.out.println("Piilotiusu");
-		
+
 		ArrayList<Pizza> pizzalista;
-		
 
-		AdminDao admintiedot= new AdminDao();
+		AdminDao admintiedot = new AdminDao();
 
-		String Salasana=request.getParameter("Salasana");
-		String Kayttajanimi=request.getParameter("Kayttajanimi");
-		String muisti=request.getParameter("memory");
-		Boolean vahvistus=false;
-		
+		String Salasana = request.getParameter("Salasana");
+		String Kayttajanimi = request.getParameter("Kayttajanimi");
+		String muisti = request.getParameter("memory");
+		Boolean vahvistus = false;
+
 		HttpSession sessio = request.getSession(false);
-		
-		
-		if(request.getParameter("Kayttajanimi")!=null){
-			
-			
-			vahvistus=admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);}
-	
-		if(vahvistus==true){
-			
-			
-			 sessio = request.getSession(true);	
-			 sessio.setAttribute("tunnus", Kayttajanimi);
-				sessio.setAttribute("salasana", Salasana);
-			if(muisti!=null){
-				
-			Cookie ck=new Cookie("kayttunnus", Kayttajanimi);
-			ck.setMaxAge(60*60*24*365);
-			response.addCookie(ck);
-			
-			ck=new Cookie("password", Salasana);
-			ck.setMaxAge(60*60*24*365);
-			response.addCookie(ck);
-				
+
+		if (request.getParameter("Kayttajanimi") != null) {
+
+			vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
+		}
+
+		if (vahvistus == true) {
+
+			sessio = request.getSession(true);
+			sessio.setAttribute("tunnus", Kayttajanimi);
+			sessio.setAttribute("salasana", Salasana);
+			if (muisti != null) {
+
+				Cookie ck = new Cookie("kayttunnus", Kayttajanimi);
+				ck.setMaxAge(60 * 60 * 24 * 365);
+				response.addCookie(ck);
+
+				ck = new Cookie("password", Salasana);
+				ck.setMaxAge(60 * 60 * 24 * 365);
+				response.addCookie(ck);
+
 			}
-			
+
 		}
-		
+
 		else {
-			request.getRequestDispatcher("Login.jsp").forward(request, response);
-			
+			request.getRequestDispatcher("Login.jsp")
+					.forward(request, response);
+
 		}
-		
-	
-		
-		
-		
+
 		response.sendRedirect("/Sprintti/controller?added=true");
 
-	
-
-}}
+	}
+}

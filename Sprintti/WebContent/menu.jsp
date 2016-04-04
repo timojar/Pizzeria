@@ -24,33 +24,10 @@
 
 
 
-	<div id=raamit>
-
-
-		<div id=header>
-		<form  method="post" action="logout" id="logout">
+	
 			
 			
-			<input type="hidden" name="logout">
-			<label><c:out value="${user}"></c:out></label>
-			<input type="submit" value="Kirjaudu ulos">
-			</form>
-		
-		
-		
-		</div>
-
-		<ul id=paavalikko>
-			<li><a href="controller">Näytä kaikki pizzat</a>
-			<li><a href="menuController">Ruokalista </a>
-			<li><a href="">Meille töihin </a>
-			<li><a href="tayteController">Luo täyte</a>
-		</ul>
-		<div id="pylvas">
-		
-		<div id="column"></div>
-		
-		</div>
+	
 
 
 		<div id=sisältö>

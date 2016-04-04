@@ -207,7 +207,17 @@
 </c:if>
 
 </div>
+
+<form  method="post" action="logout" id="logout">
+		
+			<input type="hidden" name="logout">
+			<label><c:out value="${user}"></c:out></label>
+			<input class="btn waves-effect waves-light" type="submit" value="Kirjaudu ulos">
+		</form>
+
 	<footer class="page-footer green accent-4">
+	
+	
 	<div class="container">
 		<div class="row">
 			<div class="col l6 s12">
