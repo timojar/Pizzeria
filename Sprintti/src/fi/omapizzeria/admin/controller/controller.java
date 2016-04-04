@@ -156,7 +156,9 @@ public class controller extends HttpServlet {
 		request.setAttribute("taytelista", taytelista);
 		request.setAttribute("noofPages", noofPages);
 		request.setAttribute("lista", pizzalista);
-		request.getRequestDispatcher("list.jsp").forward(request, response);
+		
+		if(vahvistus==true){
+		request.getRequestDispatcher("list.jsp").forward(request, response);}
 
 	}
 

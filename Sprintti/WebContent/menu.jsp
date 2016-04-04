@@ -47,8 +47,14 @@
 <p>
 				<c:out value="${pizzat.kuvaus }"></c:out>
 				</p>
+				
+				<form action="shoppingcart" method="get" id="add">
+					<input type="hidden" name="pizzaid" value="${pizzat.id }"> <input
+						type="submit"  value="Lisää ostoskoriin">
 
-
+				</form>
+				
+		
 </c:forEach>
 
 
@@ -59,13 +65,9 @@
 
 
 
-		<div id=footer>
+	
 
-			<p>http://localhost:8080/PizzeriaAdmin/list.jsp</p>
 
-		</div>
-
-	</div>
 
 
 
