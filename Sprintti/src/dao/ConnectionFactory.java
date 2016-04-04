@@ -20,7 +20,6 @@ public class ConnectionFactory {
 		String username = "a1500863";
 
 		String password = "kiHIwZ57b";
-
 		String url = "jdbc:mysql://localhost:3306/a1500863";
 
 		

@@ -2,24 +2,51 @@ package fi.omapizzeria.admin.bean;
 
 public class Pizza {
 	
-private int id, pizzaNo;
+private int id, pizzaNo, lkm, index;
 
 private String nimi, kuvaus, piiloitus;
 
-private double hinta;
+private double hinta, yhteishinta;
 
 
 public Pizza(){
 	
+index=0;	
+lkm=0;	
 id=0;
 pizzaNo=0;
 nimi="";
 	
 hinta=0;
+yhteishinta=0;
 
 kuvaus="";
 
 piiloitus="";
+}
+
+public int getIndex() {
+	return index;
+}
+
+public void setIndex(int index) {
+	this.index = index;
+}
+
+public int getLkm() {
+	return lkm;
+}
+
+public void setLkm(int lkm) {
+	this.lkm = lkm;
+}
+
+public double getYhteishinta() {
+	return yhteishinta;
+}
+
+public void setYhteishinta(double yhteishinta) {
+	this.yhteishinta = yhteishinta;
 }
 
 public Pizza(int id, String nimi, double hinta){
@@ -46,6 +73,8 @@ this.kuvaus=kuvaus;
 this.piiloitus=piiloitus;
 	
 }
+
+
 
 
 public String getPiiloitus() {

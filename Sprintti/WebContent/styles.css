@@ -51,26 +51,37 @@ width=650px;
 
 h2 {margin-left: 260px;}
 
-#sisältö input {margin-left: 360px;}
+#sisältö {width: 600px;
+			float: left}
+#sisältö input {margin-top: -260px;
+	
+	margin-left: 260px;}
 
 #sisältö delete {width: 50px}
 
 #sisältö p, #sisältö  format {font-style: serif;
 color: black;
-margin-left: 260px;
-font-weight: bold}
 
-#tiedot input, #tiedot p  {margin-left:500px;}
+}
+
+#tiedot input, #tiedot p  {margin-left:500px;
+}
 
 
 
 .numero {color: red}
 
-#raja {border-bottom: solid;}
 
-#footer {height: 130px;
 
-background-color: red;
-}
+#pizzat tr {float:left}
+ 
+ #add {float:right;
+        margin-top:-25px;
+ 		}
+ 		
+ 		
 
-#footer p {margin-left: 400px;}
+#pizzanimi {width:240px}
+
+#nro {width:30px}
+

@@ -40,8 +40,16 @@ public class menuController extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 
+	HttpSession muistiostoslistasta= request.getSession(false);	
+	List<Pizza> ostoslista=null;
+	
+	try {ostoslista=(List<Pizza>)muistiostoslistasta.getAttribute("ostoslista");	
 		
-		
+	} catch (Exception e) {
+		// TODO: handle exception
+	}
+	
+	
 	MenuDao menukanta= new MenuDao();
 	
 	Pizza pizza=null;
@@ -61,7 +69,7 @@ public class menuController extends HttpServlet {
 	pizzamenu.add(new Pizza( id,  nimi,  hinta,  kuvaus, pizzaNo));
 		
 	}
-	
+	request.setAttribute("ostoslista", ostoslista);
 	request.setAttribute("menu", pizzamenu);
 	
 	request.getRequestDispatcher("menu.jsp").forward(request, response);

@@ -1,7 +1,6 @@
 package fi.omapizzeria.admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,23 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.bind.ParseConversionEvent;
 
-import dao.MenuDao;
-import dao.PizzaDAO;
 import fi.omapizzeria.admin.bean.Pizza;
 
 /**
- * Servlet implementation class shoppingcart
+ * Servlet implementation class removeItem
  */
-@WebServlet("/shoppingcart")
-public class shoppingcart extends HttpServlet {
+@WebServlet("/removeItem")
+public class removeItem extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public shoppingcart() {
+    public removeItem() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,18 +33,10 @@ public class shoppingcart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-			
-			
-			
-			
-			
+		
 		response.sendRedirect("/Sprintti/menuController");
 		
-			
 	}
-	
-	
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -56,82 +44,24 @@ public class shoppingcart extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		
-	
-		
-
 		HttpSession muistiostoslistasta= request.getSession(false);
-		PizzaDAO kanta = new PizzaDAO();
-		
 		List<Pizza> ostoslista=(List<Pizza>)muistiostoslistasta.getAttribute("ostoslista");
-        double yhteishinta=0;
-        Pizza p=null;
-		int lkm=0;
 		int index=0;
-	
+		
+		String indexstr=request.getParameter("index");
 		
 		
-		if(ostoslista==null){
-		ostoslista=new ArrayList<Pizza>();}
+		try {
+			index=Integer.parseInt(indexstr);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
-		String idstr=request.getParameter("pizzaid");
-		String lkmstr=request.getParameter("lkm");
-		int pizzaId=0;	
+		ostoslista.remove(index);
 		
+		muistiostoslistasta.setAttribute("ostoslista", ostoslista);
 		
-			try {
-				
-			pizzaId=Integer.parseInt(idstr);
-			lkm=Integer.parseInt(lkmstr);
-			;
-			}
-			
-			catch(Exception e){
-				
-			}
-			
-			index=ostoslista.size();
-			p=kanta.bringPizza(pizzaId);
-			yhteishinta=(double)lkm*p.getHinta();
-			p.setYhteishinta(yhteishinta);
-			p.setLkm(lkm);
-			
-			
-			if(request.getParameter("pizzaid")!=null){
-			
-			
-			
-			
-			
-		
-			
-			ostoslista.add(p);
-			
-			if(ostoslista.size()==0){
-				muistiostoslistasta= request.getSession(true);
-								
-			}
-			
-			
-			
-			
-			
-			muistiostoslistasta.setAttribute("ostoslista", ostoslista);
-			
-			
-			
-			
-			
-			response.sendRedirect("/Sprintti/shoppingcart");
-					
-			
-			}
-			
-			
-				
-		
-		
-		
+		response.sendRedirect("/Sprintti/removeItem");
 	}
 
 }
