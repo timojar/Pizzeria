@@ -65,12 +65,17 @@ font-weight: bold}
 
 
 .numero {color: red}
-
+#vasensarake {width: 600px}
 #raja {border-bottom: solid;}
+#pizzat {float:left}
 
-#footer {height: 130px;
-
-background-color: red;
+#nro {width: 40px
 }
+#pizzanimi {width: 300px}
 
-#footer p {margin-left: 400px;}
+#ostoskori {float:right;
+width: 300}
+
+#palkki  {width: 90px;
+float:right;
+}
