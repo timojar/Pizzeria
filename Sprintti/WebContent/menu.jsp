@@ -29,12 +29,13 @@
 		rel="stylesheet">
 	<link href="materialize.css" type="text/css" rel="stylesheet"
 		media="screen,projection" />
-	<link href="style.css" type="text/css" rel="stylesheet"
+	<link href="styles.css" type="text/css" rel="stylesheet"
 		media="screen,projection" />
 	<link href='https://fonts.googleapis.com/css?family=Pacifico'
 		rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Oswald'
 		rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
 		 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
 
@@ -99,13 +100,21 @@
 <input type="hidden" name="remove" value="{ostos.index}">
 <input type="submit" value="poista" >
 
+
+
 </form>
 
-</c:forEach>			
-	
+</c:forEach>	
+<br>		
+	<button class="btn waves-effect teal lighten-1"  value="" type="submit" name="">
+				Siirry tilaukseen <i class="material-icons right">done_all</i>
+			</button>
 </div>
 	
-	
+	 <div class="row">
+        <div class="col s12 m6">
+          <div class="card green lighten-3">
+            <div class="card-content black-text">
 	
 	<div id="vasensarake">
 	
@@ -174,7 +183,9 @@
 	
 	
 	</div>	
-		
+	</div>
+          </div>
+        </div>	
 
 
 
