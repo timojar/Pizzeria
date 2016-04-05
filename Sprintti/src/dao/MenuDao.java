@@ -64,12 +64,6 @@ public  List<Pizza> haePizzat()
 			
 			
 			
-			for(Pizza p : menu) {
-			    System.out.println(p.getNimi());
-			    System.out.println(p.getHinta());
-			    System.out.println(p.getKuvaus());
-			}
-
 		} catch (SQLException e) {
 
 			e.printStackTrace();

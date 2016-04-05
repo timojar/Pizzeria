@@ -22,7 +22,7 @@ public class PizzaDAO {
 	
 	public Pizza bringPizza(int pizzaId){
 		
-		System.out.println("ID"+pizzaId);
+		
 		Connection conn;		
 		ConnectionFactory yhteys = new ConnectionFactory();	
 		conn = yhteys.getConnection();
@@ -47,7 +47,7 @@ public class PizzaDAO {
 				String kuvaus = pizzat.getString("kuvaus");
 				String piiloitus = pizzat.getString("piiloitus");
 				
-				System.out.println(nimi);
+				
 			pizza=new Pizza(id, nimi, hinta, kuvaus, piiloitus);
 				
 				
