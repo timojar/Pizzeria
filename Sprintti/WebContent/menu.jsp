@@ -77,7 +77,12 @@
 		
 	<div id="menusisalto">
 
+<h1>Menu</h1>
 
+<br>
+<br>
+<br>
+<br>
 
 	<div id="ostoskori">
 	
@@ -122,7 +127,7 @@
       
       	<form action="shoppingcart" method="post" id="add" >
 					<input type="hidden" name="pizzaid" value="${pizzat.id }"> <input
-						type="submit"  value="Lisää ostoskoriin">
+						type="submit"  value="Lisää ostoskoriin" id="add">
 
 <div id="palkki">
 <select name="lkm" class="browser-default" >

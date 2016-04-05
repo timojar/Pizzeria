@@ -26,7 +26,7 @@ public class ConnectionFactory {
 		
 		try {
 
-			Class.forName("org.mariadb.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 
 			conn = DriverManager.getConnection(url, username, password);
 

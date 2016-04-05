@@ -65,16 +65,25 @@ font-weight: bold}
 
 
 .numero {color: red}
+
+#menusisalto h1 {margin-left: 200px}
 #vasensarake {width: 600px}
+
 #raja {border-bottom: solid;}
-#pizzat {float:left}
+
+#pizzat {float:left;
+margin-left: 200px}
+#add {margin-left: 100px}
+
 
 #nro {width: 40px
 }
-#pizzanimi {width: 300px}
+#pizzanimi {width: 300px;
+font-weight: bold}
 
+#vasensarake p {margin-left: 200px}
 #ostoskori {float:right;
-width: 300}
+width: 300px}
 
 #palkki  {width: 90px;
 float:right;
