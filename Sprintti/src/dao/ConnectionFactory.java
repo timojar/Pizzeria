@@ -17,16 +17,16 @@ public class ConnectionFactory {
 		
 	
 		Connection conn = null;
-		String username = "root"; 
+		String username = "a1500863";
 	
-		String password = "R@kkaus23068869";
+		String password = "kiHIwZ57b";
 		
-		String url = "jdbc:mysql://localhost:3306/tilaus?useSSL=false";
+		String url = "jdbc:mysql://localhost:3306/a1500863";
 
 		
 		try {
 
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("org.mariadb.jdbc.Driver");
 
 			conn = DriverManager.getConnection(url, username, password);
 
