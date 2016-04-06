@@ -18,15 +18,15 @@ public class ConnectionFactory {
 	
 		Connection conn = null;
 		String username = "a1500863";
-	
+
 		String password = "kiHIwZ57b";
-		
+
 		String url = "jdbc:mysql://localhost:3306/a1500863";
 
 		
 		try {
 
-			Class.forName("org.mariadb.jdbc.Driver");
+			Class.forName("org.mariadb.jdbc.Driver").newInstance();
 
 			conn = DriverManager.getConnection(url, username, password);
 

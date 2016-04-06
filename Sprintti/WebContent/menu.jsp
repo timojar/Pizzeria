@@ -86,7 +86,7 @@
 <br>
 
 	<div id="ostoskori">
-	
+	<h5>Ostoslista</h5>
 <c:set  var="total" value="${ 0}"/>	
 <c:forEach items="${ostoslista}" var="ostos">
 <c:set  var="total" value="${ total+ostos.yhteishinta}"/>	
@@ -107,8 +107,10 @@
 </form>
 
 </c:forEach>
+
 <p>Yhteensä <span class="hinta"><fmt:formatNumber type="currency"  currencySymbol=""  value="${total}" /> EUR</span></p>	
-<br>		
+<br>
+<p> <a href="removeItem?tyhjennys=empty">Tyhjennä ostoslista</a> </p>		
 	<button class="btn waves-effect teal lighten-1"  value="" type="submit" name="">
 				Siirry tilaukseen <i class="material-icons right">done_all</i>
 			</button>

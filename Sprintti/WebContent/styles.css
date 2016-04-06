@@ -85,6 +85,10 @@ font-weight: bold}
 #ostoskori {float:right;
 width: 300px}
 
+#ostoskori a{color:brown;}
+#ostoskori a:hover {text-decoration:underline;
+					color: rgb(255,255,255)}
+
 #palkki  {width: 90px;
 float:right;
 }

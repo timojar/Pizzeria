@@ -1,6 +1,7 @@
 package fi.omapizzeria.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,7 +33,13 @@ public class removeItem extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		HttpSession muistiostoslistasta= request.getSession(false);
+		String clear=request.getParameter("tyhjennys");
+		List<Pizza> ostoslista=null;
+		if (clear!=null) {
+			ostoslista=new ArrayList<Pizza>();
+			muistiostoslistasta.setAttribute("ostoslista", ostoslista);
+		}
 		
 		response.sendRedirect("/Sprintti/menuController");
 		
