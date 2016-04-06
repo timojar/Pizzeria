@@ -87,13 +87,14 @@
 
 	<div id="ostoskori">
 	
-			
+<c:set  var="total" value="${ 0}"/>	
 <c:forEach items="${ostoslista}" var="ostos">
+<c:set  var="total" value="${ total+ostos.yhteishinta}"/>	
 <p>
 
 
-<c:out value="${ostos.lkm }"> </c:out> kpl <c:out value="${ostos.nimi }">  </c:out> <c:out value="${ostos.yhteishinta}">
-</c:out> euroa 
+<c:out value="${ostos.lkm }"> </c:out> kpl <c:out value="${ostos.nimi }">  </c:out> <fmt:formatNumber type="currency"  currencySymbol=""  value="${ostos.yhteishinta}" /> EUR
+
 				</p>
 				
 <form action="removeItem" method="post">
@@ -104,7 +105,8 @@
 
 </form>
 
-</c:forEach>	
+</c:forEach>
+<p>Yhteensä <fmt:formatNumber type="currency"  currencySymbol=""  value="${total}" /> EUR</p>	
 <br>		
 	<button class="btn waves-effect teal lighten-1"  value="" type="submit" name="">
 				Siirry tilaukseen <i class="material-icons right">done_all</i>
@@ -128,7 +130,7 @@
               <tr>
             <td id="nro"><c:out value="${pizzat.pizzaNo }"></c:out></td>
             <td id="pizzanimi"><c:out value="${pizzat.nimi }"></c:out></td>
-            <td><fmt:formatNumber type="currency"  currencySymbol="EUR"  value="${pizzat.hinta}" /></td>
+            <td><fmt:formatNumber type="currency"  currencySymbol=""  value="${pizzat.hinta}" /> EUR</td>
           </tr>
         </tbody>
       </table>
