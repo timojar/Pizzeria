@@ -62,8 +62,15 @@ public class shoppingcart extends HttpServlet {
 
 		HttpSession muistiostoslistasta= request.getSession(false);
 		PizzaDAO kanta = new PizzaDAO();
+		List<Pizza> ostoslista=null;
 		
-		List<Pizza> ostoslista=(List<Pizza>)muistiostoslistasta.getAttribute("ostoslista");
+		try { ostoslista=(List<Pizza>)muistiostoslistasta.getAttribute("ostoslista");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	
         double yhteishinta=0;
         Pizza p=null;
 		int lkm=0;
