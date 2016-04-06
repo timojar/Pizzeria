@@ -88,18 +88,19 @@
 	<div id="ostoskori">
 	<h5>Ostoslista</h5>
 <c:set  var="total" value="${ 0}"/>	
+<c:set var="index" value="${ -1}"/>
 <c:forEach items="${ostoslista}" var="ostos">
 <c:set  var="total" value="${ total+ostos.yhteishinta}"/>	
 <p>
 
-
+<c:set var="index" value="${ index+1}"/>
 <c:out value="${ostos.lkm }"> </c:out> kpl <c:out value="${ostos.nimi }">  </c:out><span class="hinta"> <fmt:formatNumber type="currency"  currencySymbol=""  value="${ostos.yhteishinta}" />
  EUR</span>
-
+<c:out value="${ index}"></c:out>
 				</p>
 				
 <form action="removeItem" method="post">
-<input type="hidden" name="remove" value="{ostos.index}">
+<input type="hidden" name="remove" value="${index}">
 <input type="submit" value="poista" >
 
 

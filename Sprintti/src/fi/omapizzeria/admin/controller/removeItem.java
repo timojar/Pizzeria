@@ -55,15 +55,15 @@ public class removeItem extends HttpServlet {
 		List<Pizza> ostoslista=(List<Pizza>)muistiostoslistasta.getAttribute("ostoslista");
 		int index=0;
 		
-		String indexstr=request.getParameter("index");
+		String indexstr=request.getParameter("remove");
 		
 		
 		try {
 			index=Integer.parseInt(indexstr);
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("Ei toimi"+indexstr);
 		}
-		
+		System.out.println(index);
 		ostoslista.remove(index);
 		
 		muistiostoslistasta.setAttribute("ostoslista", ostoslista);
