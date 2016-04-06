@@ -96,7 +96,7 @@
 <c:set var="index" value="${ index+1}"/>
 <c:out value="${ostos.lkm }"> </c:out> kpl <c:out value="${ostos.nimi }">  </c:out><span class="hinta"> <fmt:formatNumber type="currency"  currencySymbol=""  value="${ostos.yhteishinta}" />
  EUR</span>
-<c:out value="${ index}"></c:out>
+
 				</p>
 				
 <form action="removeItem" method="post">
