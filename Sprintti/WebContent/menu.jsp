@@ -93,7 +93,8 @@
 <p>
 
 
-<c:out value="${ostos.lkm }"> </c:out> kpl <c:out value="${ostos.nimi }">  </c:out> <fmt:formatNumber type="currency"  currencySymbol=""  value="${ostos.yhteishinta}" /> EUR
+<c:out value="${ostos.lkm }"> </c:out> kpl <c:out value="${ostos.nimi }">  </c:out><span class="hinta"> <fmt:formatNumber type="currency"  currencySymbol=""  value="${ostos.yhteishinta}" />
+ EUR</span>
 
 				</p>
 				
@@ -106,7 +107,7 @@
 </form>
 
 </c:forEach>
-<p>Yhteensä <fmt:formatNumber type="currency"  currencySymbol=""  value="${total}" /> EUR</p>	
+<p>Yhteensä <span class="hinta"><fmt:formatNumber type="currency"  currencySymbol=""  value="${total}" /> EUR</span></p>	
 <br>		
 	<button class="btn waves-effect teal lighten-1"  value="" type="submit" name="">
 				Siirry tilaukseen <i class="material-icons right">done_all</i>
