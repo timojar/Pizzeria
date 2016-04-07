@@ -121,20 +121,7 @@
 <body>
 
 	<div class="navbar-fixed">
-		<nav>
-		<div class="nav-wrapper green accent-4">
-			<a href="index.jsp" class="brand-logo center"><img
-				src="Kuvat/Logo.png" alt=pizza height="76" width="160"></a>
-			<ul id="nav-mobile" class="left hide-on-med-and-down">
-				<li><a href="menuController">Menu</a></li>
-				<li><a href="#">Order Online</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Group Dining</a>
-				<li><a href="Login.jsp"
-					class="waves-effect waves-light btn">Log in</a></li>
-			</ul>
-		</div>
-		</nav>
+		<%@ include file="pizzerianav.jsp" %>
 	</div>
 	<div class="section no-pad-bot" id="index-banner">
 		<div class="container">

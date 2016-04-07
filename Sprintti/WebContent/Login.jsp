@@ -38,18 +38,15 @@
 <body>
 
 	<div class="navbar-fixed">
-		<nav>
-		<div class="nav-wrapper green accent-4">
-			<a href="index.jsp" class="brand-logo center"><img
-				src="Kuvat/Logo.png" alt=pizza height="76" width="160"></a>
-			<ul id="nav-mobile" class="left hide-on-med-and-down">
-				<li><a href="menu.jsp">Menu</a></li>
-				<li><a href="#">Order Online</a></li>
-				<li><a href="#">About</a></li>
-				<li><a href="#">Group Dining</a>
-			</ul>
-		</div>
-		</nav>
+		
+		
+		
+			
+		<%@ include file="pizzerianav.jsp" %>
+	
+		
+		
+		
 	</div>
 	<br>
 	<br>

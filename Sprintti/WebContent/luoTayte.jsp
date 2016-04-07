@@ -45,18 +45,7 @@
 <body>
 
 <div class="navbar-fixed">
-		<nav>
-		<div class="nav-wrapper green accent-4">
-			<a href="index.jsp" class="brand-logo center"><img
-				src="Kuvat/Logo.png" alt=pizza height="76" width="160"></a>
-			<ul id="nav-mobile" class="left hide-on-med-and-down">
-			<li><a href="controller">Näytä kaikki pizzat</a>
-			<li><a href="menuController">Ruokalista </a>
-			<li><a href="index.jsp">Meille töihin </a>
-			<li><a href="tayteController">Luo täyte</a>
-			</ul>
-		</div>
-		</nav>
+		<%@ include file="adminnav.jsp" %>
 	</div>
 
 	<!--  <div id=raamit> -->
