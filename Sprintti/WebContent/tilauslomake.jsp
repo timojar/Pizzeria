@@ -15,7 +15,7 @@
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>Register</title>
+<title>Tilauslomake</title>
 
 <!-- CSS  -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -28,22 +28,21 @@
 		rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Oswald'
 		rel='stylesheet' type='text/css'>
-		
+
 </head>
 <body>
-
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.min.js"></script>
       
-      <div class="navbar-fixed">
+          <div class="navbar-fixed">
 		<%@ include file="pizzerianav.jsp" %>
-	</div>
-	<br>
-	<br>
-	<h4>Rekisteröidy</h4><br>
-	<p><b><i>Täytä kaikki allaolevat kohdat ja paina "Rekisteröidy".</b></i></p>
-	<br><br><br>
-	 <div class="row">
+		</div>
+		
+	
+		<h4>Tilauslomake</h4><br><br>
+		<p><b>Täytä allaolevat tiedot ja paina "Tilaa".</b><br><br>
+		
+		 <div class="row">
     <form class="col s5" action="controller" method="post">
       <div class="row">
         <div class="input-field col s6">
@@ -65,6 +64,28 @@
         </div>
       </div>
       
+      <h4>Yhteystiedot</h4><br>
+      <div class="row">
+        <div class="input-field col s12">
+         <i class="material-icons prefix">location_on</i>
+          <input id="Toimitusosoite" type="text" length="20" class="validate">
+          <label for="Toimitusosoite">Toimitusosoite</label>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="input-field col s6">
+         <i class="material-icons prefix">location_on</i>
+          <input id="postinro" length="15" type="text" class="validate">
+          <label for="postinro">Postinumero</label>
+        </div>
+        <div class="input-field col s6">
+         <i class="material-icons prefix">location_on</i>
+          <input id="postitmp" length="15" type="text" class="validate">
+          <label for="postitmp">Postitoimipaikka</label>
+        </div>
+      </div>
+      
       <div class="row">
         <div class="input-field col s12">
          <i class="material-icons prefix">email</i>
@@ -73,22 +94,35 @@
         </div>
       </div>
       
-      <div class="row">
-        <div class="input-field col s12">
-        <i class="material-icons prefix">vpn_key</i>
-          <input id="Salasana"  length="15" type="password" class="validate">
-          <label for="Salasana">Salasana</label>
-        </div>
-      </div>
-      
-      <br>
+<p>
+      <input name="group1" class="with-gap" type="radio" id="test1" />
+      <label for="test1">Kotiinkuljetus</label>
+    </p>
+    <p>
+      <input name="group1" class="with-gap" type="radio" id="test2" />
+      <label for="test2">Nouto (Kuljetuksen säde 1km)</label>
+    </p><br><br>
+    <p>
+      <input name="group1" class="with-gap" type="radio" id="test1" />
+      <label for="test1">Käteinen</label>
+    </p>
+    <p>
+      <input name="group1" class="with-gap" type="radio" id="test2" />
+      <label for="test2">Kortti (Visa electron, MasterCard, Amex, Diners Club)</label>
+    </p>
+    
+    <p>
+        <input name="group1" class="with-gap" type="radio" id="test4"/>
+        <label for="test4">Verkkomaksu</label>
+    </p><br>
+    
 			<button class="btn waves-effect waves-light" type="submit"
 				name="">
-				Rekisteröidy <i class="material-icons right"></i>
+				Tilaa <i class="material-icons right"></i>
 			</button>
+			
     </form>
   </div>
-	
-	
+
 </body>
 </html>
