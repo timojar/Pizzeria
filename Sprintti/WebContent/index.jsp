@@ -133,7 +133,7 @@
 				</h5>
 			</div>
 			<div class="row center">
-				<a href="list.jsp" id="download-button"
+				<a href="menuController" id="download-button"
 					class="btn-large waves-effect green accent-4">Siirry
 					ruokalistaan</a>
 			</div>

@@ -103,16 +103,16 @@
       <label for="test2">Nouto (Kuljetuksen säde 1km)</label>
     </p><br><br>
     <p>
-      <input name="group1" class="with-gap" type="radio" id="test1" />
-      <label for="test1">Käteinen</label>
+      <input name="group2" class="with-gap" type="radio" id="test3" />
+      <label for="test3">Käteinen</label>
     </p>
     <p>
-      <input name="group1" class="with-gap" type="radio" id="test2" />
-      <label for="test2">Kortti (Visa electron, MasterCard, Amex, Diners Club)</label>
+      <input name="group2" class="with-gap" type="radio" id="test5" />
+      <label for="test5">Kortti (Visa electron, MasterCard, Amex, Diners Club)</label>
     </p>
     
     <p>
-        <input name="group1" class="with-gap" type="radio" id="test4"/>
+        <input name="group2" class="with-gap" type="radio" id="test4"/>
         <label for="test4">Verkkomaksu</label>
     </p><br>
     
