@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.PizzaDAO;
+import dao.TayteDAO;
 
 /**
  * Servlet implementation class poistaPizza
@@ -43,13 +44,14 @@ public class poistaPizza extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		PizzaDAO kanta = new PizzaDAO();
+		TayteDAO taytehallinta= new TayteDAO();
 
 		String tunnus = request.getParameter("tunnus");
 		int id = 0;
 		if (tunnus != null) {
 			try {
 				id = Integer.parseInt(tunnus);
-
+				
 			}
 
 			catch (Exception e) {
@@ -60,7 +62,9 @@ public class poistaPizza extends HttpServlet {
 		}
 
 		if (id > 0) {
+			taytehallinta.poistaPizzaTaytte(id);
 			kanta.poistaPizza(id);
+			
 		}
 
 		response.sendRedirect("/Sprintti/controller?added=true");

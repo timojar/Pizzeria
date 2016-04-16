@@ -133,7 +133,7 @@ conn = yhteys.getConnection();
 		stmthide.setInt(2, paljastaid);
 		stmthide.executeUpdate();
 
-		System.out.println(paljastaid);
+		
 		
 	}
 	
@@ -297,7 +297,7 @@ conn = yhteys.getConnection();
 	
 	
 	
-	public  void lisaaPizza(String nimi, double hinta, List<Tayte> taytelista) {
+	public  int lisaaPizza(String nimi, double hinta, List<Tayte> taytelista) {
 
 		ConnectionFactory yhteys = new ConnectionFactory();
 		pizzalista = new ArrayList<Pizza>();
@@ -305,7 +305,7 @@ conn = yhteys.getConnection();
 		Connection conn;
 		Tayte t=taytelista.get(0);
 		conn = yhteys.getConnection();
-		int id;
+		int id=0;
 		String tayte=t.getTayteNimi();
 		if(taytelista.size()>1){
 		for(int i=1; i<taytelista.size()-1; i++){
@@ -353,7 +353,7 @@ conn = yhteys.getConnection();
 			yhteys.suljeYhteys(conn);
 
 		}
-
+return id;
 	}
 	
 
@@ -439,13 +439,9 @@ String newDesc = "Update Pizza set kuvaus = ?  where id = ?";
 
 		conn = yhteys.getConnection();
 
-		/**
-		 * pizzanpoisto: Yrittämällä poistetaan pizza ja sen Pizza-id numeroita
-		 * pitää järjstellä uudelleen.
-		 */
-
+		
 		try {
-			selaus = new ArrayList<Pizza>();
+			
 
 			String sqldelete = "delete from Pizza where id=?";
 			PreparedStatement stmtdelete = conn.prepareStatement(sqldelete);

@@ -12,23 +12,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-<link href="tyyli.css" rel="stylesheet" type="text/css">
-<link href="styles.css" rel="stylesheet" type="text/css">
-
 <!--Import Google Icon Font-->
-<link href="http://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
-<!--Import materialize.css-->
-<link type="text/css" rel="stylesheet" href="materialize.min.css"
-	media="screen,projection" />
-<!--Let browser know website is optimized for mobile-->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Insert title here</title>
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-<!--Import jQuery before materialize.js-->
-	<script type="text/javascript"
-		src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<link href="styles.css" rel="stylesheet" type="text/css">
+<link href="tyyli.css" rel="stylesheet" type="text/css">
 
 	<!-- CSS  -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -41,25 +34,45 @@
 		rel='stylesheet' type='text/css'>
 	<link href='https://fonts.googleapis.com/css?family=Oswald'
 		rel='stylesheet' type='text/css'>
+		 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.min.js"></script>
+
+<title>Lista</title>
+
+
 </head>
 <body>
 
-<div class="navbar-fixed">
-		<%@ include file="adminnav.jsp" %>
-	</div>
-
-	<!--  <div id=raamit> -->
 
 
-		<!--  <div id=header>-->
-					
+
+	 
+
+
 		
 		
-		
-		</div>
-
 	
-<h4>Luo täyte</h4>
+	
+		
+		
+
+		<div class="navbar-fixed">
+			<%@ include file="adminnav.jsp" %>
+		
+
+	</div>
+		
+		
+		
+		
+
+
+		<div id=sisältö>
+
+
+
+
+h4>Luo täyte</h4>
 <br>
 <br>
 
@@ -102,19 +115,23 @@
 </form>
 
 -->
-		</div>
 
-<br>
+
+
+
+		
+</div>
 
 <form  method="post" action="logout" id="logout">
-			
-			
+		
 			<input type="hidden" name="logout">
 			<label><c:out value="${user}"></c:out></label>
 			<input class="btn waves-effect waves-light" type="submit" value="Kirjaudu ulos">
-			</form>
+		</form>
 
-<footer class="page-footer green accent-4">
+	<footer class="page-footer green accent-4">
+	
+	
 	<div class="container">
 		<div class="row">
 			<div class="col l6 s12">
@@ -146,7 +163,6 @@
 		</div>
 	</div>
 	</footer>
-
 
 
 

@@ -170,21 +170,23 @@ public class controller extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		System.out.println("Piilotiusu");
+	
 
 		ArrayList<Pizza> pizzalista;
 
 		AdminDao admintiedot = new AdminDao();
 
-		String Salasana = request.getParameter("Salasana");
+		String salattavaTeksti = request.getParameter("Salasana");
 		String Kayttajanimi = request.getParameter("Kayttajanimi");
 		String muisti = request.getParameter("memory");
+		String Salasana=null;
 		Boolean vahvistus = false;
 
 		HttpSession sessio = request.getSession(false);
 
 		if (request.getParameter("Kayttajanimi") != null) {
-
+			
+			Salasana=admintiedot.salaaTeksti(salattavaTeksti, Kayttajanimi);
 			vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
 		}
 

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import dao.PizzaDAO;
+import dao.TayteDAO;
 import fi.omapizzeria.admin.bean.Tayte;
 
 /**
@@ -41,12 +42,14 @@ public class lisaaPitsa extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		TayteDAO taytehallinata=new TayteDAO();
 		List<Tayte>taytelista=new ArrayList<Tayte>();
 		double hinta=0;
 		String nimi = request.getParameter("nimi");
 		String kuvaus = request.getParameter("kuvaus");
 		String hintasana = request.getParameter("hinta");
 		String tayteNimi;
+		int pizzaId=0;
 		String [] taytteet=request.getParameterValues("taytteet");
 		
 	
@@ -66,12 +69,14 @@ public class lisaaPitsa extends HttpServlet {
 		catch (Exception e) {
 			hinta = 0;
 
-		}
+		}  
 		
 		
 		if (nimi != null) {
 			
-			kanta.lisaaPizza( nimi, hinta,  taytelista);
+			pizzaId=kanta.lisaaPizza( nimi, hinta,  taytelista);
+			taytehallinata.luoPizzaTayte(nimi, pizzaId, taytelista);
+			
 		}	
 		
 		
