@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.AdminDao;
+import dao.RaakaAineDAO;
 
 /**
  * Servlet implementation class raakaAineet
@@ -32,68 +33,7 @@ public class raakaAineet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
-		AdminDao admintiedot = new AdminDao();
-
-		boolean vahvistus = false;
-		String Kayttajanimi = "";
-		String Salasana = "";
-
-		HttpSession sessio = request.getSession(false);
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-
-			for (int i = 0; i < cookies.length; i++) {
-
-				if ("kayttunnus".equals(cookies[i].getName())) {
-					Kayttajanimi = cookies[i].getValue();
-				}
-
-				if ("password".equals(cookies[i].getName())) {
-					Salasana = cookies[i].getValue();
-				}
-
-			}
-		}
-
-		if (Salasana.equals("") && Kayttajanimi.equals("")) {
-			try {
-
-				Kayttajanimi = (String) sessio.getAttribute("tunnus");
-				Salasana = (String) sessio.getAttribute("salasana");
-
-			} catch (Exception e) {
-
-			}
-		}
-
-		try {
-
-			vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
-
-			if (vahvistus == true) {
-
-			}
-
-			else if(vahvistus == false) {
-				request.getRequestDispatcher("Login.jsp").forward(request,
-						response);
-			}
-
-		}
-
-		catch (Exception e) {
-			e.printStackTrace();
-			request.getRequestDispatcher("Login.jsp")
-					.forward(request, response);
-		}
-		
-		
-		
-		
-		if(vahvistus==true){
-			request.getRequestDispatcher("raakaaineet.jsp").forward(request, response);}
-		
+		request.getRequestDispatcher("raakaaineet.jsp").forward(request, response);
 	}
 
 	/**
@@ -101,6 +41,31 @@ public class raakaAineet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		RaakaAineDAO ainehallinta= new RaakaAineDAO();
+		
+		String nimi =request.getParameter("RaakaNimi");	
+		
+		String saatavuusstr=request.getParameter("saatavuus");
+		int saatavuus=0;
+		boolean correct=false;
+		
+		try {
+			saatavuus=Integer.parseInt(saatavuusstr);
+			correct=true;
+		}
+		
+		catch (Exception e){
+			System.out.println("Saatavuus pitää ilmoittaa numerona");	
+		}
+		
+		
+		if(correct==true && nimi!=null){
+			
+		ainehallinta.luoRaakaaine(nimi, saatavuus);
+			
+		}
+		
+		
 	}
 
 }

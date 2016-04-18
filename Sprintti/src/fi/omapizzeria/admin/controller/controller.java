@@ -110,7 +110,7 @@ public class controller extends HttpServlet {
 		TayteDAO taytehallinta = new TayteDAO();
 
 		noofPizzas = kanta.getnoofPizzas();
-		pizzasperPage = 5;
+		pizzasperPage = 10;
 		page = 1;
 		try {
 			page = Integer.parseInt(request.getParameter("page"));

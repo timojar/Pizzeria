@@ -7,6 +7,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.util.HashMap"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -73,9 +74,10 @@
         </div>
         <div class="input-field col s3">
           <i class="material-icons prefix">assignment</i>
-          <input id="icon_telephone" length="5" type="tel" class="validate" name="saatavuus">
-          <label for="icon_telephone">Saatavuus</label>
+          <input id="icon_telephone" length="5" type="tel" class="validate" name="maara">
+          <label for="icon_telephone">Määrä (g)</label>
           <br> </div>
+     
           <!-- <input type="submit" class="btn waves-effect waves-light"  value="Luo täyte"> -->
           
           <button class="btn waves-effect waves-light" type="submit" name="commit">
@@ -83,9 +85,23 @@
 			</button>
           
          
-  </button>
+ 
        
       </div>
+          <br>
+          
+<select class="browser-default" name="aineid">
+<c:forEach items="${aineet}" var="aine">
+<option value="${aine.id}">
+<c:out value="${aine.nimi}"></c:out>
+</option>
+</c:forEach>
+</select>
+
+  
+
+           
+      
     </form>
   </div>
   

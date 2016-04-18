@@ -67,27 +67,31 @@
 		
 
 
-		<div id=sisältö>
+		
 
 
 
 
-h4>Luo täyte</h4>
+
+	<h4>Luo uusi raaka-aine</h4>
+	
+	
+	
 <br>
 <br>
 
  <div class="row">
-    <form class="col s12" action="tayteController" method="post">
+    <form class="col s12" action="raakaAineet" method="post">
       <div class="row">
         <div class="input-field col s3">
           <i class="material-icons prefix">assignment</i>
-          <input id="icon_prefix" length="15" type="text" class="validate" name="tayteNimi">
-          <label for="icon_prefix">Täytteen nimi</label>
+          <input id="icon_prefix" length="20" type="text" class="validate" name="RaakaNimi">
+          <label for="icon_prefix">Raaka-aineen nimi</label>
         </div>
         <div class="input-field col s3">
           <i class="material-icons prefix">assignment</i>
           <input id="icon_telephone" length="5" type="tel" class="validate" name="saatavuus">
-          <label for="icon_telephone">Saatavuus</label>
+          <label for="icon_telephone">Saatavuus (g)</label>
           <br> </div>
           <!-- <input type="submit" class="btn waves-effect waves-light"  value="Luo täyte"> -->
           
@@ -100,26 +104,9 @@ h4>Luo täyte</h4>
        
       </div>
     </form>
-  </div>
-  
-  <!--  
-  <form action="tayteController" method="post">
-<label>Täytteen nimi</label>
-<input type="text" name="tayteNimi">
+	
 
-<label>Saatavuus</label>
-<input type="text" name="saatavuus">
-
-<input type="submit" value="Luo täyte">
-
-</form>
-
--->
-
-
-
-
-		
+	
 </div>
 
 <form  method="post" action="logout" id="logout">

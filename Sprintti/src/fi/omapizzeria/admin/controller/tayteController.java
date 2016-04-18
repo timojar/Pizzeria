@@ -1,6 +1,7 @@
 package fi.omapizzeria.admin.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.AdminDao;
+import dao.RaakaAineDAO;
 import dao.TayteDAO;
+import fi.omapizzeria.admin.bean.RaakaAine;
 
 /**
  * Servlet implementation class tayteController
@@ -100,6 +103,12 @@ AdminDao admintiedot= new AdminDao();
 			request.getRequestDispatcher("Login.jsp").forward(request, response);	
 		}
 		
+		
+		RaakaAineDAO ainehalinnta=new RaakaAineDAO();
+		
+		List<RaakaAine> aineet=ainehalinnta.tuoRaakaAineet();
+		request.setAttribute("aineet", aineet);
+		
 		request.getRequestDispatcher("luoTayte.jsp").forward(request, response);
 	}
 
@@ -112,12 +121,15 @@ AdminDao admintiedot= new AdminDao();
 		
 	String nimi =request.getParameter("tayteNimi");	
 	
-	String saatavuusstr=request.getParameter("saatavuus");
-	int saatavuus=0;
+	String maarasstr=request.getParameter("maara");
+	String raakaAine=request.getParameter("aineid");
+	int aineId=0;
+	int maara=0;
 	boolean correct=false;
 	
 	try {
-		saatavuus=Integer.parseInt(saatavuusstr);
+		aineId=Integer.parseInt(raakaAine);
+		maara=Integer.parseInt(maarasstr);
 		correct=true;
 	}
 	
@@ -128,11 +140,11 @@ AdminDao admintiedot= new AdminDao();
 	
 	if(correct==true && nimi!=null){
 		
-	dao.luoTayte(nimi, saatavuus);	
+	dao.luoTayte(nimi, aineId, maara);	
 		
 	}
 	
-	System.out.println(nimi+" "+saatavuusstr);
+	
 	response.sendRedirect("/Sprintti/tayteController?added=true");
 	}
 

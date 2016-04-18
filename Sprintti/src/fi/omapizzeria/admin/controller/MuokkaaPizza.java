@@ -46,7 +46,6 @@ public class MuokkaaPizza extends HttpServlet {
 		HttpSession sessio= request.getSession(false);
 		
 		AdminDao admintiedot = new AdminDao();
-
 		boolean vahvistus = false;
 		String Kayttajanimi = "";
 		String Salasana = "";
@@ -160,7 +159,7 @@ public class MuokkaaPizza extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		TayteDAO taytehallinta= new TayteDAO();
 		PizzaDAO kanta = new PizzaDAO();
 		Pizza pizza=null;
 		
@@ -198,7 +197,7 @@ String [] taytteet=request.getParameterValues("taytteet");
 		for(int i=0; i<taytteet.length; i++){
 			tayteNimi=taytteet[i];
 			taytelista.add(new Tayte(tayteNimi));
-			System.out.println(taytteet[i]);
+			
 		}
 		
 		}
@@ -241,7 +240,9 @@ String [] taytteet=request.getParameterValues("taytteet");
 			
 			int id=pizzaId;
 			
+			taytehallinta.MuokkaaPizzaTayte(nimi, pizzaId, taytelista);;
 			kanta.muokkaaPizza(id, nimi, hinta, kuvaus, taytelista, check);
+			
 			
 		}
 		
