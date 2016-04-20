@@ -4,43 +4,21 @@ public class Tayte {
 	
 private String tayteNimi;
 
-private int id, maara;
+private int saatavuus;
+
+private int id;
 
 
 public Tayte(){
 	
 tayteNimi=null;
+
+saatavuus=0;
+
 id=0;
-maara=0;
 	
 }
 
-
-public Tayte(String tayteNimi, int id){
-	
-this.tayteNimi=tayteNimi;
-this.id=id;
-
-	
-}
-
-public int getMaara() {
-	return maara;
-}
-
-
-public void setMaara(int maara) {
-	this.maara = maara;
-}
-
-
-public Tayte(String tayteNimi, int id, int maara){
-	
-this.tayteNimi=tayteNimi;
-this.id=id;
-this.maara=maara;
-	
-}
 
 public int getId() {
 	return id;
@@ -51,6 +29,24 @@ public void setId(int id) {
 	this.id = id;
 }
 
+
+public Tayte(String tayteNimi, int saatavuus){
+	
+this.tayteNimi=tayteNimi;
+
+this.saatavuus=saatavuus;
+	
+}
+
+public Tayte(String tayteNimi, int saatavuus, int id){
+	
+this.tayteNimi=tayteNimi;
+
+this.saatavuus=saatavuus;
+
+this.id=id;
+	
+}
 
 public Tayte(String tayteNimi){
 	
@@ -72,6 +68,14 @@ public void setTayteNimi(String tayteNimi) {
 }
 
 
+public int getSaatavuus() {
+	return saatavuus;
+}
+
+
+public void setSaatavuus(int saatavuus) {
+	this.saatavuus = saatavuus;
+}
 
 
 	

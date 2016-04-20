@@ -181,7 +181,12 @@
         </div>	
 
 
-
+<form  method="post" action="logout" id="logout">
+		
+			<input type="hidden" name="logout">
+			<label><c:out value="${user}"></c:out></label>
+			<input class="btn waves-effect waves-light" type="submit" value="Kirjaudu ulos">
+		</form>
 	<footer class="page-footer green accent-4">
 	
 	

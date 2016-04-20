@@ -4,26 +4,25 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.AdminDao;
-import dao.RaakaAineDAO;
+import dao.AsiakasDAO;
+import fi.omapizzeria.admin.bean.Asiakas;
 
 /**
- * Servlet implementation class raakaAineet
+ * Servlet implementation class LuoAsiakas
  */
-@WebServlet("/raakaAineet")
-public class raakaAineet extends HttpServlet {
+@WebServlet("/LuoAsiakas")
+public class LuoAsiakas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public raakaAineet() {
+    public LuoAsiakas() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,8 +31,7 @@ public class raakaAineet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.getRequestDispatcher("raakaaineet.jsp").forward(request, response);
+		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -41,31 +39,32 @@ public class raakaAineet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RaakaAineDAO ainehallinta= new RaakaAineDAO();
 		
-		String nimi =request.getParameter("RaakaNimi");	
-		
-		String saatavuusstr=request.getParameter("saatavuus");
-		int saatavuus=0;
-		boolean correct=false;
+		String etunimi=request.getParameter("enimi");
+		String sukunimi=request.getParameter("snimi");
+		String email=request.getParameter("email");
+		String salattavaTeksti=request.getParameter("salasana");
+		String puhelinstr=request.getParameter("numero");
+		int numero=0;
 		
 		try {
-			saatavuus=Integer.parseInt(saatavuusstr);
-			correct=true;
-		}
-		
-		catch (Exception e){
-			System.out.println("Saatavuus pit‰‰ ilmoittaa numerona");	
-		}
-		
-		
-		if(correct==true && nimi!=null){
 			
-		ainehallinta.luoRaakaaine(nimi, saatavuus);
+			numero=Integer.parseInt(puhelinstr);
 			
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		
 		
+		AsiakasDAO asiakashallinta=new AsiakasDAO();
+		
+		Asiakas asiakas=asiakashallinta.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti, numero);
+		
+		
+		HttpSession sessio = request.getSession(true);
+		sessio.setAttribute("asiakas", asiakas);
+	
+		response.sendRedirect("/Sprintti/menuController");
 	}
 
 }

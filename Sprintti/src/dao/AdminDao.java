@@ -71,7 +71,6 @@ finally{
 	}
 
 	public String salaaTeksti (String salattavaTeksti, String Kayttajanimi) {
-		vahvistus = false;
 		adminit = new ArrayList<Admin>();
 		String suola=null;
 		String salasana=null;
@@ -141,7 +140,7 @@ finally{
 
 			ResultSet hakutulokset = haku.executeQuery(sql);
 
-			System.out.println("parametri "+Salasana);
+			
 			while (hakutulokset.next()) {
 
 		
@@ -167,4 +166,59 @@ finally{
 	}
 	
 	
-}
+	
+	
+	
+	public boolean checkUser(String Kayttajanimi){
+		
+		ConnectionFactory yhteys = new ConnectionFactory();
+
+		Connection conn;
+
+		conn = yhteys.getConnection();
+		
+		boolean kayttvahvistus=false;
+		
+		
+
+		try {
+
+			String sql = "select  * from Admin ;";
+
+			Statement haku = conn.createStatement();
+
+			ResultSet hakutulokset = haku.executeQuery(sql);
+
+			
+			while (hakutulokset.next()) {
+
+		
+
+				if (Kayttajanimi.equals(hakutulokset.getString("Kayttajanimi")))
+						 {
+					
+
+					kayttvahvistus=true;
+				}
+
+			}
+	
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		finally {yhteys.suljeYhteys(conn);}
+		
+		return kayttvahvistus;
+	}
+		
+		
+		
+		
+	}
+	
+	
+	
+

@@ -15,6 +15,66 @@ public class TayteDAO {
 	private  List<Tayte> taytelista, selaus;
 	
 	
+	
+	
+	
+public Tayte tuoTayte(int tayteId){
+		
+		
+		Connection conn;		
+		ConnectionFactory yhteys = new ConnectionFactory();	
+		conn = yhteys.getConnection();
+		Tayte tayte=null;
+		try {
+			
+			String sql = "select * from Tayte where tayteId = "+tayteId;
+ 
+			Statement tayteHaku = conn.createStatement();
+
+			ResultSet taytteet = tayteHaku.executeQuery(sql);	
+		
+			
+			
+			while (taytteet.next()) {
+				
+				int id = taytteet.getInt("tayteId");
+
+				String nimi = taytteet.getString("tayteNimi");
+
+				int saatavuus= taytteet.getInt("saatavuus");
+				
+				
+			tayte=new Tayte(nimi, saatavuus, id );
+				
+				
+				
+			}
+			
+			
+		}
+		
+		catch(Exception e){
+		e.printStackTrace();	
+		}
+		
+		finally{
+			
+			yhteys.suljeYhteys(conn);
+		}
+		
+		
+		
+	return tayte;	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 		
 		ConnectionFactory yhteys = new ConnectionFactory();
@@ -112,7 +172,7 @@ public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 	}
 	  
 	
-	public  void luoTayte(String nimi, int aineId, int maara) {
+	public  void luoTayte(String nimi, int saatavuus) {
 
 		ConnectionFactory yhteys = new ConnectionFactory();
 		
@@ -144,12 +204,12 @@ public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 		try {
 			
 			
-			String sqlInsert = "INSERT INTO Tayte( tayteNimi, raakaAineid, tayteId, maara  ) VALUES (?, ?, ?,?)";
+			String sqlInsert = "INSERT INTO Tayte( tayteNimi, tayteId, saatavuus  ) VALUES (?, ?, ?)";
 			PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert);
 			stmtInsert.setString(1, nimi);
-			stmtInsert.setInt(2, aineId);
-			stmtInsert.setInt(3, id);
-			stmtInsert.setInt(4, maara);
+			stmtInsert.setInt(2, id);
+			stmtInsert.setInt(3, saatavuus);
+			
 			stmtInsert.executeUpdate();
 
 		}
@@ -194,10 +254,10 @@ public  List<Tayte> haeTaytteet()
 				
 
 				String tayteNimi = hakutulokset.getString("tayteNimi");
-
 				int id=hakutulokset.getInt("tayteId");
-				int maara=hakutulokset.getInt("maara");
-				taytelista.add(new Tayte(tayteNimi, id, maara));
+				int saatavuus=hakutulokset.getInt("saatavuus");
+				
+				taytelista.add(new Tayte(tayteNimi,saatavuus, id ));
 
 			}
 

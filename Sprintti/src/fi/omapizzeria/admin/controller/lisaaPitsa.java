@@ -50,14 +50,14 @@ public class lisaaPitsa extends HttpServlet {
 		String hintasana = request.getParameter("hinta");
 		String tayteNimi;
 		int pizzaId=0;
+		int tayteId=0;
 		String [] taytteet=request.getParameterValues("taytteet");
 		
 	
 		for(int i=0; i<taytteet.length; i++){
-			tayteNimi=taytteet[i];
-			taytelista.add(new Tayte(tayteNimi));
-			System.out.println(tayteNimi);
-			
+			tayteId=Integer.parseInt(taytteet[i]);
+			taytelista.add(taytehallinata.tuoTayte(tayteId));
+						
 		}
 		
 		PizzaDAO kanta = new PizzaDAO();

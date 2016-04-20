@@ -167,6 +167,7 @@ public class MuokkaaPizza extends HttpServlet {
 		boolean numerotarkistus=true;
 		double hinta=0;
 		int pizzaId=0;
+		int tayteId=0;
 		String tayteNimi;
 		String idstr=request.getParameter("id");
 		String nimi=request.getParameter("nimi").trim();
@@ -195,8 +196,9 @@ String [] taytteet=request.getParameterValues("taytteet");
 	
 		try {
 		for(int i=0; i<taytteet.length; i++){
-			tayteNimi=taytteet[i];
-			taytelista.add(new Tayte(tayteNimi));
+			tayteId=Integer.parseInt(taytteet[i]);
+			taytelista.add(taytehallinta.tuoTayte(tayteId));
+						
 			
 		}
 		

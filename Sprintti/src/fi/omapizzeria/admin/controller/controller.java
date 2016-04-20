@@ -27,6 +27,10 @@ import org.apache.catalina.connector.Request;
 import fi.omapizzeria.admin.bean.*;
 
 /**
+ * @Timo Jarmala
+ */
+
+/**
  * Servlet implementation class controller
  */
 @WebServlet("/controller")
@@ -170,26 +174,108 @@ public class controller extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-	
+		
 
 		ArrayList<Pizza> pizzalista;
-
+		AsiakasDAO asiakastiedot=new AsiakasDAO();
 		AdminDao admintiedot = new AdminDao();
 
+		
+		/**
+		 * Otetaan parametrit login.jsp:st‰ vastaan.
+		 */
+		
 		String salattavaTeksti = request.getParameter("Salasana");
 		String Kayttajanimi = request.getParameter("Kayttajanimi");
 		String muisti = request.getParameter("memory");
 		String Salasana=null;
 		Boolean vahvistus = false;
-
+		boolean kayttvahvistus=false;
+		boolean asiakasvahvistus = false;
 		HttpSession sessio = request.getSession(false);
-
+		
+		admintiedot.checkUser(Kayttajanimi);
+		/**
+		 * Tarkistetaan onko kirjautuja admin vai k‰ytt‰j‰. Jos kirjautuja on admin, salataan salasana ja 
+		 * k‰yd‰‰nn admin tunnistus l‰pi
+		 */
+		
+		
+		
+		if (kayttvahvistus==true) {
+			
+				
+		
 		if (request.getParameter("Kayttajanimi") != null) {
 			
 			Salasana=admintiedot.salaaTeksti(salattavaTeksti, Kayttajanimi);
 			vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
 		}
+		}
+		
+		/**
+		 * Jos kirjautuja on asiakas, salataan salasana ja k‰yd‰‰n asiakastunnistus l‰pi
+		 */
+		
+		
+		
+		else 
+			
+		{
+			
+			Salasana=asiakastiedot.salaaTeksti(salattavaTeksti, Kayttajanimi);	
+			
+			
+			asiakasvahvistus=asiakastiedot.vahvistaTunnus(Salasana, Kayttajanimi);
+			
+			/**
+			 * Jos asiakasvahvistus on true luodaan sessio, johon talletetaan asiakkaan tunnukset.
+			 * Jos kirjautuja on merkinnyt muista minut-toiminnon, tunnukset talletetaan ev‰steisiin.
+			 * Ohjataan lopuksi Asiakascontroller:lle.
+			 */
+			
 
+			if (asiakasvahvistus == true) {
+				
+				System.out.println("Pit‰is toimia Kaytta "+Kayttajanimi);
+				System.out.println("Salasana"+Salasana);
+				
+				sessio = request.getSession(true);
+				sessio.setAttribute("tunnus", Kayttajanimi);
+				sessio.setAttribute("salasana", Salasana);
+				if (muisti != null) {
+
+					Cookie ck = new Cookie("kayttunnus", Kayttajanimi);
+					ck.setMaxAge(60 * 60 * 24 * 365);
+					response.addCookie(ck);
+
+					ck = new Cookie("password", Salasana);
+					ck.setMaxAge(60 * 60 * 24 * 365);
+					response.addCookie(ck);
+					
+				}
+				response.sendRedirect("/Sprintti/AsiakasController");
+			}
+			
+			/**
+			 * Jos tunnistautuminen on v‰‰rin ohtajaan takaisin login.jsp:lle
+			 */
+			
+
+			else {
+				request.getRequestDispatcher("Login.jsp")
+						.forward(request, response);
+
+			}
+			
+		}
+			
+		/**
+		 * Jos adminvahvistus on true luodaan sessio, johon talletetaan asiakkaan tunnukset.
+		 * Jos kirjautuja on merkinnyt muista minut-toiminnon, tunnukset talletetaan ev‰steisiin.
+		 * Ohjataan lopuksi controller:lle.
+		 */
+		
 		if (vahvistus == true) {
 
 			sessio = request.getSession(true);
@@ -207,15 +293,16 @@ public class controller extends HttpServlet {
 
 			}
 
-		}
+
 
 		else {
 			request.getRequestDispatcher("Login.jsp")
 					.forward(request, response);
 
-		}
+		}}
 
+		if(vahvistus==true){
 		response.sendRedirect("/Sprintti/controller?added=true");
-
+		}
 	}
 }

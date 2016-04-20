@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.AdminDao;
 import dao.MenuDao;
+import fi.omapizzeria.admin.bean.Asiakas;
 import fi.omapizzeria.admin.bean.Pizza;
 
 
@@ -41,13 +42,24 @@ public class menuController extends HttpServlet {
 		
 
 	HttpSession muistiostoslistasta= request.getSession(false);	
+	HttpSession sessio= request.getSession(false);	
 	List<Pizza> ostoslista=null;
+	Asiakas asiakas=null;
+	
+	try {
+		asiakas=(Asiakas)sessio.getAttribute("asiakas");
+	} catch (Exception e) {
+		// TODO: handle exception
+	}
 	
 	try {ostoslista=(List<Pizza>)muistiostoslistasta.getAttribute("ostoslista");	
 		
 	} catch (Exception e) {
 		// TODO: handle exception
 	}
+	
+	List<Asiakas>asiakastiedot=new ArrayList<Asiakas>();
+	asiakastiedot.add(asiakas);
 	
 	
 	MenuDao menukanta= new MenuDao();
@@ -69,6 +81,7 @@ public class menuController extends HttpServlet {
 	pizzamenu.add(new Pizza( id,  nimi,  hinta,  kuvaus, pizzaNo));
 		
 	}
+	
 	request.setAttribute("ostoslista", ostoslista);
 	request.setAttribute("menu", pizzamenu);
 	

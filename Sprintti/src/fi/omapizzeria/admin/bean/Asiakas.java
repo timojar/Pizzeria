@@ -3,19 +3,45 @@ package fi.omapizzeria.admin.bean;
 public class Asiakas {
 
 	private int numero;
-	private String nimi;
+	
 	private String email;
 	private String salasana;
+	private String etunimi;
+	private String sukunimi;
 
 	private Asiakas() {
 
 	}
 
-	private Asiakas(int numero, String nimi, String email, String salasana) {
+	public Asiakas(String etunimi, String sukunimi, int numero,  String email, String salasana) {
 		this.numero = numero;
-		this.nimi = nimi;
 		this.email = email;
 		this.salasana = salasana;
+		this.etunimi=etunimi;
+		this.sukunimi=sukunimi;
+	}
+
+	@Override
+	public String toString() {
+		return "Asiakas [numero=" + numero + ", email=" + email + ", salasana="
+				+ salasana + ", etunimi=" + etunimi + ", sukunimi=" + sukunimi
+				+ "]";
+	}
+
+	public String getEtunimi() {
+		return etunimi;
+	}
+
+	public void setEtunimi(String etunimi) {
+		this.etunimi = etunimi;
+	}
+
+	public String getSukunimi() {
+		return sukunimi;
+	}
+
+	public void setSukunimi(String sukunimi) {
+		this.sukunimi = sukunimi;
 	}
 
 	public int getNumero() {
@@ -26,13 +52,7 @@ public class Asiakas {
 		this.numero = numero;
 	}
 
-	public String getNimi() {
-		return nimi;
-	}
-
-	public void setNimi(String nimi) {
-		this.nimi = nimi;
-	}
+	
 
 	public String getEmail() {
 		return email;
@@ -50,10 +70,5 @@ public class Asiakas {
 		this.salasana = salasana;
 	}
 
-	@Override
-	public String toString() {
-		return "Asiakas [numero=" + numero + ", nimi=" + nimi + ", email="
-				+ email + "]";
-	}
-
+	
 }
