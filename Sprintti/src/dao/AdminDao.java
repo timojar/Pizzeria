@@ -188,7 +188,7 @@ finally{
 			Statement haku = conn.createStatement();
 
 			ResultSet hakutulokset = haku.executeQuery(sql);
-
+		
 			
 			while (hakutulokset.next()) {
 
@@ -199,6 +199,8 @@ finally{
 					
 
 					kayttvahvistus=true;
+					
+					
 				}
 
 			}

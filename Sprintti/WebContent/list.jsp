@@ -147,7 +147,7 @@
 			<c:forEach items="${taytelista}" var="tayte"> 
 						
 		<p>
-      <input type="checkbox" id="${tayte.tayteNimi}" name="taytteet" value="${tayte.tayteNimi}"/>
+      <input type="checkbox" id="${tayte.tayteNimi}" name="taytteet" value="${tayte.id}"/>
       
       <label for="${tayte.tayteNimi}"><c:out value="${tayte.tayteNimi}"> </c:out></label>
     </p>

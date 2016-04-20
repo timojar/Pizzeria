@@ -36,6 +36,10 @@ import fi.omapizzeria.admin.bean.*;
 @WebServlet("/controller")
 public class controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static String Salasana = null;
+	private static boolean vahvistus = false;
+	private static boolean kayttvahvistus = false;
+	private static boolean asiakasvahvistus = false;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -58,7 +62,7 @@ public class controller extends HttpServlet {
 		boolean vahvistus = false;
 		String Kayttajanimi = "";
 		String Salasana = "";
-
+		
 		HttpSession sessio = request.getSession(false);
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -66,7 +70,10 @@ public class controller extends HttpServlet {
 			for (int i = 0; i < cookies.length; i++) {
 
 				if ("kayttunnus".equals(cookies[i].getName())) {
+					String logged = "logged";
 					Kayttajanimi = cookies[i].getValue();
+					request.setAttribute("logged", logged);
+					request.setAttribute("tunnus", Kayttajanimi);
 				}
 
 				if ("password".equals(cookies[i].getName())) {
@@ -95,7 +102,7 @@ public class controller extends HttpServlet {
 
 			}
 
-			else if(vahvistus == false) {
+			else if (vahvistus == false) {
 				request.getRequestDispatcher("Login.jsp").forward(request,
 						response);
 			}
@@ -160,9 +167,10 @@ public class controller extends HttpServlet {
 		request.setAttribute("taytelista", taytelista);
 		request.setAttribute("noofPages", noofPages);
 		request.setAttribute("lista", pizzalista);
-		
-		if(vahvistus==true){
-		request.getRequestDispatcher("list.jsp").forward(request, response);}
+
+		if (vahvistus == true) {
+			request.getRequestDispatcher("list.jsp").forward(request, response);
+		}
 
 	}
 
@@ -174,135 +182,175 @@ public class controller extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		
-
 		ArrayList<Pizza> pizzalista;
-		AsiakasDAO asiakastiedot=new AsiakasDAO();
+		AsiakasDAO asiakastiedot = new AsiakasDAO();
 		AdminDao admintiedot = new AdminDao();
 
-		
 		/**
 		 * Otetaan parametrit login.jsp:st‰ vastaan.
 		 */
-		
+
 		String salattavaTeksti = request.getParameter("Salasana");
 		String Kayttajanimi = request.getParameter("Kayttajanimi");
 		String muisti = request.getParameter("memory");
-		String Salasana=null;
-		Boolean vahvistus = false;
-		boolean kayttvahvistus=false;
-		boolean asiakasvahvistus = false;
-		HttpSession sessio = request.getSession(false);
-		
-		admintiedot.checkUser(Kayttajanimi);
+
+		kayttvahvistus=admintiedot.checkUser(Kayttajanimi);
 		/**
-		 * Tarkistetaan onko kirjautuja admin vai k‰ytt‰j‰. Jos kirjautuja on admin, salataan salasana ja 
-		 * k‰yd‰‰nn admin tunnistus l‰pi
+		 * Tarkistetaan onko kirjautuja admin vai k‰ytt‰j‰. Jos kirjautuja on
+		 * admin, salataan salasana ja k‰yd‰‰nn admin tunnistus l‰pi
 		 */
-		
-		
-		
-		if (kayttvahvistus==true) {
+
+		if (kayttvahvistus == true) {
 			
-				
-		
-		if (request.getParameter("Kayttajanimi") != null) {
-			
-			Salasana=admintiedot.salaaTeksti(salattavaTeksti, Kayttajanimi);
-			vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
+		adminTunnistus(request, response, salattavaTeksti, Kayttajanimi);		
 		}
-		}
-		
+
 		/**
-		 * Jos kirjautuja on asiakas, salataan salasana ja k‰yd‰‰n asiakastunnistus l‰pi
+		 * Jos kirjautuja on asiakas, salataan salasana ja k‰yd‰‰n
+		 * asiakastunnistus l‰pi
 		 */
-		
-		
-		
-		else 
-			
+
+		else
+
 		{
-			
-			Salasana=asiakastiedot.salaaTeksti(salattavaTeksti, Kayttajanimi);	
-			
-			
-			asiakasvahvistus=asiakastiedot.vahvistaTunnus(Salasana, Kayttajanimi);
-			
-			/**
-			 * Jos asiakasvahvistus on true luodaan sessio, johon talletetaan asiakkaan tunnukset.
-			 * Jos kirjautuja on merkinnyt muista minut-toiminnon, tunnukset talletetaan ev‰steisiin.
-			 * Ohjataan lopuksi Asiakascontroller:lle.
-			 */
-			
+asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 
-			if (asiakasvahvistus == true) {
-				
-				System.out.println("Pit‰is toimia Kaytta "+Kayttajanimi);
-				System.out.println("Salasana"+Salasana);
-				
-				sessio = request.getSession(true);
-				sessio.setAttribute("tunnus", Kayttajanimi);
-				sessio.setAttribute("salasana", Salasana);
-				if (muisti != null) {
-
-					Cookie ck = new Cookie("kayttunnus", Kayttajanimi);
-					ck.setMaxAge(60 * 60 * 24 * 365);
-					response.addCookie(ck);
-
-					ck = new Cookie("password", Salasana);
-					ck.setMaxAge(60 * 60 * 24 * 365);
-					response.addCookie(ck);
-					
-				}
-				response.sendRedirect("/Sprintti/AsiakasController");
-			}
-			
-			/**
-			 * Jos tunnistautuminen on v‰‰rin ohtajaan takaisin login.jsp:lle
-			 */
-			
-
-			else {
-				request.getRequestDispatcher("Login.jsp")
-						.forward(request, response);
-
-			}
-			
 		}
-			
+
+		
+
+		
+	}
+
+	
+	
+	
+	
+	
+	
+	private void asiakasTunnistus(HttpServletRequest request,
+			HttpServletResponse response, String salattavaTeksti,
+			String Kayttajanimi)throws ServletException, IOException {
+
+		AsiakasDAO asiakastiedot = new AsiakasDAO();
+		HttpSession sessio = request.getSession(false);
+		String muisti = request.getParameter("memory");
+		Salasana = asiakastiedot.salaaTeksti(salattavaTeksti, Kayttajanimi);
+		asiakasvahvistus = asiakastiedot.vahvistaTunnus(Salasana, Kayttajanimi);
+
 		/**
-		 * Jos adminvahvistus on true luodaan sessio, johon talletetaan asiakkaan tunnukset.
-		 * Jos kirjautuja on merkinnyt muista minut-toiminnon, tunnukset talletetaan ev‰steisiin.
-		 * Ohjataan lopuksi controller:lle.
+		 * Jos asiakasvahvistus on true luodaan sessio, johon talletetaan
+		 * asiakkaan tunnukset. Jos kirjautuja on merkinnyt muista
+		 * minut-toiminnon, tunnukset talletetaan ev‰steisiin. Ohjataan lopuksi
+		 * Asiakascontroller:lle.
 		 */
+
+		if (asiakasvahvistus == true) {
+
+			sessio = request.getSession(true);
+			String logged = "logged";
+			sessio.setAttribute("logged", logged);
+			sessio.setAttribute("tunnus", Kayttajanimi);
+			sessio.setAttribute("salasana", Salasana);
+			if (muisti != null) {
+
+				lisaaEvasteet(request, response, logged, Kayttajanimi, Salasana);
+
+			}
+			response.sendRedirect("/Sprintti/AsiakasController");
+
+		}
+		
+
+		/**
+		 * Jos tunnistautuminen on v‰‰rin ohtajaan takaisin login.jsp:lle
+		 */
+
+		else  {
+			request.getRequestDispatcher("Login.jsp")
+					.forward(request, response);
+
+			System.out.println("ei mennyt l‰pi");
+
+		}
+
+	}
+
+	
+	
+	
+	
+	
+	private void adminTunnistus(HttpServletRequest request,
+			HttpServletResponse response, String salattavaTeksti,
+			String Kayttajanimi) throws ServletException, IOException 
+	{
+		AsiakasDAO asiakastiedot = new AsiakasDAO();
+		HttpSession sessio = request.getSession(false);
+		String muisti = request.getParameter("memory");
+		
+		AdminDao admintiedot = new AdminDao();
+
+		Salasana = admintiedot.salaaTeksti(salattavaTeksti,
+				Kayttajanimi);
+		vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);	
+		
+		
+		
+		/**
+		 * Jos adminvahvistus on true luodaan sessio, johon talletetaan
+		 * asiakkaan tunnukset. Jos kirjautuja on merkinnyt muista
+		 * minut-toiminnon, tunnukset talletetaan ev‰steisiin. Ohjataan lopuksi
+		 * controller:lle.
+		 */
+		
 		
 		if (vahvistus == true) {
 
 			sessio = request.getSession(true);
 			sessio.setAttribute("tunnus", Kayttajanimi);
 			sessio.setAttribute("salasana", Salasana);
+			String logged="logged";
 			if (muisti != null) {
-
-				Cookie ck = new Cookie("kayttunnus", Kayttajanimi);
-				ck.setMaxAge(60 * 60 * 24 * 365);
-				response.addCookie(ck);
-
-				ck = new Cookie("password", Salasana);
-				ck.setMaxAge(60 * 60 * 24 * 365);
-				response.addCookie(ck);
+				lisaaEvasteet(request, response, logged, Kayttajanimi, Salasana);
+				
+			}
+			response.sendRedirect("/Sprintti/controller?added=true");}
+			else {
+				request.getRequestDispatcher("Login.jsp").forward(request,
+						response);
 
 			}
+		
 
+		
+	
 
-
-		else {
-			request.getRequestDispatcher("Login.jsp")
-					.forward(request, response);
-
-		}}
-
-		if(vahvistus==true){
-		response.sendRedirect("/Sprintti/controller?added=true");
-		}
+		
 	}
+	
+	
+	
+	
+	
+	private void lisaaEvasteet (HttpServletRequest request,
+			HttpServletResponse response, String login,
+			String Kayttajanimi, String Salasana) throws ServletException, IOException{
+		
+		Cookie ck = new Cookie("kayttunnus", Kayttajanimi);
+		ck.setMaxAge(60 * 60 * 24 * 365);
+		response.addCookie(ck);
+
+		ck = new Cookie("password", Salasana);
+		ck.setMaxAge(60 * 60 * 24 * 365);
+		response.addCookie(ck);
+
+		
+		
+	}
+	
+	
+	
+	
+	
 }

@@ -37,7 +37,7 @@
 			
 			<c:forEach items="${taytelista}" var="tayte"> 
 		
-		<label> <input type="checkbox" name="taytteet" value="${tayte.tayteNimi}"> 
+		<label> <input type="checkbox" name="taytteet" value="${tayte.id}"> 
 		<c:out value="${tayte.tayteNimi}">
 		</c:out> </label>
 		

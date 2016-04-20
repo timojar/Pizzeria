@@ -1,4 +1,4 @@
-use tilaus;
+
 
 create table Pizza (
 id integer not null,
@@ -14,25 +14,14 @@ piiloitus varchar(10) ,
 
 );
 
-create table RaakaAine (
-id integer not null,
-
-nimi varchar(30) not null,
-
-saatavuus  integer not null,
-
- primary key(id) 
-
-); 
 
 
 create table Tayte (
-raakaAineid integer not null,
+ 
 tayteId integer not null,
 tayteNimi varchar(30)  not null,
-maara integer not null,
- primary key(tayteId),
-foreign key (raakaAineid) references RaakaAine (id)
+saatavuus integer not null,
+ primary key(tayteId)
 );
 
 
@@ -42,15 +31,26 @@ tayteId integer not null,
 nimi varchar(30) not null,
 tayteNimi varchar(30)  not null,
 id integer not null,
-
-
-
-  foreign key (tayteId) references Tayte (tayteId),
+foreign key (tayteId) references Tayte (tayteId),
 foreign key (id) references Pizza (id)
 
 )
 
 ;
+
+
+create table Asiakas(
+Etunimet varchar(30)  not null,
+Sukunimi varchar(40)  not null,
+Email varchar(120)  not null,
+Salasana varchar(1000) not null,
+Puhelin Integer not null,
+Suola varchar(20) not null,
+primary key (Email)
+)
+
+;
+
 
 
 create table Admin(
@@ -61,7 +61,4 @@ Kayttajanimi varchar(120)  not null,
 Salasana varchar(1000) not null,
 Suola varchar(20) not null,
 primary key (Kayttajanimi)
-
-
-
 )

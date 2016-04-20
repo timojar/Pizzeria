@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,13 +37,23 @@ public class AsiakasController extends HttpServlet {
 		
 		
 		HttpSession sessio= request.getSession(false);	
-		Asiakas asiakas=null;
 		
-		try {
-			asiakas=(Asiakas)sessio.getAttribute("asiakas");
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+
+			for (int i = 0; i < cookies.length; i++) {
+
+				if ("kayttunnus".equals(cookies[i].getName())) {
+					String logged = "logged";
+					String Kayttajanimi = cookies[i].getValue();
+					request.setAttribute("logged", logged);
+					request.setAttribute("tunnus", Kayttajanimi);
+				}
+
+			
+			}}
+		
+		
 		
 		request.getRequestDispatcher("index.jsp").forward(request, response);	
 		

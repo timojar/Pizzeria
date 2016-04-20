@@ -30,6 +30,46 @@ public class logout extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		
+String logout=request.getParameter("logout");
+	
+		
+		
+		HttpSession sessio = request.getSession(false);
+		Cookie [] cookies=request.getCookies();
+		if(request.getParameter("logout")!=null){
+			
+			
+			if(sessio!=null){
+			sessio.invalidate();
+			}
+			
+			
+			if(cookies!=null){
+				
+			for(int i=0; i<cookies.length; i++)	{
+				
+				Cookie ck=cookies[i];
+				System.out.println(cookies[i].getName());
+				System.out.println(cookies[i].getValue());
+				cookies[i].setValue(null);;
+				cookies[i].setMaxAge(0);
+					
+				response.addCookie(ck);
+			}
+			
+				
+			}
+			
+				
+		}
+		
+		response.sendRedirect("/Sprintti/controller?added=true");
+				
+	
+		
+		
 	}
 
 	/**

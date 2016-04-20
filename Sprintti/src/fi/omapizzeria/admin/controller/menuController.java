@@ -45,7 +45,21 @@ public class menuController extends HttpServlet {
 	HttpSession sessio= request.getSession(false);	
 	List<Pizza> ostoslista=null;
 	Asiakas asiakas=null;
-	
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null) {
+
+		for (int i = 0; i < cookies.length; i++) {
+
+			if ("kayttunnus".equals(cookies[i].getName())) {
+				String logged = "logged";
+				String Kayttajanimi = cookies[i].getValue();
+				request.setAttribute("logged", logged);
+				request.setAttribute("tunnus", Kayttajanimi);
+			}
+
+		
+		}}
+
 	try {
 		asiakas=(Asiakas)sessio.getAttribute("asiakas");
 	} catch (Exception e) {
@@ -82,7 +96,7 @@ public class menuController extends HttpServlet {
 		
 	}
 	
-	request.setAttribute("ostoslista", ostoslista);
+	
 	request.setAttribute("menu", pizzamenu);
 	
 	request.getRequestDispatcher("menu.jsp").forward(request, response);

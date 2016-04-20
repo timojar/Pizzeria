@@ -62,7 +62,10 @@ public class LuoAsiakas extends HttpServlet {
 		
 		
 		HttpSession sessio = request.getSession(true);
-		sessio.setAttribute("asiakas", asiakas);
+		String logged="logged";
+		sessio.setAttribute("logged", logged);
+		sessio.setAttribute("tunnus", asiakas.getEmail());
+		sessio.setAttribute("salasana", asiakas.getSalasana());
 	
 		response.sendRedirect("/Sprintti/menuController");
 	}
