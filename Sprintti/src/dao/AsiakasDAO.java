@@ -189,7 +189,7 @@ public boolean checkUser(String email){
 	ResultSet result= suolahaku.executeQuery();
 	
 	while(result.next()){
-		suola=result.getNString("Suola");
+		suola=result.getString("Suola");
 		
 	}
 
