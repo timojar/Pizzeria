@@ -1,5 +1,4 @@
 
-
 create table Pizza (
 id integer not null,
 
@@ -38,19 +37,59 @@ foreign key (id) references Pizza (id)
 
 ;
 
-
 create table Asiakas(
+id integer,
+Etunimet varchar(30)  not null,
+Sukunimi varchar(40)  not null,
+Email varchar(120)  not null,
+Puhelin Integer not null,
+osoite varchar(120)  not null,
+tmp varchar(30)  not null,
+postinro integer,
+primary key (id)
+
+)
+
+;
+create table KantaAsiakas(
+id integer,
 Etunimet varchar(30)  not null,
 Sukunimi varchar(40)  not null,
 Email varchar(120)  not null,
 Salasana varchar(1000) not null,
 Puhelin Integer not null,
 Suola varchar(20) not null,
-primary key (Email)
+primary key(id),
+foreign key(id) references Asiakas(id)
+
+);
+
+
+create table Tilaus(
+tilausnumero integer not null,
+asiakasnumero integer not null,
+tilausajankohta timestamp not null,
+toimitusajankohta varchar(120),
+toimitustapa varchar(30)  not null,
+maksutapa varchar(30)  not null,
+yhteishinta decimal (6,2) not null,
+primary key(tilausnumero),
+foreign key(asiakasnumero) references Asiakas(id)
+
+);
+
+create table TilausRivi(
+tilausnumero integer not null,
+pizzaid integer not null,
+lkm integer not null,
+hinta decimal (3,2) not null,
+
+foreign key (tilausnumero) references Tilaus (tilausnumero),
+foreign key(pizzaid) references Pizza(id)
+
 )
 
 ;
-
 
 
 create table Admin(

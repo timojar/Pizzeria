@@ -35,6 +35,9 @@ public class LuoAsiakas extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		
+		
+		
+		
 		request.getRequestDispatcher("register.jsp").forward(request, response);
 	}
 
