@@ -61,8 +61,7 @@ return conn;
 
 		catch (Exception e) {
 
-			System.out
-					.println("Tietokantayhteys ei jostain syyst‰ suostu menem‰‰n kiinni.");
+			System.out.println("Tietokantayhteys ei jostain syyst‰ suostu menem‰‰n kiinni.");
 		}
 
 	}

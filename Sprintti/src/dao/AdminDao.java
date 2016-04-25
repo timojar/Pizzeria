@@ -80,7 +80,7 @@ finally{
 		Connection conn;
 
 		conn = yhteys.getConnection();
-		String suolasql="SELECT Suola from admin where Kayttajanimi=?";
+		String suolasql="SELECT Suola from Admin where Kayttajanimi=?";
 		
 		
 		try {
@@ -90,9 +90,11 @@ finally{
 	suolahaku.setString(1, Kayttajanimi);
 	
 	ResultSet result= suolahaku.executeQuery();
-	
+	System.out.println(salattavaTeksti);
 	while(result.next()){
-		suola=result.getNString("Suola");
+		
+		
+		suola=result.getString("Suola");
 		
 	}
 
@@ -101,7 +103,7 @@ finally{
 		System.out.println("suolaluku "+ suola);
 		
 		salasana=salaus.salaa(salattavaTeksti, suola, montakoKertaa);
-		
+		System.out.println(salasana);
 		
 	} catch (Exception e) {
 		// TODO: handle exception
@@ -112,6 +114,9 @@ finally{
 		}
 
 		catch (SQLException e) {
+			
+		e.printStackTrace();	
+			
 
 		}
 
@@ -208,7 +213,7 @@ finally{
 			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 		finally {yhteys.suljeYhteys(conn);}

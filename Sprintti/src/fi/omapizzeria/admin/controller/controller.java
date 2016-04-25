@@ -295,6 +295,8 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 			String Kayttajanimi) throws ServletException, IOException 
 	{
 		
+		
+		
 		HttpSession sessio = request.getSession(false);
 		String muisti = request.getParameter("memory");
 		
@@ -302,6 +304,8 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 
 		Salasana = admintiedot.salaaTeksti(salattavaTeksti,
 				Kayttajanimi);
+		
+		System.out.println(Salasana);
 		vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);	
 		
 		
