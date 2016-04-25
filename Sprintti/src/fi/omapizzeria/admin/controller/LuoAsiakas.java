@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.AsiakasDAO;
 import fi.omapizzeria.admin.bean.Asiakas;
+import fi.omapizzeria.admin.bean.KantaAsiakas;
 
 /**
  * Servlet implementation class LuoAsiakas
@@ -32,6 +33,9 @@ public class LuoAsiakas extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		
+		request.getRequestDispatcher("register.jsp").forward(request, response);
 	}
 
 	/**
@@ -39,12 +43,24 @@ public class LuoAsiakas extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		int postinro=0;
 		String etunimi=request.getParameter("enimi");
 		String sukunimi=request.getParameter("snimi");
 		String email=request.getParameter("email");
+		String toimosoite=request.getParameter("numero");
+		String postitmp=request.getParameter("numero");
+		String postinrostr=request.getParameter("postinro");
+		try {
+			 postinro=Integer.parseInt(postinrostr);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
 		String salattavaTeksti=request.getParameter("salasana");
 		String puhelinstr=request.getParameter("numero");
+		boolean kayttvahvistus=true;
 		int numero=0;
 		
 		try {
@@ -57,17 +73,28 @@ public class LuoAsiakas extends HttpServlet {
 		
 		
 		AsiakasDAO asiakashallinta=new AsiakasDAO();
-		
-		Asiakas asiakas=asiakashallinta.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti, numero);
+		kayttvahvistus=asiakashallinta.checkUser(email);
+		if(kayttvahvistus==false){
+		KantaAsiakas kasiakas=asiakashallinta.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti, numero, toimosoite, postitmp, postinro);
 		
 		
 		HttpSession sessio = request.getSession(true);
 		String logged="logged";
 		sessio.setAttribute("logged", logged);
-		sessio.setAttribute("tunnus", asiakas.getEmail());
-		sessio.setAttribute("salasana", asiakas.getSalasana());
+		sessio.setAttribute("etunimi", kasiakas.getEtunimi());
+		sessio.setAttribute("sukunimi", kasiakas.getSukunimi());
+		sessio.setAttribute("asiakas", kasiakas);
+		sessio.setAttribute("tunnus", kasiakas.getEmail());
+		sessio.setAttribute("salasana", kasiakas.getSalasana());
 	
 		response.sendRedirect("/Sprintti/menuController");
+	}
+		
+		else{
+			response.sendRedirect("/Sprintti/LuoAsiakas?email=true");
+		}
+	
+	
 	}
 
 }

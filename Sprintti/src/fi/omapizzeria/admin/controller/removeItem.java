@@ -63,7 +63,7 @@ public class removeItem extends HttpServlet {
 		} catch (Exception e) {
 			System.out.println("Ei toimi"+indexstr);
 		}
-		System.out.println(index);
+		
 		ostoslista.remove(index);
 		
 		muistiostoslistasta.setAttribute("ostoslista", ostoslista);

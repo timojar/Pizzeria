@@ -66,11 +66,7 @@ public class menuController extends HttpServlet {
 		// TODO: handle exception
 	}
 	
-	try {ostoslista=(List<Pizza>)muistiostoslistasta.getAttribute("ostoslista");	
-		
-	} catch (Exception e) {
-		// TODO: handle exception
-	}
+	
 	
 	List<Asiakas>asiakastiedot=new ArrayList<Asiakas>();
 	asiakastiedot.add(asiakas);

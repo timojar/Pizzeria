@@ -39,7 +39,7 @@ public class email1 extends HttpServlet {
 
 		String lahettajanGoogleSalasana="88juslin!";
 
-		String vastaanottajanEmail="jukka.juslin@haaga-helia.fi";
+		String vastaanottajanEmail="timo_jarmala@luukku.com";
 
 		String otsikko="Moro";
 

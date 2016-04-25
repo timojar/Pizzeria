@@ -1,31 +1,45 @@
 package fi.omapizzeria.admin.bean;
 
 public class Asiakas {
-
+	private int id;
 	private int numero;
 	
 	private String email;
-	private String salasana;
+	
 	private String etunimi;
 	private String sukunimi;
+	private String osoite;
+	private String tmp;
+	private int postinro;
 
-	private Asiakas() {
-
-	}
-
-	public Asiakas(String etunimi, String sukunimi, int numero,  String email, String salasana) {
+	public Asiakas(int id,String etunimi, String sukunimi, int numero,  String email, String osoite, String tmp,
+			int postinro) {
+		this.id=id;
 		this.numero = numero;
 		this.email = email;
-		this.salasana = salasana;
+		this.etunimi=etunimi;
+		this.sukunimi=sukunimi;
+		this.osoite=osoite;
+		this.tmp=tmp;
+		this.postinro=postinro;
+	}
+
+	
+	
+	public Asiakas(int id,String etunimi, String sukunimi, int numero,  String email) {
+		this.id=id;
+		this.numero = numero;
+		this.email = email;
 		this.etunimi=etunimi;
 		this.sukunimi=sukunimi;
 	}
 
-	@Override
-	public String toString() {
-		return "Asiakas [numero=" + numero + ", email=" + email + ", salasana="
-				+ salasana + ", etunimi=" + etunimi + ", sukunimi=" + sukunimi
-				+ "]";
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getEtunimi() {
@@ -62,13 +76,41 @@ public class Asiakas {
 		this.email = email;
 	}
 
-	public String getSalasana() {
-		return salasana;
+
+
+	public String getOsoite() {
+		return osoite;
 	}
 
-	public void setSalasana(String salasana) {
-		this.salasana = salasana;
+
+
+	public void setOsoite(String osoite) {
+		this.osoite = osoite;
 	}
 
-	
+
+
+	public String getTmp() {
+		return tmp;
+	}
+
+
+
+	public void setTmp(String tmp) {
+		this.tmp = tmp;
+	}
+
+
+
+	public int getPostinro() {
+		return postinro;
+	}
+
+
+
+	public void setPostinro(int postinro) {
+		this.postinro = postinro;
+	}
+
+
 }

@@ -490,7 +490,7 @@ String newDesc = "Update Pizza set kuvaus = ?  where id = ?";
 			
 			while (pizzat.next()) {
 				
-				System.out.println("testi");
+				
 					
 				int id = pizzat.getInt("id");
 

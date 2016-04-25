@@ -182,8 +182,8 @@ public class controller extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		ArrayList<Pizza> pizzalista;
-		AsiakasDAO asiakastiedot = new AsiakasDAO();
+		
+		
 		AdminDao admintiedot = new AdminDao();
 
 		/**
@@ -231,7 +231,9 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 	private void asiakasTunnistus(HttpServletRequest request,
 			HttpServletResponse response, String salattavaTeksti,
 			String Kayttajanimi)throws ServletException, IOException {
-
+		KantaAsiakas k=null;
+		String etunimi=null;
+		String sukunimi=null;
 		AsiakasDAO asiakastiedot = new AsiakasDAO();
 		HttpSession sessio = request.getSession(false);
 		String muisti = request.getParameter("memory");
@@ -247,14 +249,21 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 
 		if (asiakasvahvistus == true) {
 
+			k=asiakastiedot.getAsiakas(Kayttajanimi);
+			etunimi=k.getEtunimi();
+			sukunimi=k.getSukunimi();
+			
 			sessio = request.getSession(true);
 			String logged = "logged";
+			sessio.setAttribute("etunimi", k.getEtunimi());
+			sessio.setAttribute("sukunimi", k.getSukunimi());
+			sessio.setAttribute("asiakas", k);
 			sessio.setAttribute("logged", logged);
 			sessio.setAttribute("tunnus", Kayttajanimi);
 			sessio.setAttribute("salasana", Salasana);
 			if (muisti != null) {
 
-				lisaaEvasteet(request, response, logged, Kayttajanimi, Salasana);
+				lisaaAsiakasEvasteet(request, response, logged, Kayttajanimi, Salasana, etunimi, sukunimi, k);
 
 			}
 			response.sendRedirect("/Sprintti/AsiakasController");
@@ -285,7 +294,7 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 			HttpServletResponse response, String salattavaTeksti,
 			String Kayttajanimi) throws ServletException, IOException 
 	{
-		AsiakasDAO asiakastiedot = new AsiakasDAO();
+		
 		HttpSession sessio = request.getSession(false);
 		String muisti = request.getParameter("memory");
 		
@@ -333,6 +342,43 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 	
 	
 	
+	private void lisaaAsiakasEvasteet (HttpServletRequest request,
+			HttpServletResponse response, String login,
+			String Kayttajanimi, String Salasana, String etunimi, String sukunimi, KantaAsiakas k) throws ServletException, IOException{
+		
+		Cookie ck = new Cookie("kayttunnus", Kayttajanimi);
+		ck.setMaxAge(60 * 60 * 24 * 365);
+		response.addCookie(ck);
+
+		ck = new Cookie("password", Salasana);
+		ck.setMaxAge(60 * 60 * 24 * 365);
+		response.addCookie(ck);
+		
+		ck = new Cookie("etunimi", etunimi);
+		ck.setMaxAge(60 * 60 * 24 * 365);
+		response.addCookie(ck);
+		
+		ck = new Cookie("sukunimi", sukunimi);
+		ck.setMaxAge(60 * 60 * 24 * 365);
+		response.addCookie(ck);
+
+		
+		
+		ck = new Cookie("puhelin", ""+k.getNumero());
+		ck.setMaxAge(60 * 60 * 24 * 365);
+		response.addCookie(ck);
+
+		ck = new Cookie("id", ""+k.getId());
+		ck.setMaxAge(60 * 60 * 24 * 365);
+		response.addCookie(ck);
+
+
+		
+		
+	}
+	
+	
+	
 	private void lisaaEvasteet (HttpServletRequest request,
 			HttpServletResponse response, String login,
 			String Kayttajanimi, String Salasana) throws ServletException, IOException{
@@ -348,8 +394,6 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 		
 		
 	}
-	
-	
 	
 	
 	

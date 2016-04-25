@@ -41,34 +41,61 @@
 	<br>
 	<br>
 	<h4>Rekisteröidy</h4><br>
+	
 	<p><b><i>Täytä kaikki allaolevat kohdat ja paina "Rekisteröidy".</b></i></p>
-	<br><br><br>
+	<br><c:if test="${not empty param.email}">Sähköposti on jo käytössä?</c:if>
+	<br><br>
 	 <div class="row">
     <form class="col s5" action="LuoAsiakas" method="post">
       <div class="row">
         <div class="input-field col s6">
          <i class="material-icons prefix">perm_identity</i>
-          <input id="Etunimi" length="15" type="text" class="validate" name="enimi">
+          <input id="Etunimi" length="15" type="text" class="validate" name="enimi" required">
           <label for="Sukunimi">Etunimi</label>
         </div>
         <div class="input-field col s6">
          <i class="material-icons prefix">perm_identity</i>
-          <input id="Sukunimi" length="15" type="text" class="validate" name="snimi">
+          <input id="Sukunimi" length="15" type="text" class="validate" name="snimi" required>
           <label for="Sukunimi">Sukunimi</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
         <i class="material-icons prefix">phone</i>
-          <input type="text" length="15" id="numero" class="validate" name="numero">
+          <input type="text" length="15" id="numero" class="validate" name="numero" required>
           <label for="numero">Puhelinnumero (+358)</label>
+        </div>
+      </div>
+      
+       <div class="row">
+        <div class="input-field col s12">
+        <i class="material-icons prefix">phone</i>
+          <input type="text" length="30" id="numero" class="validate" name="osoite" required>
+          <label for="numero">Osoite</label>
         </div>
       </div>
       
       <div class="row">
         <div class="input-field col s12">
+        <i class="material-icons prefix">phone</i>
+          <input type="text" length="30" id="numero" class="validate" name="tmp" required>
+          <label for="numero">Toimipaikka</label>
+        </div>
+      </div>
+      
+       <div class="row">
+        <div class="input-field col s12">
+        <i class="material-icons prefix">phone</i>
+          <input type="text" length="30" id="numero" class="validate" name="postinro" required>
+          <label for="numero">Posti nro</label>
+        </div>
+      </div>
+      
+      
+      <div class="row">
+        <div class="input-field col s12">
          <i class="material-icons prefix">email</i>
-          <input id="email" type="email" length="20" class="validate" name="email">
+          <input id="email" type="email" length="20" class="validate" name="email" required>
           <label for="email">Email</label>
         </div>
       </div>
@@ -76,7 +103,7 @@
       <div class="row">
         <div class="input-field col s12">
         <i class="material-icons prefix">vpn_key</i>
-          <input id="Salasana"  length="15" type="password" class="validate" name="salasana">
+          <input id="Salasana"  length="15" type="password" class="validate" name="salasana" required>
           <label for="Salasana">Salasana</label>
         </div>
       </div>
