@@ -2,9 +2,12 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
-import fi.omapizzeria.admin.bean.Pizza;
+import fi.omapizzeria.admin.bean.*;
+
 
 public class TilausRiviDao {
 	
@@ -42,5 +45,62 @@ public void luoTilausRivi(List<Pizza> ostoslista, int tilausnumero){
 		yhteys.suljeYhteys(conn);
 	}
 }
+
+
+
+public List<Tilausrivi> haeRivit(int TilausNro){
+	
+	List<Tilausrivi>rivit=new ArrayList<Tilausrivi>();
+	ResultSet rs=null;
+	Connection conn=null;		
+	ConnectionFactory yhteys = new ConnectionFactory();
+	
+	conn = yhteys.getConnection();
+	
+	String sql="select * from TilausRivi where id=?;";
+	
+	try {
+		
+		PreparedStatement rowSearch= conn.prepareStatement(sql);
+		rowSearch.setInt(1, TilausNro);
+	
+		rs=rowSearch.executeQuery();
+		
+		
+		
+		while(rs.next()){
+			
+			
+			
+			int PizzaId=rs.getInt("pizzaid");	
+			
+			rivit.add(new Tilausrivi(PizzaId,TilausNro));
+		}
+		
+		
+		
+		}
+		
+		
+	 catch (Exception e) {
+		// TODO: handle exception
+	}
+	
+	
+	finally {
+		yhteys.suljeYhteys(conn);
+	}
+	
+	
+	
+	
+	
+	return rivit;
+	
+	
+}
+
+
+
 
 }

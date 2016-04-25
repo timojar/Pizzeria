@@ -90,7 +90,7 @@ finally{
 	suolahaku.setString(1, Kayttajanimi);
 	
 	ResultSet result= suolahaku.executeQuery();
-	System.out.println(salattavaTeksti);
+	
 	while(result.next()){
 		
 		

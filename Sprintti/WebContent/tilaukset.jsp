@@ -24,7 +24,18 @@
 <p><c:out value="${tilaus.tilausAsiakas.email}"></c:out></p>
 
 <p><c:out value="${tilaus.yhteishinta}"></c:out></p>
+
+
+<form action="Tilaukselle" method="get">
+
+<input type="hidden" value="${tilaus.numero }" name="numero">
+
+<input type="submit" value="Katso Tilausta">
+
 <br>
+<br>
+<br>
+</form>
 
 </c:forEach>
 

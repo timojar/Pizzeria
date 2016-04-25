@@ -16,14 +16,14 @@ public class Tilausrivi {
 	public int getPizzaId() {
 		return PizzaId;
 	}
-	public void setPizzaId(int pizzaId) {
-		PizzaId = pizzaId;
+	public void setPizzaId(int PizzaId) {
+		this.PizzaId = PizzaId;
 	}
 	public int getTilausNro() {
 		return TilausNro;
 	}
-	public void setTilausNro(int tilausNro) {
-		TilausNro = tilausNro;
+	public void setTilausNro(int TilausNro) {
+		this.TilausNro = TilausNro;
 	}
 	@Override
 	public String toString() {
