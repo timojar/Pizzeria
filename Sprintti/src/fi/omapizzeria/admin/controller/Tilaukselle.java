@@ -8,9 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.text.DecimalFormat;
+
 import dao.TilausDao;
 import dao.TilausRiviDao;
+import email.SahkoPosti;
 import fi.omapizzeria.admin.bean.Tilaus;
 import fi.omapizzeria.admin.bean.Tilausrivi;
 
@@ -95,12 +98,22 @@ public class Tilaukselle extends HttpServlet {
 		
 		String etunimi=t.getTilausAsiakas().getEtunimi();
 		String sukunimi=t.getTilausAsiakas().getSukunimi();
-		String viesti="Hei "+etunimi+" "+sukunimi+linebreak
+		String emailinSisalto="Hei "+etunimi+" "+sukunimi+linebreak
 				+ "Tilauksenne:"+linebreak
 				+item+linebreak+linebreak+"Ystävällisin Terveisin"+linebreak+"Castello & Fior";
+		String otsikko="Tilauksenne";
+		String lahettajanGoogleEmail= "88juslin@gmail.com";
+		String lahettajanGoogleSalasana="88juslin!";
+		String vastaanottajanEmail=t.getTilausAsiakas().getEmail();
+		
+		SahkoPosti sposti=new SahkoPosti();
+		
+		sposti.lahetaSahkoposti(lahettajanGoogleEmail, lahettajanGoogleSalasana, vastaanottajanEmail, otsikko, emailinSisalto);
+		
+		System.out.println(emailinSisalto);
 		
 		
-		System.out.println(viesti);
+		
 		
 	}
 
