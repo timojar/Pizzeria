@@ -10,13 +10,14 @@ public class Tilaus {
 	private String  toimitusajankohta;
 	private String toimitustapa;
 	private String maksutapa;
+	private String status;
 	private double yhteishinta;
 	private Asiakas tilausAsiakas;
 	
 	
 	
 	public Tilaus(int asiakasnumero, int numero, String tilausajankohta, String toimitusajankohta,
-			String toimitustapa, String maksutapa, double yhteishinta) {
+			String toimitustapa, String maksutapa, double yhteishinta,String  status) {
 		this.numero = numero;
 		this.tilausajankohta = tilausajankohta;
 		this.toimitusajankohta = toimitusajankohta;
@@ -24,6 +25,18 @@ public class Tilaus {
 		this.maksutapa = maksutapa;
 		this.yhteishinta=yhteishinta;
 		this.asiakasnumero=asiakasnumero;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Tilaus(Asiakas tilausAsiakas){
+		this.tilausAsiakas=tilausAsiakas;
 	}
 	
 	public Tilaus(int numero, String tilausajankohta, String toimitusajankohta,

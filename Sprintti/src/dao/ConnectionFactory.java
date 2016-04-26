@@ -15,7 +15,6 @@ public class ConnectionFactory {
 	
 	public static Connection getConnection() {
 		
-
 	
 		Connection conn = null;
 		String username = "a1500863";
@@ -62,7 +61,8 @@ return conn;
 
 		catch (Exception e) {
 
-			System.out.println("Tietokantayhteys ei jostain syyst‰ suostu menem‰‰n kiinni.");
+			System.out
+					.println("Tietokantayhteys ei jostain syyst‰ suostu menem‰‰n kiinni.");
 		}
 
 	}

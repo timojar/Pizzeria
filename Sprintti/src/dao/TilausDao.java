@@ -41,16 +41,16 @@ Timestamp tilausaika=null;
 	}
 	
 	try {
-		
-		String sqlInsert = "insert into Tilaus (tilausnumero, asiakasnumero, tilausajankohta,  toimitustapa, maksutapa, yhteishinta) values(?,?,?,?,?,?);";
+		String status="tilattu";
+		String sqlInsert = "insert into Tilaus (tilausnumero, asiakasnumero, tilausajankohta,  toimitustapa, maksutapa, yhteishinta, tilauksenstatus) values(?,?,?,?,?,?,?);";
 		PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert);
 		stmtInsert.setInt(1, tilausnumero);
 		stmtInsert.setInt(2, asiakasnumero);
 		stmtInsert.setTimestamp(3, tilausaika);
 		stmtInsert.setString(4, toimitustapa);
-		
 		stmtInsert.setString(5, maksutapa);
 		stmtInsert.setDouble(6, yhteishinta);
+		stmtInsert.setString(7, status);
 		stmtInsert.executeUpdate();
 		
 		
@@ -101,12 +101,13 @@ public List<Tilaus>	 haeTilaukset(){
 			String toimitusajankohta = ""+orders.getDate("toimitusajankohta");
 			String toimitustapa = orders.getString("toimitustapa");
 			String maksutapa = orders.getString("maksutapa");
+			String status = orders.getString("tilauksenstatus");
 			double yhteishinta = orders.getDouble("yhteishinta");	
 			int asiakasnumero=orders.getInt("asiakasnumero");
 			tilaukset.add(new Tilaus(asiakasnumero,numero, tilausajankohta,  toimitusajankohta,
-					toimitustapa,  maksutapa,yhteishinta));
+					toimitustapa,  maksutapa,yhteishinta, status));
 			
-			System.out.println("etunimibytv"+asiakasnumero);
+			
 			
 			
 			
@@ -136,5 +137,98 @@ public List<Tilaus>	 haeTilaukset(){
 	
 }
 	
+
+public void vahvistaTilaus(int tilausnro){
+	
+	
+	Connection conn;		
+	ConnectionFactory yhteys = new ConnectionFactory();	
+	String status="vahvistettu";
+			
+	conn = yhteys.getConnection();
+
+		try {
+			String vahvistus = "Update Tilaus set tilauksenstatus = ? where tilausnumero = ?";
+			
+			
+			PreparedStatement stmtvahvistus = conn.prepareStatement(vahvistus);
+			stmtvahvistus.setString(1, status);
+			stmtvahvistus.setInt(2, tilausnro);
+			stmtvahvistus.executeUpdate();
+
+			
+			
+		}
+		
+		catch (SQLException e) {
+		e.printStackTrace();
+			System.out.println("Vahvistus ei onnistunut");	
+			
+		}
+		
+		finally {
+			yhteys.suljeYhteys(conn);
+		}	
+	
+	
+	
+	
+}
+
+
+public Tilaus haeTilaus(int tilausnro){
+	
+	
+	    AsiakasDAO asiakashallinta=new AsiakasDAO();
+		
+		Tilaus tilaus=null;
+		Connection conn;		
+		ConnectionFactory yhteys = new ConnectionFactory();	
+		
+				
+		conn = yhteys.getConnection();
+
+			try {
+				
+				
+
+				String sql = "select * from Tilaus where tilausnumero = "+tilausnro;
+	 
+				Statement tilaushaku = conn.createStatement();
+
+				ResultSet tilaukset = tilaushaku.executeQuery(sql);	
+				int e=0;
+				
+				
+				while (tilaukset.next()) {
+					
+					int asiakasnumero = tilaukset.getInt("asiakasnumero");
+
+					Asiakas tilausAsiakas =asiakashallinta.tuoTilaaja(asiakasnumero);
+					
+					tilaus=new Tilaus(tilausAsiakas);
+					
+					
+				}
+				
+				
+			}
+			
+			catch (SQLException e) {
+			e.printStackTrace();
+				System.out.println("Tilaus haku ei onnistunut");	
+				
+			}
+			
+			finally {
+				yhteys.suljeYhteys(conn);
+			}	
+		
+	
+	return tilaus;
+	
+}
+
+
 
 }

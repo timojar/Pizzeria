@@ -1,18 +1,17 @@
+use tilaus;
 
-
-
-drop table PizzaTayte;
-
-drop table Tilausrivi;
+drop table TilausRivi;
 
 drop table Tilaus;
+drop table PizzaTayte;
+
+drop table KantaAsiakas;
 
 drop table Asiakas;
 
 drop table Pizza;
 
-drop table Tayte ;
+drop table Tayte;
 
-
-drop table Admin
+drop table Admin;
 

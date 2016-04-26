@@ -2,33 +2,58 @@ package fi.omapizzeria.admin.bean;
 
 public class Tilausrivi {
 
-	private int PizzaId;
-	private int TilausNro;
+	private int pizzaid;
+	private int tilausNro;
+	private int lkm;
+	private Pizza pizza;
+	double hinta;
 	
 	public Tilausrivi(){
 		
 	}
-	public Tilausrivi(int PizzaId, int TilausNro){
-		this.PizzaId = PizzaId;
-		this.TilausNro = TilausNro;
+	public Tilausrivi(int pizzaid, int TilausNro){
+		this.pizzaid = pizzaid;
+		this.tilausNro = TilausNro;
 		
 	}
-	public int getPizzaId() {
-		return PizzaId;
+	
+	public Tilausrivi(int pizzaid, int TilausNro, Pizza pizza, int lkm, double hinta){
+		this.pizzaid = pizzaid;
+		this.tilausNro = TilausNro;
+		this.pizza=pizza;
+		this.lkm=lkm;
+		this.hinta=hinta;
 	}
-	public void setPizzaId(int PizzaId) {
-		this.PizzaId = PizzaId;
+	
+	public double getHinta() {
+		return hinta;
+	}
+	public void setHinta(double hinta) {
+		this.hinta = hinta;
+	}
+	public int getLkm() {
+		return lkm;
+	}
+	public void setLkm(int lkm) {
+		this.lkm = lkm;
+	}
+	public Pizza getPizza() {
+		return pizza;
+	}
+	public void setPizza(Pizza pizza) {
+		this.pizza = pizza;
+	}
+	public int getPizzaid() {
+		return pizzaid;
+	}
+	public void setPizzaid(int pizzaid) {
+		this.pizzaid = pizzaid;
 	}
 	public int getTilausNro() {
-		return TilausNro;
+		return tilausNro;
 	}
-	public void setTilausNro(int TilausNro) {
-		this.TilausNro = TilausNro;
-	}
-	@Override
-	public String toString() {
-		return "Tilausrivi [PizzaId=" + PizzaId + ", TilausNro=" + TilausNro
-				+ "]";
+	public void setTilausNro(int tilausNro) {
+		this.tilausNro = tilausNro;
 	}
 	
 }

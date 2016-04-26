@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import fi.omapizzeria.admin.bean.*;
 
 public class TilausRiviDao {
 	
-	
+	 
 	
 public void luoTilausRivi(List<Pizza> ostoslista, int tilausnumero){
 	
@@ -24,20 +25,20 @@ public void luoTilausRivi(List<Pizza> ostoslista, int tilausnumero){
 	try {
 		
 		String sqlInsert = "insert into TilausRivi (tilausnumero, pizzaid, lkm, hinta) values(?,?,?,?);";
-		
+		System.out.println(ostoslista.size());
 		for(Pizza p : ostoslista){
 		PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert);
 		stmtInsert.setInt(1, tilausnumero);
 		stmtInsert.setInt(2, p.getId());
 		stmtInsert.setInt(3, p.getLkm());
-		stmtInsert.setDouble(4, p.getHinta());
+		stmtInsert.setDouble(4, p.getYhteishinta());
 		stmtInsert.executeUpdate();
 		
 		}
 		
 		
-	} catch (Exception e) {
-		// TODO: handle exception
+	} catch (SQLException e) {
+		e.printStackTrace();
 	}
 	
 	
@@ -48,8 +49,8 @@ public void luoTilausRivi(List<Pizza> ostoslista, int tilausnumero){
 
 
 
-public List<Tilausrivi> haeRivit(int TilausNro){
-	
+public List<Tilausrivi> haeRivit(int tilausNro){
+	PizzaDAO pizzahallinta=new PizzaDAO();
 	List<Tilausrivi>rivit=new ArrayList<Tilausrivi>();
 	ResultSet rs=null;
 	Connection conn=null;		
@@ -57,12 +58,12 @@ public List<Tilausrivi> haeRivit(int TilausNro){
 	
 	conn = yhteys.getConnection();
 	
-	String sql="select * from TilausRivi where id=?;";
+	String sql="select * from TilausRivi where tilausnumero=?;";
 	
 	try {
 		
 		PreparedStatement rowSearch= conn.prepareStatement(sql);
-		rowSearch.setInt(1, TilausNro);
+		rowSearch.setInt(1, tilausNro);
 	
 		rs=rowSearch.executeQuery();
 		
@@ -72,9 +73,12 @@ public List<Tilausrivi> haeRivit(int TilausNro){
 			
 			
 			
-			int PizzaId=rs.getInt("pizzaid");	
+			int pizzaId=rs.getInt("pizzaid");	
+			int lkm=rs.getInt("lkm");
+			double hinta=rs.getDouble("hinta");
 			
-			rivit.add(new Tilausrivi(PizzaId,TilausNro));
+			Pizza pizza=pizzahallinta.bringPizza(pizzaId);
+			rivit.add(new Tilausrivi(pizzaId,tilausNro, pizza, lkm, hinta));
 		}
 		
 		
@@ -82,8 +86,8 @@ public List<Tilausrivi> haeRivit(int TilausNro){
 		}
 		
 		
-	 catch (Exception e) {
-		// TODO: handle exception
+	 catch (SQLException e) {
+		e.printStackTrace();
 	}
 	
 	
