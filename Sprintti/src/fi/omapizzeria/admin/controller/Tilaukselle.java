@@ -100,7 +100,7 @@ public class Tilaukselle extends HttpServlet {
 		String sukunimi=t.getTilausAsiakas().getSukunimi();
 		String emailinSisalto="Hei "+etunimi+" "+sukunimi+linebreak
 				+ "Tilauksenne:"+linebreak
-				+item+linebreak+linebreak+"Ystävällisin Terveisin"+linebreak+"Castello & Fior";
+				+item+linebreak+linebreak+"toimitetaan 30-60 minuutin kuluttua."+linebreak+linebreak+"Ystävällisin Terveisin"+linebreak+"Castello & Fior";
 		String otsikko="Tilauksenne";
 		String lahettajanGoogleEmail= "88juslin@gmail.com";
 		String lahettajanGoogleSalasana="88juslin!";

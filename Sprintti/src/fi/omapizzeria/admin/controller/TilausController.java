@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import java.util.List;
 import dao.AsiakasDAO;
 import dao.TilausDao;
 import dao.TilausRiviDao;
+import fi.omapizzeria.admin.bean.Asiakas;
 import fi.omapizzeria.admin.bean.KantaAsiakas;
 import fi.omapizzeria.admin.bean.Pizza;
 
@@ -40,7 +42,46 @@ public class TilausController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		AsiakasDAO asiakashallinta=new AsiakasDAO();
 		
+		
+		
+		HttpSession sessio= request.getSession(false);	
+		List<Pizza> ostoslista=null;
+		Asiakas asiakas=null;
+		Cookie[] cookies = request.getCookies();
+		String logged=null;
+		
+		
+		
+		
+		if (cookies != null) {
+
+			for (int i = 0; i < cookies.length; i++) {
+
+				if ("kayttunnus".equals(cookies[i].getName())) {
+					 logged = "logged";
+					String Kayttajanimi = cookies[i].getValue();
+					request.setAttribute("logged", logged);
+					request.setAttribute("tunnus", Kayttajanimi);
+				}
+
+			
+			}}
+
+		try {
+			asiakas=(Asiakas)sessio.getAttribute("asiakas");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		int asiakasnumero=tuoAsiakasnumero(request, response);
+		
+		
+		if(logged!=null){
+		asiakas=asiakashallinta.tuoTilaaja(asiakasnumero);
+		request.setAttribute("asiakas", asiakas);	
+			
+		}
 		
 		
 		request.getRequestDispatcher("tilauslomake.jsp").forward(request, response);
@@ -134,4 +175,56 @@ for(Pizza p : ostoslista) {
 		
 	}
 
-}
+	
+	
+	
+	
+	
+	
+	private int tuoAsiakasnumero(HttpServletRequest request, HttpServletResponse response){
+		
+		Cookie[] cookies = request.getCookies();
+	int asiakasnumero=0;	
+	
+
+	String asiakasnumerostr=null;
+	
+	for (int i = 0; i < cookies.length; i++) {
+
+		if ("id".equals(cookies[i].getName())) {
+			
+			 asiakasnumerostr = cookies[i].getValue();
+							
+			
+		}
+
+	
+	}
+	
+	
+	HttpSession sessio= request.getSession(false);
+
+	asiakasnumero=(int)sessio.getAttribute("asiakasnumero");
+	
+	
+	if(asiakasnumero==0){
+		
+	asiakasnumero=Integer.parseInt(asiakasnumerostr)	;
+		
+	}
+	
+	return asiakasnumero;
+	
+	}
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+

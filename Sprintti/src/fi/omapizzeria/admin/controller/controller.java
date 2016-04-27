@@ -255,6 +255,7 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 			
 			sessio = request.getSession(true);
 			String logged = "logged";
+			sessio.setAttribute("asiakasnumero", k.getId());
 			sessio.setAttribute("etunimi", k.getEtunimi());
 			sessio.setAttribute("sukunimi", k.getSukunimi());
 			sessio.setAttribute("asiakas", k);
