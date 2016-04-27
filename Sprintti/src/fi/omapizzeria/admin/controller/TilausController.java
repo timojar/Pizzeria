@@ -50,7 +50,7 @@ public class TilausController extends HttpServlet {
 		List<Pizza> ostoslista=null;
 		Asiakas asiakas=null;
 		Cookie[] cookies = request.getCookies();
-		String logged=null;
+		String logged=(String)sessio.getAttribute("logged");
 		
 		
 		
@@ -78,9 +78,15 @@ public class TilausController extends HttpServlet {
 		
 		
 		if(logged!=null){
-		asiakas=asiakashallinta.tuoTilaaja(asiakasnumero);
-		request.setAttribute("asiakas", asiakas);	
 			
+		asiakas=asiakashallinta.tuoTilaaja(asiakasnumero);
+		request.setAttribute("osoite", asiakas.getOsoite());
+		request.setAttribute("numero", asiakas.getNumero());	
+		request.setAttribute("postinro", asiakas.getPostinro());	
+		request.setAttribute("tmp", asiakas.getTmp());	
+		request.setAttribute("email", asiakas.getEmail());	
+	
+		System.out.println("Kirjautuminen"+asiakas.getOsoite());
 		}
 		
 		

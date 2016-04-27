@@ -99,7 +99,7 @@
 <p>Yhteensä <span class="hinta"><fmt:formatNumber type="currency"  currencySymbol=""  value="${total}" /> EUR</span></p>	
 <br>
 <p> <a href="removeItem?tyhjennys=empty">Tyhjennä ostoslista</a> </p>		
-	<a href="tilauslomake.jsp" button class="btn waves-effect teal lighten-1"  value="" type="submit" name="">
+	<a href="TilausController" button class="btn waves-effect teal lighten-1"  value="" type="submit" name="">
 				Siirry tilaukseen <i class="material-icons right">done_all</i></a>
 			</button>
 </div>
