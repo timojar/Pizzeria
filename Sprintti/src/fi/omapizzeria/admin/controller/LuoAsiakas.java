@@ -46,20 +46,14 @@ public class LuoAsiakas extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int postinro=0;
+		
 		String etunimi=request.getParameter("enimi");
 		String sukunimi=request.getParameter("snimi");
 		String email=request.getParameter("email");
 		String toimosoite=request.getParameter("osoite");
 		String postitmp=request.getParameter("tmp");
-		String postinrostr=request.getParameter("postinro");
-		try {
-			 postinro=Integer.parseInt(postinrostr);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
+		String postinro=request.getParameter("postinro");
+	
 		
 		String salattavaTeksti=request.getParameter("salasana");
 		String puhelinstr=request.getParameter("numero");

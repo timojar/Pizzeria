@@ -47,19 +47,19 @@
       <div class="row">
         <div class="input-field col s6">
          <i class="material-icons prefix">perm_identity</i>
-          <input id="Etunimi" length="15" type="text" class="validate" name="etunimi" value="${etunimi}">
+          <input id="Etunimi" length="15" type="text" class="validate" name="etunimi" value="${etunimi}" required>
           <label for="Sukunimi">Etunimi</label>
         </div>
         <div class="input-field col s6">
          <i class="material-icons prefix">perm_identity</i>
-          <input id="Sukunimi" length="15" type="text" class="validate" name="sukunimi" value="${sukunimi}">
+          <input id="Sukunimi" length="15" type="text" class="validate" name="sukunimi" value="${sukunimi}" required>
           <label for="Sukunimi">Sukunimi</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
         <i class="material-icons prefix">phone</i>
-          <input type="text" length="15" id="numero" class="validate" name="numero" value="${numero}">
+          <input type="text" length="15" id="numero" class="validate" name="numero" value="${numero}" required>
           <label for="numero">Puhelinnumero (+358)</label>
         </div>
       </div>
@@ -68,7 +68,7 @@
       <div class="row">
         <div class="input-field col s12">
          <i class="material-icons prefix">location_on</i>
-          <input id="Toimitusosoite" type="text" length="20" class="validate" name="toimosoite" value="${osoite}">
+          <input id="Toimitusosoite" type="text" length="20" class="validate" name="toimosoite" value="${osoite}" required>
           <label for="Toimitusosoite">Toimitusosoite</label>
         </div>
       </div>
@@ -76,12 +76,12 @@
       <div class="row">
         <div class="input-field col s6">
          <i class="material-icons prefix">location_on</i>
-          <input id="postinro" length="15" type="text" class="validate" name="postinro" value="${postinro}">
+          <input id="postinro" length="5" type="text" class="validate" name="postinro" value="${postinro}" required>
           <label for="postinro">Postinumero</label>
         </div>
         <div class="input-field col s6">
          <i class="material-icons prefix">location_on</i>
-          <input id="postitmp" length="15" type="text" class="validate" name="postitmp" value="${tmp}">
+          <input id="postitmp" length="15" type="text" class="validate" name="postitmp" value="${tmp}" required>
           <label for="postitmp">Postitoimipaikka</label>
         </div>
       </div>
@@ -89,7 +89,7 @@
       <div class="row">
         <div class="input-field col s12">
          <i class="material-icons prefix">email</i>
-          <input id="email" type="email" length="20" class="validate" name="email" value="${email}">
+          <input id="email" type="email" length="20" class="validate" name="email" value="${email}" required>
           <label for="email">Email</label>
         </div>
       </div>

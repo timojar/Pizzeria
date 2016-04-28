@@ -63,121 +63,40 @@
 	</div>
 		
 		
-	<div id="menusisalto">
+	<div id="kuittaus">
 
-<h1>Menu</h1>
 
 <br>
 <br>
 <br>
+<h3>Tilauksesi</h3>
 <br>
-<c:if test="${not empty param.shoppingcart}"><p>Ostoskorisi on tyhjä!!!</p></c:if>
-	<div id="ostoskori">
-	<h5>Ostoslista</h5>
-<c:set  var="total" value="${ 0}"/>	
-<c:set var="index" value="${ -1}"/>
-<c:forEach items="${ostoslista}" var="ostos">
-<c:set  var="total" value="${ total+ostos.yhteishinta}"/>	
+
 <p>
 
-<c:set var="index" value="${ index+1}"/>
-<c:out value="${ostos.lkm }"> </c:out> kpl <c:out value="${ostos.nimi }">  </c:out><span class="hinta"> <fmt:formatNumber type="currency"  currencySymbol=""  value="${ostos.yhteishinta}" />
- EUR</span>
 
-				</p>
-				
-<form action="removeItem" method="post">
-<input type="hidden" name="remove" value="${index}">
-<input type="submit" value="poista" >
+
+Tilaus on tullut järjestelmäämme ja 
+odottaa meiltä vahvistusta,  jos ette saa vahvistusta 10-15 min aikana sähköpostiinne,
+ ottakaa yhteyttä asiakaspalveluun 
 
 
 
-</form>
 
-</c:forEach>
 
-<p>Yhteensä <span class="hinta"><fmt:formatNumber type="currency"  currencySymbol=""  value="${total}" /> EUR</span></p>	
+
+</p>
+
+
+<p>
+
+
+</p>
+puh:1234 56774
 <br>
-<p> <a href="removeItem?tyhjennys=empty">Tyhjennä ostoslista</a> </p>		
-	<a href="TilausController" button class="btn waves-effect teal lighten-1"  value="" type="submit" name="">
-				Siirry tilaukseen <i class="material-icons right">done_all</i></a>
-			</button>
-</div>
-	
-	 <div class="row">
-        <div class="col s12 m6">
-          <div class="card green lighten-3">
-            <div class="card-content black-text">
-	
-	<div id="vasensarake">
-	
-	<c:forEach items="${menu}" var="pizzat">
+<br>
 
 
-<table id="pizzat">
-				
-      
-        <tbody>
-              <tr>
-            <td id="nro"><c:out value="${pizzat.pizzaNo }"></c:out></td>
-            <td id="pizzanimi"><c:out value="${pizzat.nimi }"></c:out></td>
-            <td><fmt:formatNumber type="currency"  currencySymbol=""  value="${pizzat.hinta}" /> EUR</td>
-          </tr>
-        </tbody>
-      </table>
-      
-      
-      	<form action="shoppingcart" method="post" id="add" >
-					<input type="hidden" name="pizzaid" value="${pizzat.id }"> <input
-						type="submit"  value="Lisää ostoskoriin" id="add">
-
-<div id="palkki">
-<select name="lkm" class="browser-default" >
-<option value="1">1 kpl</option>
-<option value="2">2 kpl</option>
-<option value="3">3 kpl</option>
-<option value="4">4 kpl</option>
-<option value="5">5 kpl</option>
-<option value="6">6 kpl</option>
-<option value="7">7 kpl</option>
-<option value="8">8 kpl</option>
-<option value="9">9 kpl</option>
-</select>
-
-
-
-
-  
-</div>
-				</form>
-				
-            <p>
-				<c:out value="${pizzat.kuvaus }"></c:out>
-				</p>
-				
-			
-	
-<br>	
-<br>	
-<br>		
-</c:forEach>
-
-
-
-		
-</div>
-
-
-
-
-
-
-	
-	
-	
-	</div>	
-	</div>
-          </div>
         </div>	
 
 

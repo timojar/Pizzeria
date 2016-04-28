@@ -46,7 +46,7 @@ public Asiakas tuoTilaaja(int asiakasnumero){
 			String email=rs.getString("Email");
 			String osoite=rs.getString("osoite");
 			String tmp=rs.getString("tmp");
-			int postinro=rs.getInt("postinro");
+			String postinro=rs.getString("postinro");
 			asiakas=new Asiakas(id, etunimi, sukunimi,  numero,  email, osoite,  tmp, postinro );
 			System.out.println("Kirjautuminen"+osoite);
 		}
@@ -275,7 +275,7 @@ public boolean vahvistaTunnus(String Salasana, String Kayttajanimi) {
 	
 	
 	public KantaAsiakas  luoAsiakas(String etunimi, String sukunimi,  String email, String salattavaTeksti, 
-			int numero, String toimosoite, String postitmp,int postinro) {
+			int numero, String toimosoite, String postitmp,String postinro) {
 		
 		KantaAsiakas asiakas=null;
 		ConnectionFactory yhteys = new ConnectionFactory();
@@ -376,7 +376,7 @@ public boolean vahvistaTunnus(String Salasana, String Kayttajanimi) {
 	
 	
 	private void insertAsiakas(String email,  String etunimi, String sukunimi
-			, int numero, int id,String toimosoite,String postitmp,int postinro){
+			, int numero, int id,String toimosoite,String postitmp,String postinro){
 		
 		ConnectionFactory yhteys = new ConnectionFactory();
 
@@ -396,7 +396,7 @@ public boolean vahvistaTunnus(String Salasana, String Kayttajanimi) {
 			stmInsert.setInt(5, id);
 			stmInsert.setString(6, toimosoite);
 			stmInsert.setString(7, postitmp);
-			stmInsert.setInt(8, postinro);
+			stmInsert.setString(8, postinro);
 			stmInsert.executeUpdate();
 			
 			

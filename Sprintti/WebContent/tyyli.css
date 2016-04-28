@@ -146,3 +146,7 @@ h4 {font-family: 'Pacifico', cursive;
 
 #tilaukset {margin-left: 200px}
 
+#kuittaus {text-align: center;
+			width:500px;
+			margin-left: 300px}
+.atribuutit {font-weight: bolder}

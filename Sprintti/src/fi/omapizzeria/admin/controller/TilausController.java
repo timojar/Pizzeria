@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,34 +28,31 @@ import fi.omapizzeria.admin.bean.Pizza;
 @WebServlet("/TilausController")
 public class TilausController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public TilausController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public TilausController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		AsiakasDAO asiakashallinta=new AsiakasDAO();
-		
-		
-		
-		HttpSession sessio= request.getSession(false);	
-		List<Pizza> ostoslista=null;
-		Asiakas asiakas=null;
+
+		AsiakasDAO asiakashallinta = new AsiakasDAO();
+
+		HttpSession sessio = request.getSession(false);
+		List<Pizza> ostoslista = null;
+		Asiakas asiakas = null;
 		Cookie[] cookies = request.getCookies();
-		String logged=(String)sessio.getAttribute("logged");
-		
-		
-		
-		
+		String logged = (String) sessio.getAttribute("logged");
+
 		if (cookies != null) {
 
 			for (int i = 0; i < cookies.length; i++) {
@@ -65,160 +63,157 @@ public class TilausController extends HttpServlet {
 					request.setAttribute("logged", logged);
 					request.setAttribute("etunimi", etunimi);
 				}
-				
-				
+
 				if ("sukunimi".equals(cookies[i].getName())) {
-					
+
 					String sukunimi = cookies[i].getValue();
 					request.setAttribute("sukunimi", sukunimi);
 				}
-				
-				
-				
-				
-				
-				
-			
-			}}
+
+			}
+		}
 
 		try {
-			asiakas=(Asiakas)sessio.getAttribute("asiakas");
+			asiakas = (Asiakas) sessio.getAttribute("asiakas");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		int asiakasnumero=tuoAsiakasnumero(request, response);
+		int asiakasnumero = tuoAsiakasnumero(request, response);
 		request.setAttribute("asiakasnumero", asiakasnumero);
-		
-		if(logged!=null){
-			
-		asiakas=asiakashallinta.tuoTilaaja(asiakasnumero);
-		request.setAttribute("osoite", asiakas.getOsoite());
-		request.setAttribute("numero", asiakas.getNumero());	
-		request.setAttribute("postinro", asiakas.getPostinro());	
-		request.setAttribute("tmp", asiakas.getTmp());	
-		request.setAttribute("email", asiakas.getEmail());	
-	
-		
+
+		if (logged != null) {
+
+			asiakas = asiakashallinta.tuoTilaaja(asiakasnumero);
+			request.setAttribute("osoite", asiakas.getOsoite());
+			request.setAttribute("numero", asiakas.getNumero());
+			request.setAttribute("postinro", asiakas.getPostinro());
+			request.setAttribute("tmp", asiakas.getTmp());
+			request.setAttribute("email", asiakas.getEmail());
+
 		}
-		
-		
-		request.getRequestDispatcher("tilauslomake.jsp").forward(request, response);
-		
-		
+
+		request.getRequestDispatcher("tilauslomake.jsp").forward(request,
+				response);
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		/*
-		 * KantaAsiakas-luokkaa käytetään tässä, koska sillä ja Asiakas-luokalla on yhteinen id.
-		 * Asiakkaan luodessa luoAsiakas()-metodi palauttaa KantaAsiakas-olion, josta saadan Asiakas-id.
+		 * KantaAsiakas-luokkaa käytetään tässä, koska sillä ja Asiakas-luokalla
+		 * on yhteinen id. Asiakkaan luodessa luoAsiakas()-metodi palauttaa
+		 * KantaAsiakas-olion, josta saadan Asiakas-id.
 		 */
-		KantaAsiakas asiakas=null;
-		
-		boolean eiNumero=false;
-		
-		List<Pizza> ostoslista=null;
-		double yhteishinta=0;
-		
-		
-		HttpSession muistiostoslistasta= request.getSession(false);
-		
-		try { ostoslista=(List<Pizza>)muistiostoslistasta.getAttribute("ostoslista");
-		
-for(Pizza p : ostoslista) {
-		    
-			yhteishinta=yhteishinta+p.getYhteishinta();
-		}
-		
+		KantaAsiakas asiakas = null;
+
+		boolean eiNumero = false;
+
+		List<Pizza> ostoslista = null;
+		double yhteishinta = 0;
+
+		HttpSession muistiostoslistasta = request.getSession(false);
+
+		try {
+			ostoslista = (List<Pizza>) muistiostoslistasta
+					.getAttribute("ostoslista");
+
+			for (Pizza p : ostoslista) {
+
+				yhteishinta = yhteishinta + p.getYhteishinta();
+			}
+
 		} catch (Exception e) {
 			// TODO: handle exception
-			
-			
-			
-			
+
 		}
-		
-		
-		AsiakasDAO a=new AsiakasDAO();
-		TilausRiviDao rivikasittely=new TilausRiviDao();
-		TilausDao tilauskasittely=new TilausDao();
-		Date date=new Date();
-		SimpleDateFormat Totimestamp=new SimpleDateFormat("yyy.MM.dd hh:mm");
-		String tilausajankohta=null;
-		
-		
+
+		AsiakasDAO a = new AsiakasDAO();
+		TilausRiviDao rivikasittely = new TilausRiviDao();
+		TilausDao tilauskasittely = new TilausDao();
+		Date date = new Date();
+		SimpleDateFormat Totimestamp = new SimpleDateFormat("yyy.MM.dd hh:mm");
+		String tilausajankohta = null;
+
 		try {
-			tilausajankohta=Totimestamp.format(date);
-			
+			tilausajankohta = Totimestamp.format(date);
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
-		String salattavaTeksti=null;
+		String salattavaTeksti = null;
 		String etunimi = request.getParameter("etunimi");
 		String sukunimi = request.getParameter("sukunimi");
 		String numerostr = request.getParameter("numero");
-		int numero=0;
-		
-		try {numero=Integer.parseInt(numerostr);
-			
+		int numero = 0;
+
+		try {
+			numero = Integer.parseInt(numerostr);
+
 		} catch (Exception e) {
-			eiNumero=true;
+			eiNumero = true;
 		}
 		String toimosoite = request.getParameter("toimosoite");
-		String postinrostr = request.getParameter("postinro");
-		int postinro=0;
-		try {postinro=Integer.parseInt(postinrostr);
-		
-		} catch (Exception e) {
-			eiNumero=true;
-		}
-		
+		String postinro = request.getParameter("postinro");
+
 		String postitmp = request.getParameter("postitmp");
 		String email = request.getParameter("email");
 		String toimitustapa = request.getParameter("toimtapa");
 		String maksutapa = request.getParameter("maksutapa");
-		String asiakasstr=request.getParameter("asiakasnro");
-		int asiakasnumero=0;
+		String asiakasstr = request.getParameter("asiakasnro");
+		int asiakasnumero = 0;
 		try {
-			asiakasnumero=Integer.parseInt(asiakasstr)	;
+			asiakasnumero = Integer.parseInt(asiakasstr);
 		} catch (Exception e) {
-		
+
 			// TODO: handle exception
 		}
-		if(eiNumero==false && ostoslista!=null){
-		System.out.println("Asikas"+asiakasnumero);
-		if(asiakasstr.equals("")){
-		asiakas=a.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti, numero ,toimosoite,postitmp, postinro);
-		
-		asiakasnumero=asiakas.getId();}
-		
-		int tilausnumero=tilauskasittely.luoTilaus(asiakasnumero, tilausajankohta, toimitustapa, maksutapa, yhteishinta);
-		
-		rivikasittely.luoTilausRivi(ostoslista, tilausnumero);}
-		
-		
-		
-		if (eiNumero==true) {
+		if (eiNumero == false && ostoslista.size()>0) {
+			System.out.println("Asikas" + asiakasnumero);
+			if (asiakasstr.equals("")) {
+				asiakas = a
+						.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti,
+								numero, toimosoite, postitmp, postinro);
+
+				asiakasnumero = asiakas.getId();
+			}
+
+			int tilausnumero = tilauskasittely.luoTilaus(asiakasnumero,
+					tilausajankohta, toimitustapa, maksutapa, yhteishinta);
+
+			rivikasittely.luoTilausRivi(ostoslista, tilausnumero);
 			
-			response.sendRedirect("/Sprintti/TilausController?number=true");	
+			ostoslista=new ArrayList<Pizza>();
 			
-		}
-		
-		
-		else	if(ostoslista==null){
-			
-			response.sendRedirect("/Sprintti/menuController?shoppingcart=true");	
+			muistiostoslistasta.setAttribute("ostoslista", ostoslista);
+			request.getRequestDispatcher("kuittaus.jsp").forward(request,
+					response);
+
 			
 		}
+
 		
 		
 		
 		
+		if (eiNumero == true) {
+
+			response.sendRedirect("/Sprintti/TilausController?number=true");
+
+		}
+
+		else if (ostoslista == null) {
+
+			response.sendRedirect("/Sprintti/menuController?shoppingcart=true");
+
+		}
+
 	}
 
 	
@@ -227,58 +222,46 @@ for(Pizza p : ostoslista) {
 	
 	
 	
-	private int tuoAsiakasnumero(HttpServletRequest request, HttpServletResponse response){
-		
+	
+	
+	
+	
+	private int tuoAsiakasnumero(HttpServletRequest request,
+			HttpServletResponse response) {
+
 		Cookie[] cookies = request.getCookies();
-	int asiakasnumero=0;	
-	
+		int asiakasnumero = 0;
 
-	String asiakasnumerostr=null;
-	
-	for (int i = 0; i < cookies.length; i++) {
+		String asiakasnumerostr = null;
 
-		if ("id".equals(cookies[i].getName())) {
-			
-			 asiakasnumerostr = cookies[i].getValue();
-							
-			
+		for (int i = 0; i < cookies.length; i++) {
+
+			if ("id".equals(cookies[i].getName())) {
+
+				asiakasnumerostr = cookies[i].getValue();
+
+			}
+
 		}
 
-	
-	}
-	
-	
-	HttpSession sessio= request.getSession(false);
-try {
-	asiakasnumero=(int)sessio.getAttribute("asiakasnumero");
-} catch (Exception e) {
-	// TODO: handle exception
-}
-	
-	
-	
-	if(asiakasnumero==0){
+		HttpSession sessio = request.getSession(false);
 		try {
-			asiakasnumero=Integer.parseInt(asiakasnumerostr);
+			asiakasnumero = (int) sessio.getAttribute("asiakasnumero");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		
-	}
-	
-	return asiakasnumero;
-	
-	}
-		
-		
-		
-	}
-	
-	
-	
-	
-	
-	
-	
 
+		if (asiakasnumero == 0) {
+			try {
+				asiakasnumero = Integer.parseInt(asiakasnumerostr);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		}
+
+		return asiakasnumero;
+
+	}
+
+}

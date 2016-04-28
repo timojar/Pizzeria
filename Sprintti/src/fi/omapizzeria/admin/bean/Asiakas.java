@@ -10,10 +10,10 @@ public class Asiakas {
 	private String sukunimi;
 	private String osoite;
 	private String tmp;
-	private int postinro;
+	private String postinro;
 
 	public Asiakas(int id,String etunimi, String sukunimi, int numero,  String email, String osoite, String tmp,
-			int postinro) {
+			String postinro) {
 		this.id=id;
 		this.numero = numero;
 		this.email = email;
@@ -102,13 +102,13 @@ public class Asiakas {
 
 
 
-	public int getPostinro() {
+	public String getPostinro() {
 		return postinro;
 	}
 
 
 
-	public void setPostinro(int postinro) {
+	public void setPostinro(String postinro) {
 		this.postinro = postinro;
 	}
 

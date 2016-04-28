@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -62,32 +63,33 @@
 	<c:forEach items="${tilaukset}" var="tilaus">
 
 		<p>
-			<c:out value="${tilaus.numero }"></c:out>
+		<span class="atribuutit">	Tilaus nro: </span><c:out value="${tilaus.numero }"></c:out>
 		</p>
 
 		<p>
-			<c:out value="${tilaus.tilausAsiakas.osoite}"></c:out>
+		<span class="atribuutit">	Osoite: </span><c:out value="${tilaus.tilausAsiakas.osoite}"></c:out>
 		</p>
 		<p>
-			<c:out value="${tilaus.tilausAsiakas.postinro}"></c:out>
+		<span class="atribuutit">	Postinumero: </span><c:out value="${tilaus.tilausAsiakas.postinro}"></c:out>
 		</p>
 		<p>
-			<c:out value="${tilaus.tilausAsiakas.tmp}"></c:out>
+		<span class="atribuutit">	Toimipaikka: </span><c:out value="${tilaus.tilausAsiakas.tmp}"></c:out>
 		</p>
 		<p>
-			<c:out value="${tilaus.tilausAsiakas.etunimi}"></c:out>
-		</p>
-
-		<p>
-			<c:out value="${tilaus.tilausAsiakas.sukunimi}"></c:out>
+		<span class="atribuutit">	Etunimi: </span><c:out value="${tilaus.tilausAsiakas.etunimi}"></c:out>
 		</p>
 
 		<p>
-			<c:out value="${tilaus.tilausAsiakas.email}"></c:out>
+		<span class="atribuutit">	Sukunimi </span><c:out value="${tilaus.tilausAsiakas.sukunimi}"></c:out>
 		</p>
 
 		<p>
-			<c:out value="${tilaus.yhteishinta}"></c:out>
+		<span class="atribuutit">	Email:</span> <c:out value="${tilaus.tilausAsiakas.email}"></c:out>
+		</p>
+
+		<p>
+			
+		<span class="atribuutit">	Yhteishinta: </span><fmt:formatNumber type="currency"  currencySymbol=""  value="${tilaus.yhteishinta}" /> EUR
 		</p>
 
 
