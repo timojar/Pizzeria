@@ -36,12 +36,17 @@ public class SelaaTilauksia extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		String tilauksenstatus=request.getParameter("status");
+		
+		if(tilauksenstatus==null){
+			tilauksenstatus="tilattu";
+		}
 		
 		AsiakasDAO a=new AsiakasDAO();
 		Asiakas tilausAsiakas =null;
 		TilausDao tilauskasittely=new TilausDao();
-		Tilaus tilaus=null;
-		List<Tilaus>tilaukset=tilauskasittely.haeTilaukset();
+		
+		List<Tilaus>tilaukset=tilauskasittely.lajitteletilaukse(tilauksenstatus);
 		List<Tilaus>tilaustiedot=new ArrayList<Tilaus>();
 		int asiakasnumero=0;
 		 
@@ -51,7 +56,7 @@ for(Tilaus t : tilaukset) {
 	
 	
 	tilausAsiakas=a.tuoTilaaja(asiakasnumero);
-	System.out.println(tilausAsiakas.getEmail());
+	
 	t.setTilausAsiakas(tilausAsiakas);
 			
 	tilaustiedot.add(t);

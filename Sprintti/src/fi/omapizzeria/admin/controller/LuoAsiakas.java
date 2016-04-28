@@ -50,8 +50,8 @@ public class LuoAsiakas extends HttpServlet {
 		String etunimi=request.getParameter("enimi");
 		String sukunimi=request.getParameter("snimi");
 		String email=request.getParameter("email");
-		String toimosoite=request.getParameter("numero");
-		String postitmp=request.getParameter("numero");
+		String toimosoite=request.getParameter("osoite");
+		String postitmp=request.getParameter("tmp");
 		String postinrostr=request.getParameter("postinro");
 		try {
 			 postinro=Integer.parseInt(postinrostr);
@@ -82,6 +82,7 @@ public class LuoAsiakas extends HttpServlet {
 		
 		
 		HttpSession sessio = request.getSession(true);
+		sessio.setAttribute("asiakasnumero",kasiakas.getId());
 		String logged="logged";
 		sessio.setAttribute("logged", logged);
 		sessio.setAttribute("etunimi", kasiakas.getEtunimi());

@@ -48,7 +48,7 @@ public Asiakas tuoTilaaja(int asiakasnumero){
 			String tmp=rs.getString("tmp");
 			int postinro=rs.getInt("postinro");
 			asiakas=new Asiakas(id, etunimi, sukunimi,  numero,  email, osoite,  tmp, postinro );
-			
+			System.out.println("Kirjautuminen"+osoite);
 		}
 	
 		

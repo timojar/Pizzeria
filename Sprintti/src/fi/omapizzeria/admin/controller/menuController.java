@@ -50,12 +50,22 @@ public class menuController extends HttpServlet {
 
 		for (int i = 0; i < cookies.length; i++) {
 
-			if ("kayttunnus".equals(cookies[i].getName())) {
+			if ("etunimi".equals(cookies[i].getName())) {
 				String logged = "logged";
-				String Kayttajanimi = cookies[i].getValue();
+				String etunimi = cookies[i].getValue();
 				request.setAttribute("logged", logged);
-				request.setAttribute("tunnus", Kayttajanimi);
+				request.setAttribute("etunimi", etunimi);
 			}
+			
+			
+			if ("sukunimi".equals(cookies[i].getName())) {
+				
+				String sukunimi = cookies[i].getValue();
+				request.setAttribute("sukunimi", sukunimi);
+			}
+			
+			
+			
 
 		
 		}}

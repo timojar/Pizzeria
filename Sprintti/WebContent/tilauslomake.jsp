@@ -41,7 +41,7 @@
 	
 		<h4>Tilauslomake</h4><br><br>
 		<p><b>Täytä allaolevat tiedot ja paina "Tilaa".</b><br><br>
-		
+		<c:if test="${not empty param.number}"><p>Syöttö ei ollut numeraalinen</p></c:if>
 		 <div class="row">
     <form class="col s5" action="TilausController" method="post">
       <div class="row">
@@ -115,6 +115,8 @@
         <input name="maksutapa" class="with-gap" type="radio" id="test4" value="Verkkomaksu"/>
         <label for="test4">Verkkomaksu</label>
     </p><br>
+    
+    <input type="hidden" value="${asiakasnumero}" name="asiakasnro">
     
 			<button class="btn waves-effect waves-light" type="submit"
 				>

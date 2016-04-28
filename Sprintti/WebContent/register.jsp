@@ -70,7 +70,7 @@
        <div class="row">
         <div class="input-field col s12">
         <i class="material-icons prefix">phone</i>
-          <input type="text" length="30" id="numero" class="validate" name="osoite" required>
+          <input type="text" length="30" id="osoite" class="validate" name="osoite" required>
           <label for="numero">Osoite</label>
         </div>
       </div>

@@ -306,7 +306,7 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 		Salasana = admintiedot.salaaTeksti(salattavaTeksti,
 				Kayttajanimi);
 		
-		System.out.println(Salasana);
+		
 		vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);	
 		
 		

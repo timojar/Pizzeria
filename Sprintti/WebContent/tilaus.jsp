@@ -62,7 +62,7 @@
 		
 
 	</div>
-		
+	<div id="tilaukset">	
 		
 	<h3>Tilaus nro <c:out value="${tilausid}"></c:out></h3>	
 
@@ -107,7 +107,7 @@
             <br>
             <br>
 
-
+</div>
 <form  method="post" action="logout" id="logout">
 		
 			<input type="hidden" name="logout">

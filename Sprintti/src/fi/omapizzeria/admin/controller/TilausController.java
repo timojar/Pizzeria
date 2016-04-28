@@ -59,13 +59,25 @@ public class TilausController extends HttpServlet {
 
 			for (int i = 0; i < cookies.length; i++) {
 
-				if ("kayttunnus".equals(cookies[i].getName())) {
-					 logged = "logged";
-					String Kayttajanimi = cookies[i].getValue();
+				if ("etunimi".equals(cookies[i].getName())) {
+					logged = "logged";
+					String etunimi = cookies[i].getValue();
 					request.setAttribute("logged", logged);
-					request.setAttribute("tunnus", Kayttajanimi);
+					request.setAttribute("etunimi", etunimi);
 				}
-
+				
+				
+				if ("sukunimi".equals(cookies[i].getName())) {
+					
+					String sukunimi = cookies[i].getValue();
+					request.setAttribute("sukunimi", sukunimi);
+				}
+				
+				
+				
+				
+				
+				
 			
 			}}
 
@@ -75,7 +87,7 @@ public class TilausController extends HttpServlet {
 			// TODO: handle exception
 		}
 		int asiakasnumero=tuoAsiakasnumero(request, response);
-		
+		request.setAttribute("asiakasnumero", asiakasnumero);
 		
 		if(logged!=null){
 			
@@ -86,7 +98,7 @@ public class TilausController extends HttpServlet {
 		request.setAttribute("tmp", asiakas.getTmp());	
 		request.setAttribute("email", asiakas.getEmail());	
 	
-		System.out.println("Kirjautuminen"+asiakas.getOsoite());
+		
 		}
 		
 		
@@ -107,7 +119,7 @@ public class TilausController extends HttpServlet {
 		 */
 		KantaAsiakas asiakas=null;
 		
-		
+		boolean eiNumero=false;
 		
 		List<Pizza> ostoslista=null;
 		double yhteishinta=0;
@@ -116,7 +128,7 @@ public class TilausController extends HttpServlet {
 		HttpSession muistiostoslistasta= request.getSession(false);
 		
 		try { ostoslista=(List<Pizza>)muistiostoslistasta.getAttribute("ostoslista");
-		System.out.println("vfc"+ostoslista.size());
+		
 for(Pizza p : ostoslista) {
 		    
 			yhteishinta=yhteishinta+p.getYhteishinta();
@@ -155,7 +167,7 @@ for(Pizza p : ostoslista) {
 		try {numero=Integer.parseInt(numerostr);
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			eiNumero=true;
 		}
 		String toimosoite = request.getParameter("toimosoite");
 		String postinrostr = request.getParameter("postinro");
@@ -163,21 +175,49 @@ for(Pizza p : ostoslista) {
 		try {postinro=Integer.parseInt(postinrostr);
 		
 		} catch (Exception e) {
-			// TODO: handle exception
+			eiNumero=true;
 		}
 		
 		String postitmp = request.getParameter("postitmp");
 		String email = request.getParameter("email");
 		String toimitustapa = request.getParameter("toimtapa");
 		String maksutapa = request.getParameter("maksutapa");
+		String asiakasstr=request.getParameter("asiakasnro");
+		int asiakasnumero=0;
+		try {
+			asiakasnumero=Integer.parseInt(asiakasstr)	;
+		} catch (Exception e) {
 		
+			// TODO: handle exception
+		}
+		if(eiNumero==false && ostoslista!=null){
+		System.out.println("Asikas"+asiakasnumero);
+		if(asiakasstr.equals("")){
 		asiakas=a.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti, numero ,toimosoite,postitmp, postinro);
 		
-		int asiakasnumero=asiakas.getId();
+		asiakasnumero=asiakas.getId();}
 		
 		int tilausnumero=tilauskasittely.luoTilaus(asiakasnumero, tilausajankohta, toimitustapa, maksutapa, yhteishinta);
 		
-		rivikasittely.luoTilausRivi(ostoslista, tilausnumero);
+		rivikasittely.luoTilausRivi(ostoslista, tilausnumero);}
+		
+		
+		
+		if (eiNumero==true) {
+			
+			response.sendRedirect("/Sprintti/TilausController?number=true");	
+			
+		}
+		
+		
+		else	if(ostoslista==null){
+			
+			response.sendRedirect("/Sprintti/menuController?shoppingcart=true");	
+			
+		}
+		
+		
+		
 		
 	}
 
@@ -209,13 +249,21 @@ for(Pizza p : ostoslista) {
 	
 	
 	HttpSession sessio= request.getSession(false);
-
+try {
 	asiakasnumero=(int)sessio.getAttribute("asiakasnumero");
+} catch (Exception e) {
+	// TODO: handle exception
+}
+	
 	
 	
 	if(asiakasnumero==0){
+		try {
+			asiakasnumero=Integer.parseInt(asiakasnumerostr);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
-	asiakasnumero=Integer.parseInt(asiakasnumerostr)	;
 		
 	}
 	

@@ -38,8 +38,26 @@
 
 
 	<div class="navbar-fixed">
-		<%@ include file="pizzerianav.jsp"%>
+		<%@ include file="adminnav.jsp"%>
 	</div>
+	
+
+
+<div id="tilaukset">
+<br>
+<br>
+<h3>Tilaukset</h3>
+<br>
+<br>
+<a class="waves-effect waves-light btn" href="SelaaTilauksia?status=tilattu">Tilatut</a>
+<a class="waves-effect waves-light btn" href="SelaaTilauksia?status=vahvistettu">Vahvistetut</a>
+ 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 	<c:forEach items="${tilaukset}" var="tilaus">
 
@@ -82,6 +100,14 @@
 		</form>
 
 	</c:forEach>
+	
+	</div>
+	<form  method="post" action="logout" id="logout">
+		
+			<input type="hidden" name="logout">
+			<label><c:out value="${user}"></c:out></label>
+			<input class="btn waves-effect waves-light" type="submit" value="Kirjaudu ulos">
+		</form>
 <%@ include file="footer.jsp" %>
 	
 

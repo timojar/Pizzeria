@@ -130,7 +130,7 @@ public List<Tilaus>	 haeTilaukset(){
 	}
 		
 	
-	System.out.println("Tilaukset "+tilaukset.size());
+	
 	
 	
 	return tilaukset;
@@ -229,6 +229,76 @@ public Tilaus haeTilaus(int tilausnro){
 	
 }
 
+public List<Tilaus>	 lajitteletilaukse(String tilauksenstatus){
+	
 
+	Connection conn;
+	
+	ConnectionFactory yhteys = new ConnectionFactory();	
+	
+	conn = yhteys.getConnection();
+	
+	tilaukset=new ArrayList();
+	
+	try {
+		String sql = "select  * from Tilaus where tilauksenstatus = ?;";
+
+		PreparedStatement tilausHaku = conn.prepareStatement(sql);
+
+		tilausHaku.setString(1, tilauksenstatus);
+		
+		ResultSet orders = tilausHaku.executeQuery();	
+		
+		
+		
+		while (orders.next()) {
+			
+			
+				
+			int numero = orders.getInt("tilausnumero");
+
+			String tilausajankohta = orders.getString("tilausajankohta");
+			
+			String toimitusajankohta = ""+orders.getDate("toimitusajankohta");
+			String toimitustapa = orders.getString("toimitustapa");
+			String maksutapa = orders.getString("maksutapa");
+			String status = orders.getString("tilauksenstatus");
+			double yhteishinta = orders.getDouble("yhteishinta");	
+			int asiakasnumero=orders.getInt("asiakasnumero");
+			tilaukset.add(new Tilaus(asiakasnumero,numero, tilausajankohta,  toimitusajankohta,
+					toimitustapa,  maksutapa,yhteishinta, status));
+			
+			
+			
+			
+			
+			
+		}
+		
+		
+		
+	}
+	
+	catch (SQLException e){
+	e.printStackTrace();
+		
+		
+		
+	}
+	
+	finally{
+		yhteys.suljeYhteys(conn);
+	}
+		
+	
+	
+	
+	
+	return tilaukset;
+		
+	
+	
+	
+}
 
 }

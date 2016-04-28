@@ -113,7 +113,7 @@ public class Tilaukselle extends HttpServlet {
 		System.out.println(emailinSisalto);
 		
 		
-		
+		response.sendRedirect("/Sprintti/SelaaTilauksia");
 		
 	}
 

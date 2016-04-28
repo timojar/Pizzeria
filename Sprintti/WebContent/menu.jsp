@@ -71,7 +71,7 @@
 <br>
 <br>
 <br>
-
+<c:if test="${not empty param.shoppingcart}"><p>Ostoskorisi on tyhjä!!!</p></c:if>
 	<div id="ostoskori">
 	<h5>Ostoslista</h5>
 <c:set  var="total" value="${ 0}"/>	
