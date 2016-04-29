@@ -46,7 +46,7 @@
 	<br><c:if test="${not empty param.email}">Sähköposti on jo käytössä?</c:if>
 	<br><br>
 	 <div class="row">
-    <form class="col s5" action="LuoAsiakas" method="post">
+    <form class="col s10" action="LuoAsiakas" method="post">
       <div class="row">
         <div class="input-field col s6">
          <i class="material-icons prefix">perm_identity</i>
@@ -67,29 +67,29 @@
         </div>
       </div>
       
+      
+      
        <div class="row">
         <div class="input-field col s12">
-        <i class="material-icons prefix">phone</i>
+        <i class="material-icons prefix">location_on</i>
           <input type="text" length="30" id="osoite" class="validate" name="osoite" required>
-          <label for="numero">Osoite</label>
-        </div>
-      </div>
-      
-      <div class="row">
-        <div class="input-field col s12">
-        <i class="material-icons prefix">phone</i>
-          <input type="text" length="30" id="numero" class="validate" name="tmp" required>
-          <label for="numero">Toimipaikka</label>
+          <label for="numero">Lähiosoite</label>
         </div>
       </div>
       
        <div class="row">
-        <div class="input-field col s12">
-        <i class="material-icons prefix">phone</i>
-          <input type="text" length="5" id="numero" class="validate" name="postinro" required>
-          <label for="numero">Posti nro</label>
+        <div class="input-field col s6">
+          <i class="material-icons prefix">location_on</i>
+          <input id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">Postitoimipaikka</label>
+        </div>
+        <div class="input-field col s6">
+          <i class="material-icons prefix">location_on</i>
+          <input id="icon_telephone" type="tel" class="validate">
+          <label for="icon_telephone">Postinumero</label>
         </div>
       </div>
+      
       
       
       <div class="row">
