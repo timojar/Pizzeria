@@ -1,11 +1,14 @@
 package fi.omapizzeria.admin.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import email.SahkoPosti;
 
 /**
  * Servlet implementation class Feedback
@@ -34,10 +37,16 @@ public class Feedback extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String otsikko=request.getParameter("group1")+" palaute";
+		String emailinSisalto=request.getParameter("palaute");
+		String lahettajanGoogleEmail= "88juslin@gmail.com";
+		String lahettajanGoogleSalasana="88juslin!";
+		String vastaanottajanEmail="Castellopalaute@gmail.com";
+	
+
+		SahkoPosti sposti=new SahkoPosti();
 		
-		String palaute=request.getParameter("#textarea1");
-	System.out.println("Palaute"+palaute);
-		
+		sposti.lahetaSahkoposti(lahettajanGoogleEmail, lahettajanGoogleSalasana, vastaanottajanEmail, otsikko, emailinSisalto);
 		
 	}
 

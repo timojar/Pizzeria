@@ -45,27 +45,28 @@
 	<br>
 	<br>
 	<div class="row">
-		<form class="col s12" action="controller" method="POST">
+		<form class="col s12" action="Feedback" method="post">
 			<div class="row">
 				<div class="input-field col s5">
-					<textarea id="textarea1" class="materialize-textarea"></textarea>
+					<textarea name="palaute" id="textarea1" class="materialize-textarea"></textarea>
 					<label for="textarea1">Kirjoita t‰h‰n</label>
 
 
 				</div>
 			</div>
 <p><i>Kokemukseni oli:</i><br><br>
-      <input name="group1" class="with-gap" type="radio" id="test1" />
+      <input name="group1" class="with-gap" type="radio" id="test1" value="Positiivinen" />
       <label for="test1">Positiivinen</label>
     </p>
     <p>
-      <input name="group1" class="with-gap" type="radio" id="test2" />
+      <input name="group1" class="with-gap" type="radio" id="test2" value="Negatiivinen" />
       <label for="test2">Negatiivinen</label>
     </p><br><br>
 
-			<a class="btn" type="submit" value="submit" 
-				onclick="Materialize.toast('L‰hetetty!', 4000, '', function(){alert('Kiitos palautteestasi!')})">L‰het‰</a>
-
+			<button class="btn waves-effect waves-light" type="submit"
+				name="commit">
+				Kirjaudu sis‰‰n <i class="material-icons right"></i>
+			</button>
 
 		</form>
 	</div>
