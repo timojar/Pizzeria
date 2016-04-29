@@ -1,4 +1,3 @@
-use tilaus;
 
 drop table TilausRivi;
 
@@ -8,10 +7,10 @@ drop table Pizzatayte;
 drop table KantaAsiakas;
 
 drop table Asiakas;
-drop table Tayte;
+
 drop table Pizza;
 
+drop table Tayte;
 
-
-drop table Admin
+drop table Admin;
 

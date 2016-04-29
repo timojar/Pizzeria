@@ -1,4 +1,3 @@
-use tilaus;
 
 create table Pizza (
 id integer not null,
