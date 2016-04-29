@@ -45,7 +45,7 @@
 	<br>
 	<br>
 	<div class="row">
-		<form class="col s12" action="controller" method="POST">
+		<form class="col s12" action="Feedback" method="get">
 			<div class="row">
 				<div class="input-field col s5">
 					<textarea id="textarea1" class="materialize-textarea"></textarea>
@@ -63,9 +63,8 @@
       <label for="test2">Negatiivinen</label>
     </p><br><br>
 
-			<a class="btn" type="submit" value="submit" 
-				onclick="Materialize.toast('Lähetetty!', 4000, '', function(){alert('Kiitos palautteestasi!')})">Lähetä</a>
-
+			
+<input class="btn waves-effect waves-light" type="submit" value="Lähetä">
 
 		</form>
 	</div>

@@ -35,7 +35,8 @@ public class Tilaus {
 		this.status = status;
 	}
 
-	public Tilaus(Asiakas tilausAsiakas){
+	public Tilaus(Asiakas tilausAsiakas,String status){
+		this.status=status;
 		this.tilausAsiakas=tilausAsiakas;
 	}
 	

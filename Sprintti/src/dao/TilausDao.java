@@ -138,12 +138,12 @@ public List<Tilaus>	 haeTilaukset(){
 }
 	
 
-public void vahvistaTilaus(int tilausnro){
+public void vahvistaTilaus(int tilausnro, String status){
 	
 	
 	Connection conn;		
 	ConnectionFactory yhteys = new ConnectionFactory();	
-	String status="vahvistettu";
+	
 			
 	conn = yhteys.getConnection();
 
@@ -199,16 +199,17 @@ public Tilaus haeTilaus(int tilausnro){
 				ResultSet tilaukset = tilaushaku.executeQuery(sql);	
 				int e=0;
 				
-				
+			
 				while (tilaukset.next()) {
 					
 					int asiakasnumero = tilaukset.getInt("asiakasnumero");
+					String status = tilaukset.getString("tilauksenstatus");
 
 					Asiakas tilausAsiakas =asiakashallinta.tuoTilaaja(asiakasnumero);
 					
-					tilaus=new Tilaus(tilausAsiakas);
+					tilaus=new Tilaus(tilausAsiakas, status);
 					
-					
+					;
 				}
 				
 				

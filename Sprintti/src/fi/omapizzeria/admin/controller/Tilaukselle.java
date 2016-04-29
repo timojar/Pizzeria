@@ -39,13 +39,13 @@ public class Tilaukselle extends HttpServlet {
 		// TODO Auto-generated method stub
 		int tilausNro=0;
 		String tilausNrostr= request.getParameter("numero");
-		
+		int tilausnro=0;
 		try {tilausNro=Integer.parseInt(tilausNrostr);
-			
+			tilausnro=tilausNro;
 		} catch (Exception e) {e.printStackTrace();
 			// TODO: handle exception
 		}
-		
+		TilausDao tilauskasittely = new TilausDao();
 		TilausRiviDao rivihallinta=new TilausRiviDao();
 		
 		List<Tilausrivi>rivit=rivihallinta.haeRivit(tilausNro);
@@ -53,7 +53,9 @@ public class Tilaukselle extends HttpServlet {
 		for(Tilausrivi p : rivit) {
 		   
 		}
+		Tilaus tilaus=tilauskasittely.haeTilaus(tilausnro);
 		
+		request.setAttribute("tilauksenstatus", tilaus.getStatus());
 		request.setAttribute("tilausid", tilausNro);
 		request.setAttribute("rivit", rivit);
 		
@@ -92,8 +94,8 @@ public class Tilaukselle extends HttpServlet {
 					" EUR";
 		}
 		
-		
-		tilauskasittely.vahvistaTilaus(tilausnro);
+		String status="vahvistettu";
+		tilauskasittely.vahvistaTilaus(tilausnro,status);
 		Tilaus t=tilauskasittely.haeTilaus(tilausnro);
 		
 		String etunimi=t.getTilausAsiakas().getEtunimi();

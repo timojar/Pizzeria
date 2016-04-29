@@ -333,7 +333,7 @@ conn = yhteys.getConnection();
 			}
 			
 			
-			String sqlInsert = "INSERT INTO Pizza(id, nimi, hinta, kuvaus) VALUES (?, ?, ?,?)";
+			String sqlInsert = "INSERT INTO Pizza(id, nimi, hinta, kuvaus, piiloitus) VALUES (?, ?, ?,?, 'nosale')";
 			PreparedStatement stmtInsert = conn.prepareStatement(sqlInsert);
 			stmtInsert.setInt(1, id);
 			stmtInsert.setString(2, nimi);

@@ -93,6 +93,12 @@
             <br>
             <br>
 
+
+<c:set var="tilauksenstatus" value="${tilauksenstatus}"/>
+
+<c:choose>
+
+<c:when test="${ tilauksenstatus=='tilattu'}">
 <form action="Tilaukselle" method="post">
 
 <input type="hidden" value="${tilausid}" name="vahvistus">
@@ -100,9 +106,29 @@
 <button class="btn waves-effect waves-light" type="submit" name="action">Vahvista
     <i class="material-icons right">send</i>
   </button>
-
-
 </form>
+</c:when>
+
+
+<c:when test="${ tilauksenstatus=='vahvistettu'}">
+<form action="Maksutus" method="post">
+
+<input type="hidden" value="${tilausid}" name="maksutus">
+
+<button class="btn waves-effect waves-light" type="submit" name="action">Kirjaa maksetuksi
+    <i class="material-icons right">send</i>
+  </button>
+</form>
+</c:when>
+
+
+
+
+</c:choose>
+
+
+
+
 		<br>
             <br>
             <br>

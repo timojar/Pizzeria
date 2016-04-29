@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,77 +41,94 @@
 	<div class="navbar-fixed">
 		<%@ include file="adminnav.jsp"%>
 	</div>
-	
 
 
-<div id="tilaukset">
-<br>
-<br>
-<h3>Tilaukset</h3>
-<br>
-<br>
-<a class="waves-effect waves-light btn" href="SelaaTilauksia?status=tilattu">Tilatut</a>
-<a class="waves-effect waves-light btn" href="SelaaTilauksia?status=vahvistettu">Vahvistetut</a>
- 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
-	<c:forEach items="${tilaukset}" var="tilaus">
+	<div id="tilaukset">
+		<br> <br>
+		<h3>Tilaukset</h3>
+		<br> <br> <a class="waves-effect waves-light btn"
+			href="SelaaTilauksia?status=tilattu">Tilatut</a> <a
+			class="waves-effect waves-light btn"
+			href="SelaaTilauksia?status=vahvistettu">Vahvistetut</a> <br> <br>
+			 <a
+			class="waves-effect waves-light btn"
+			href="SelaaTilauksia?status=maksettu">Maksetut</a> <br> <br>
+		<br> <br> <br> <br>
+<c:set var="tuotot" value="${0}"/>
+		<c:forEach items="${tilaukset}" var="tilaus">
+<c:set var="tuotot" value="${tilaus.yhteishinta+tuotot }"/>
+			<p>
+				<span class="atribuutit"> Tilaus nro: </span>
+				<c:out value="${tilaus.numero }"></c:out>
+			</p>
 
-		<p>
-		<span class="atribuutit">	Tilaus nro: </span><c:out value="${tilaus.numero }"></c:out>
-		</p>
+			<p>
+				<span class="atribuutit"> Osoite: </span>
+				<c:out value="${tilaus.tilausAsiakas.osoite}"></c:out>
+			</p>
+			<p>
+				<span class="atribuutit"> Postinumero: </span>
+				<c:out value="${tilaus.tilausAsiakas.postinro}"></c:out>
+			</p>
 
-		<p>
-		<span class="atribuutit">	Osoite: </span><c:out value="${tilaus.tilausAsiakas.osoite}"></c:out>
-		</p>
-		<p>
-		<span class="atribuutit">	Postinumero: </span><c:out value="${tilaus.tilausAsiakas.postinro}"></c:out>
-		</p>
-		<p>
-		<span class="atribuutit">	Toimipaikka: </span><c:out value="${tilaus.tilausAsiakas.tmp}"></c:out>
-		</p>
-		<p>
-		<span class="atribuutit">	Etunimi: </span><c:out value="${tilaus.tilausAsiakas.etunimi}"></c:out>
-		</p>
+			<p>
+				<span class="atribuutit"> Toimipaikka: </span>
+				<c:out value="${tilaus.tilausAsiakas.tmp}"></c:out>
+			</p>
+			<p>
+				<span class="atribuutit"> Etunimi: </span>
+				<c:out value="${tilaus.tilausAsiakas.etunimi}"></c:out>
+			</p>
 
-		<p>
-		<span class="atribuutit">	Sukunimi </span><c:out value="${tilaus.tilausAsiakas.sukunimi}"></c:out>
-		</p>
+			<p>
+				<span class="atribuutit"> Sukunimi </span>
+				<c:out value="${tilaus.tilausAsiakas.sukunimi}"></c:out>
+			</p>
 
-		<p>
-		<span class="atribuutit">	Email:</span> <c:out value="${tilaus.tilausAsiakas.email}"></c:out>
-		</p>
+			<p>
+				<span class="atribuutit"> Email:</span>
+				<c:out value="${tilaus.tilausAsiakas.email}"></c:out>
+			</p>
 
-		<p>
-			
-		<span class="atribuutit">	Yhteishinta: </span><fmt:formatNumber type="currency"  currencySymbol=""  value="${tilaus.yhteishinta}" /> EUR
-		</p>
+			<p>
+				<span class="atribuutit"> Toimitustapa: </span>
+				<c:out value="${tilaus.toimitustapa}"></c:out>
+			</p>
+
+			<p>
+				<span class="atribuutit"> Maksutapa: </span>
+				<c:out value="${tilaus.maksutapa}"></c:out>
+			</p>
+
+			<p>
+
+				<span class="atribuutit"> Yhteishinta: </span>
+				<fmt:formatNumber type="currency" currencySymbol=""
+					value="${tilaus.yhteishinta}" />
+				EUR
+			</p>
 
 
-		<form action="Tilaukselle" method="get">
+			<form action="Tilaukselle" method="get">
 
-			<input type="hidden" value="${tilaus.numero }" name="numero">
+				<input type="hidden" value="${tilaus.numero }" name="numero">
 
-			<input type="submit"  value="Katso Tilausta"> <br> <br>
-			<br>
-		</form>
+				<input type="submit" value="Katso Tilausta"> <br> <br>
+				<br>
+			</form>
 
-	</c:forEach>
-	
+		</c:forEach>
+
 	</div>
-	<form  method="post" action="logout" id="logout">
-		
-			<input type="hidden" name="logout">
-			<label><c:out value="${user}"></c:out></label>
-			<input class="btn waves-effect waves-light" type="submit" value="Kirjaudu ulos">
-		</form>
-<%@ include file="footer.jsp" %>
-	
+	<form method="post" action="logout" id="logout">
+
+		<input type="hidden" name="logout"> <label><c:out
+				value="${user}"></c:out></label> <input class="btn waves-effect waves-light"
+			type="submit" value="Kirjaudu ulos">
+	</form>
+	<%@ include file="footer.jsp"%>
+
 
 	<!--  Scripts-->
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

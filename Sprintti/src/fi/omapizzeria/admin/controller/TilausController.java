@@ -166,7 +166,8 @@ public class TilausController extends HttpServlet {
 		String email = request.getParameter("email");
 		String toimitustapa = request.getParameter("toimtapa");
 		String maksutapa = request.getParameter("maksutapa");
-		String asiakasstr = request.getParameter("asiakasnro");
+		String asiakasstr="";
+		asiakasstr = request.getParameter("asiakasnro");
 		int asiakasnumero = 0;
 		try {
 			asiakasnumero = Integer.parseInt(asiakasstr);
@@ -176,12 +177,12 @@ public class TilausController extends HttpServlet {
 		}
 		if (eiNumero == false && ostoslista.size()>0) {
 			System.out.println("Asikas" + asiakasnumero);
-			if (asiakasstr.equals("")) {
-				asiakas = a
-						.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti,
+			if (asiakasnumero==0) {
+				asiakas = a.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti,
 								numero, toimosoite, postitmp, postinro);
-
+				System.out.println("asiakasnro "+asiakasnumero);
 				asiakasnumero = asiakas.getId();
+				
 			}
 
 			int tilausnumero = tilauskasittely.luoTilaus(asiakasnumero,
