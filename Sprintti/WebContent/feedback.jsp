@@ -65,7 +65,7 @@
 
 			<button class="btn waves-effect waves-light" type="submit"
 				name="commit">
-				Kirjaudu sisään <i class="material-icons right"></i>
+				Lähetä<i class="material-icons right"></i>
 			</button>
 
 		</form>
