@@ -45,9 +45,9 @@ public class Feedback extends HttpServlet {
 	
 
 		SahkoPosti sposti=new SahkoPosti();
-		
+	
 		sposti.lahetaSahkoposti(lahettajanGoogleEmail, lahettajanGoogleSalasana, vastaanottajanEmail, otsikko, emailinSisalto);
-		
+		request.getRequestDispatcher("feedbackResponse.jsp").forward(request, response);
 	}
 
 }
