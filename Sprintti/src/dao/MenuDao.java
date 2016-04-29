@@ -33,7 +33,7 @@ public  List<Pizza> haePizzat()
 			
 			
 			
-			String sql = "select  * from Pizza ;";
+			String sql = "select  * from Pizza order by nimi ASC;";
 			
 			
 
