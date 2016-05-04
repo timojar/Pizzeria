@@ -145,7 +145,11 @@ h4 {font-family: 'Pacifico', cursive;
 
 
 #tilaukset {margin-left: 200px}
+#taytteet {margin-left:100px}
+ a {text-decoration: none;
+}
 
+ a:hover {text-decoration:underline}
 #kuittaus {text-align: center;
 			width:500px;
 			margin-left: 300px}

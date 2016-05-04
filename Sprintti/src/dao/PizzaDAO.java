@@ -20,6 +20,58 @@ public class PizzaDAO {
 	private int noofPizzas, nextIndex, pizzasperPage, pizzaindex;
 	
 	
+	public List<PizzaTayte>  naytaLopppuvatPizzatTaytteet(boolean  saatavuusyli15){
+		
+
+		
+		List<PizzaTayte>loppuvatTaytteet=new ArrayList<PizzaTayte>();
+	Connection conn;		
+	ConnectionFactory yhteys = new ConnectionFactory();	
+	conn = yhteys.getConnection();
+	
+	String sql="select * from Pizza natural join PizzaTayte join Tayte using (tayteId) where saatavuus<15 group by nimi;";	
+		
+	if(saatavuusyli15==true){
+	sql="select * from Pizza natural join PizzaTayte join Tayte using (tayteId) where saatavuus<30;";	
+	}
+	
+
+	
+	
+	
+
+	
+	try {
+		Statement pizzaHaku = conn.createStatement();
+
+		ResultSet pizzat = pizzaHaku.executeQuery(sql);
+		
+		
+	while(pizzat.next()){
+		int tayteid=pizzat.getInt("tayteId");
+		int pizzaid=pizzat.getInt("id");
+		String pizzanimi=pizzat.getString("nimi");
+		String tayteNimi=pizzat.getString("tayteNimi");
+		loppuvatTaytteet.add(new PizzaTayte ( tayteNimi,  pizzaid, tayteid,  pizzanimi));
+	}
+		
+		
+		
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}	
+	
+	
+	finally{
+		
+	}
+	
+	
+	return loppuvatTaytteet;	
+	}
+	
+	
 	public Pizza bringPizza(int pizzaId){
 		
 		
@@ -164,7 +216,7 @@ ConnectionFactory yhteys = new ConnectionFactory();
 conn = yhteys.getConnection();
 
 
-
+System.out.println("Nosale");
 	try {
 		/**
 		 * Pizzan piiloitus: Päivitetään se pizza jonka tunnus on sama kuin metodissa saatu sama parametri.

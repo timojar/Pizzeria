@@ -2,40 +2,61 @@ package fi.omapizzeria.admin.bean;
 
 public class PizzaTayte {
 
-	private String TayteNimi;
-	private int saatavuus;
-
-	public PizzaTayte() {
-
+	private String tayteNimi;
+	private int pizzaid;
+	private int tayteid;
+	private String pizzanimi;
+	
+	public PizzaTayte(){
+		tayteNimi="";
+		pizzaid=0;
+		tayteid=0;
+		pizzanimi="";
+		
 	}
-
-	public PizzaTayte(String TayteNimi, int saatavuus) {
-
-		this.TayteNimi = TayteNimi;
-		this.saatavuus = saatavuus;
-
+	
+	public PizzaTayte (String tayteNimi, int pizzaid, int tayteid, String pizzanimi){
+		
+	this.tayteNimi=tayteNimi;
+	this.pizzaid=pizzaid;
+	this.tayteid=tayteid;
+	this.pizzanimi=pizzanimi;
+		
+		
 	}
 
 	public String getTayteNimi() {
-		return TayteNimi;
+		return tayteNimi;
 	}
 
 	public void setTayteNimi(String tayteNimi) {
-		TayteNimi = tayteNimi;
+		this.tayteNimi = tayteNimi;
 	}
 
-	public int getSaatavuus() {
-		return saatavuus;
+	public int getPizzaid() {
+		return pizzaid;
 	}
 
-	public void setSaatavuus(int saatavuus) {
-		this.saatavuus = saatavuus;
+	public void setPizzaid(int pizzaid) {
+		this.pizzaid = pizzaid;
 	}
 
-	@Override
-	public String toString() {
-		return "PizzaTayte [TayteNimi=" + TayteNimi + ", saatavuus="
-				+ saatavuus + "]";
+	public int getTayteid() {
+		return tayteid;
 	}
 
+	public void setTayteid(int tayteid) {
+		this.tayteid = tayteid;
+	}
+
+	public String getPizzanimi() {
+		return pizzanimi;
+	}
+
+	public void setPizzanimi(String pizzanimi) {
+		this.pizzanimi = pizzanimi;
+	}
+
+	
+	
 }

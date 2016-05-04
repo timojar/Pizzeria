@@ -38,6 +38,13 @@ this.saatavuus=saatavuus;
 	
 }
 
+public Tayte( int id ,String tayteNimi){
+	
+this.tayteNimi=tayteNimi;
+
+this.id=id;
+	
+}
 public Tayte(String tayteNimi, int saatavuus, int id){
 	
 this.tayteNimi=tayteNimi;

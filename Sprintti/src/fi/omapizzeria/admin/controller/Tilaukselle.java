@@ -1,6 +1,7 @@
 package fi.omapizzeria.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,9 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.text.DecimalFormat;
 
+import dao.TayteDAO;
 import dao.TilausDao;
 import dao.TilausRiviDao;
 import email.SahkoPosti;
+import fi.omapizzeria.admin.bean.Pizza;
+import fi.omapizzeria.admin.bean.PizzaTayte;
+import fi.omapizzeria.admin.bean.Tayte;
 import fi.omapizzeria.admin.bean.Tilaus;
 import fi.omapizzeria.admin.bean.Tilausrivi;
 
@@ -71,7 +76,7 @@ public class Tilaukselle extends HttpServlet {
 		DecimalFormat desimaalit=new DecimalFormat("0.00");
 		TilausRiviDao rivihallinta=new TilausRiviDao();
 		TilausDao tilauskasittely=new TilausDao();
-		
+		TayteDAO taytehallinta=new TayteDAO();
 		String vahvistusstr=request.getParameter("vahvistus");	
 		int tilausnro=0;
 		try {
@@ -83,16 +88,30 @@ public class Tilaukselle extends HttpServlet {
 		
 		int tilausNro=tilausnro;
 		List<Tilausrivi>rivit=rivihallinta.haeRivit(tilausNro);
+		
 		String item="";
 		Tilausrivi rivi=null;
 		String linebreak=System.getProperty("line.separator");
 		rivi=rivit.get(0);
 		
+		kulutaTaytteet(rivit);
+		
 		for(int i=0; i<rivit.size(); i++){
 			rivi=rivit.get(i);
 			item=item+linebreak+rivi.getPizza().getNimi()+" "+rivi.getLkm()+" kpl "+desimaalit.format(rivi.getHinta())+
 					" EUR";
-		}
+			
+			
+			
+			
+			
+			}
+			
+			
+			
+			
+			
+			
 		
 		String status="vahvistettu";
 		tilauskasittely.vahvistaTilaus(tilausnro,status);
@@ -119,7 +138,35 @@ public class Tilaukselle extends HttpServlet {
 		
 	}
 
-	
+	private void kulutaTaytteet(List<Tilausrivi>rivit){
+		
+		
+
+		TayteDAO taytehallinta=new TayteDAO();
+		List<Tayte>kulutetutTaytteet=new ArrayList<Tayte>();
+		List<PizzaTayte>pizzaTaytteet=new ArrayList<PizzaTayte>();
+		
+		for (int t=0; t<rivit.size(); t++){
+	Tilausrivi r=rivit.get(t);
+		for (int e=0; e<r.getLkm(); e++){
+			int pizzaid=r.getPizzaid();	
+			pizzaTaytteet=taytehallinta.haePizzaTaytteet(pizzaid);
+				
+			
+			for(PizzaTayte piz: pizzaTaytteet){
+			
+				int id=piz.getTayteid();
+				String tayteNimi=piz.getPizzanimi();
+				
+			kulutetutTaytteet.add(new Tayte(id ,tayteNimi))	;
+				
+			}
+		}}
+		
+		taytehallinta.maaranVahennys(kulutetutTaytteet);
+		
+		
+	}
 	
 	
 }

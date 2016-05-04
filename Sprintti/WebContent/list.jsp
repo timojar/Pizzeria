@@ -68,13 +68,21 @@
 		
 
 
+	
 		<div id=sis‰ltˆ>
 
 
-
+<c:forEach items="${taytteetvahissa }" var="t">
+	
+	<p><c:out value="${t.pizzanimi}"> </c:out>: <c:out value="${t.tayteNimi}"></c:out> on <span class="nosale">loppumassa.
+	</span>Lis‰‰ t‰ytteet tai <span class="nosale"> pizza poistetaan ruokalistalta </span></p>
+	
+	</c:forEach>
 
 
 	<h2>Pizza lista</h2>
+	
+	
 
 			<c:out value="${aloitusaika }"></c:out>
 			<c:if test="${not empty param.added}">Uuden pizzan lis‰‰minen onnistui!</c:if>

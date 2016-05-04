@@ -18,6 +18,55 @@ public class TayteDAO {
 	
 	
 	
+	
+	public void muokkaaTayte(String nimi, int maara, int id){
+	
+		Connection conn;		
+		ConnectionFactory yhteys = new ConnectionFactory();	
+		conn = yhteys.getConnection();
+		String sql="update Tayte set tayteNimi=?, saatavuus=saatavuus+? where tayteId=?;";
+		
+		try {
+			
+			
+			
+			PreparedStatement stmtmuokkaa = conn.prepareStatement(sql);	
+			
+			
+			stmtmuokkaa.setString(1, nimi);
+			stmtmuokkaa.setInt(2, maara);
+			stmtmuokkaa.setInt(3, id);
+			
+			stmtmuokkaa.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		
+		}
+		
+		finally {
+		
+			
+			
+			yhteys.suljeYhteys(conn);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 public Tayte tuoTayte(int tayteId){
 		
 		
@@ -84,7 +133,7 @@ public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 		conn = yhteys.getConnection();
 		
 		
-		String sql="INSERT INTO PizzaTayte(tayteNimi, id, nimi) VALUES (? , ?, ?)";
+		String sql="INSERT INTO PizzaTayte(tayteNimi, id, nimi, tayteId) VALUES (? , ?, ?, ?)";
 		String newName = "Update PizzaTayte set nimi = ? where id = ?";
 		
 	try {
@@ -115,6 +164,7 @@ public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 			stmtInsertTayte.setString(1, t.getTayteNimi());
 			stmtInsertTayte.setInt(2, pizzaId);
 			stmtInsertTayte.setString(3, nimi);
+			stmtInsertTayte.setInt(4, t.getId());
 			stmtInsertTayte.executeUpdate();
 
 			
@@ -142,7 +192,7 @@ public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 		conn = yhteys.getConnection();
 		
 		
-		String sql="INSERT INTO PizzaTayte(tayteNimi, id, nimi) VALUES (? , ?, ?)";
+		String sql="INSERT INTO PizzaTayte(tayteNimi, id, nimi, tayteId) VALUES (? , ?, ?, ?)";
 		
 		
 		try {
@@ -154,6 +204,7 @@ public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 				stmtInsertTayte.setString(1, t.getTayteNimi());
 				stmtInsertTayte.setInt(2, pizzaId);
 				stmtInsertTayte.setString(3, nimi);
+				stmtInsertTayte.setInt(4, t.getId());
 				stmtInsertTayte.executeUpdate();
 
 				
@@ -163,7 +214,7 @@ public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 			
 		
 	} catch (SQLException e) {
-		
+		e.printStackTrace();
 	}	
 	finally {
 		yhteys.suljeYhteys(conn);
@@ -187,7 +238,7 @@ public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 		
 
 		
-		taytelista=haeTaytteet();
+		taytelista=selaaTaytteet();
 		System.out.println("Taytteet"+taytelista.size());
 		if(taytelista.size()>0){
 		Tayte t=taytelista.get(taytelista.size()-1);
@@ -243,7 +294,7 @@ public  List<Tayte> haeTaytteet()
 
 		try {
 
-			String sql = "select * from Tayte"	                 ;
+			String sql = "select * from Tayte order by tayteNimi ASC;"	                 ;
 						
 			Statement haku = conn.createStatement();
 				
@@ -313,4 +364,139 @@ finally{
 
 
 
+
+
+
+public  List<PizzaTayte> haePizzaTaytteet(int pizzaid) 
+
+
+{
+	List<PizzaTayte> taytelista  = new ArrayList<PizzaTayte>();
+	ConnectionFactory yhteys = new ConnectionFactory();
+	
+
+	Connection conn;
+
+	conn = yhteys.getConnection();
+
+	try {
+
+		String sql = "select * from PizzaTayte where id= ?"	                 ;
+					
+		PreparedStatement haku= conn.prepareStatement(sql);
+			
+		haku.setInt(1, pizzaid);
+		ResultSet hakutulokset=haku.executeQuery();
+		
+
+		while (hakutulokset.next()) {
+
+			
+
+			String tayteNimi = hakutulokset.getString("tayteNimi");
+			int tayteid=hakutulokset.getInt("tayteId");
+			String pizzanimi=hakutulokset.getString("nimi");
+			taytelista.add(new PizzaTayte(tayteNimi, pizzaid,  tayteid,  pizzanimi ));
+
+		}
+
+		
+		
+	} catch (SQLException e) {
+
+		e.printStackTrace();
+
+		System.out.println("Tietokantahaku aiheutti virheen");
+
+	}
+
+	finally {
+		yhteys.suljeYhteys(conn);
+	}
+
+	return taytelista;
 }
+
+
+
+public void maaranVahennys(List<Tayte>kulutetutTaytteet){
+ConnectionFactory yhteys = new ConnectionFactory();
+Connection conn;
+conn = yhteys.getConnection();
+String sql="update tayte set  saatavuus=saatavuus-1 where tayteId=?;";
+Tayte t=null;
+try {
+	
+	PreparedStatement stmtmuokkaa = conn.prepareStatement(sql);	
+	
+	for(int i=0; i<kulutetutTaytteet.size() ;i++){
+	t=kulutetutTaytteet.get(i);
+	stmtmuokkaa.setInt(1, t.getId());
+	
+	stmtmuokkaa.executeUpdate();	
+	}
+	
+} catch (SQLException e) {
+	e.printStackTrace();
+}
+finally {
+	
+	
+yhteys.suljeYhteys(conn);	
+	
+}
+	
+	
+	
+}
+
+
+private List<Tayte>  selaaTaytteet(){
+	
+	Connection conn;		
+	ConnectionFactory yhteys = new ConnectionFactory();	
+	conn = yhteys.getConnection();
+	taytelista=new ArrayList<Tayte>();
+	
+	try {
+
+		String sql = "select * from Tayte;"	                 ;
+					
+		Statement haku = conn.createStatement();
+			
+		ResultSet hakutulokset = haku.executeQuery(sql);
+
+		while (hakutulokset.next()) {
+
+			
+
+			String tayteNimi = hakutulokset.getString("tayteNimi");
+			int id=hakutulokset.getInt("tayteId");
+			int saatavuus=hakutulokset.getInt("saatavuus");
+			
+			taytelista.add(new Tayte(tayteNimi,saatavuus, id ));
+
+		}
+
+		System.out.println("Taytteet"+taytelista.size());
+		
+	} catch (SQLException e) {
+
+		e.printStackTrace();
+
+		System.out.println("Tietokantahaku aiheutti virheen");
+
+	}
+
+	finally {
+		yhteys.suljeYhteys(conn);
+	}
+
+	return taytelista;
+}	
+	
+	
+}
+
+
+

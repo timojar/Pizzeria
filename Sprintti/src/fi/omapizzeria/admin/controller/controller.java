@@ -57,67 +57,32 @@ public class controller extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		AdminDao admintiedot = new AdminDao();
-
-		boolean vahvistus = false;
-		String Kayttajanimi = "";
-		String Salasana = "";
 		
-		HttpSession sessio = request.getSession(false);
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-
-			for (int i = 0; i < cookies.length; i++) {
-
-				if ("kayttunnus".equals(cookies[i].getName())) {
-					String logged = "logged";
-					Kayttajanimi = cookies[i].getValue();
-					request.setAttribute("logged", logged);
-					request.setAttribute("tunnus", Kayttajanimi);
-				}
-
-				if ("password".equals(cookies[i].getName())) {
-					Salasana = cookies[i].getValue();
-				}
-
-			}
-		}
-
-		if (Salasana.equals("") && Kayttajanimi.equals("")) {
-			try {
-
-				Kayttajanimi = (String) sessio.getAttribute("tunnus");
-				Salasana = (String) sessio.getAttribute("salasana");
-
-			} catch (Exception e) {
-
-			}
-		}
-
-		try {
-
-			vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
-
-			if (vahvistus == true) {
-
-			}
-
-			else if (vahvistus == false) {
-				request.getRequestDispatcher("Login.jsp").forward(request,
-						response);
-			}
+		 vahvistus= tunnistaKayttaja(request, response);
+		
+		if (vahvistus == true) {
 
 		}
 
-		catch (Exception e) {
-			e.printStackTrace();
-			request.getRequestDispatcher("Login.jsp")
-					.forward(request, response);
+		else if (vahvistus == false) {
+			request.getRequestDispatcher("Login.jsp").forward(request,
+					response);
 		}
-
+		boolean saatavuusyli15=true;
+		
+		PizzaDAO kanta = new PizzaDAO();
+		
+		List<PizzaTayte>lowofFillings=kanta.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
+		
+		
+		saatavuusyli15=false;
+		List<PizzaTayte>noSalepizzas=kanta.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
+		
+		poistaMenusta(noSalepizzas);
+		
 		int noofPizzas, pizzasperPage, page, nextIndex, noofPages, startindex;
 
-		PizzaDAO kanta = new PizzaDAO();
+		
 		TayteDAO taytehallinta = new TayteDAO();
 
 		noofPizzas = kanta.getnoofPizzas();
@@ -157,11 +122,13 @@ public class controller extends HttpServlet {
 
 		List<Pizza> pizzalista = kanta.haePizzat(nextIndex, pizzasperPage);
 		List<Tayte> taytelista = taytehallinta.haeTaytteet();
-
+		
+		
 		if (noofPages > 1) {
 			startindex = 1;
 		}
-
+		
+		request.setAttribute("taytteetvahissa",lowofFillings );
 		request.setAttribute("currentpage", page);
 		request.setAttribute("startindex", startindex);
 		request.setAttribute("taytelista", taytelista);
@@ -399,6 +366,97 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 		
 		
 	}
+	
+	
+	
+	
+	
+	private void poistaMenusta(List<PizzaTayte>noSalepizzas){
+		PizzaDAO kanta = new PizzaDAO();
+			
+	for(int i=0; i<noSalepizzas.size(); i++)	{
+		
+	PizzaTayte pt=noSalepizzas.get(i);
+		int piiloitusid=pt.getPizzaid();
+		kanta.piilotaPizza(piiloitusid);
+		
+		
+	}
+			
+			
+	
+			
+			
+		}
+		
+		
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private boolean tunnistaKayttaja(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException{
+		
+		
+		boolean vahvistus = false;
+		AdminDao admintiedot = new AdminDao();
+		String Kayttajanimi = "";
+		String Salasana = "";
+		
+		HttpSession sessio = request.getSession(false);
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+
+			for (int i = 0; i < cookies.length; i++) {
+
+				if ("kayttunnus".equals(cookies[i].getName())) {
+					String logged = "logged";
+					Kayttajanimi = cookies[i].getValue();
+					request.setAttribute("logged", logged);
+					request.setAttribute("tunnus", Kayttajanimi);
+				}
+
+				if ("password".equals(cookies[i].getName())) {
+					Salasana = cookies[i].getValue();
+				}
+
+			}
+		}
+
+		if (Salasana.equals("") && Kayttajanimi.equals("")) {
+			try {
+
+				Kayttajanimi = (String) sessio.getAttribute("tunnus");
+				Salasana = (String) sessio.getAttribute("salasana");
+
+			} catch (Exception e) {
+
+			}
+		}
+
+		try {
+
+			vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
+			
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+	
+		
+		return vahvistus;
+	}
+	
+	
 	
 	
 	

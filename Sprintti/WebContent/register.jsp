@@ -80,12 +80,12 @@
        <div class="row">
         <div class="input-field col s6">
           <i class="material-icons prefix">location_on</i>
-          <input id="icon_prefix" type="text" class="validate">
+          <input id="icon_prefix" type="text" class="validate" name="tmp">
           <label for="icon_prefix">Postitoimipaikka</label>
         </div>
         <div class="input-field col s6">
           <i class="material-icons prefix">location_on</i>
-          <input id="icon_telephone" type="tel" class="validate">
+          <input id="icon_telephone" type="tel" class="validate" name="postinro">
           <label for="icon_telephone">Postinumero</label>
         </div>
       </div>
