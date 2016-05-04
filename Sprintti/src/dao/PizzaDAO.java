@@ -32,7 +32,7 @@ public class PizzaDAO {
 	String sql="select * from Pizza natural join PizzaTayte join Tayte using (tayteId) where saatavuus<15 group by nimi;";	
 		
 	if(saatavuusyli15==true){
-	sql="select * from Pizza natural join PizzaTayte join Tayte using (tayteId) where saatavuus<30;";	
+	sql="select * from Pizza natural join Pizzatayte join Tayte using (tayteId) where saatavuus<30;";	
 	}
 	
 

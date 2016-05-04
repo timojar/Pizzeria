@@ -133,8 +133,8 @@ public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 		conn = yhteys.getConnection();
 		
 		
-		String sql="INSERT INTO PizzaTayte(tayteNimi, id, nimi, tayteId) VALUES (? , ?, ?, ?)";
-		String newName = "Update PizzaTayte set nimi = ? where id = ?";
+		String sql="INSERT INTO Pizzatayte(tayteNimi, id, nimi, tayteId) VALUES (? , ?, ?, ?)";
+		String newName = "Update Pizzatayte set nimi = ? where id = ?";
 		
 	try {
 		
@@ -148,7 +148,7 @@ public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 		if(taytelista.size()>0){
 		
 			
-			String sqldelete = "delete from PizzaTayte where id=?";
+			String sqldelete = "delete from Pizzatayte where id=?";
 			PreparedStatement stmtdelete = conn.prepareStatement(sqldelete);
 			stmtdelete.setInt(1, pizzaId);
 			stmtdelete.executeUpdate();
@@ -192,7 +192,7 @@ public void MuokkaaPizzaTayte(String nimi, int pizzaId, List<Tayte>taytelista){
 		conn = yhteys.getConnection();
 		
 		
-		String sql="INSERT INTO PizzaTayte(tayteNimi, id, nimi, tayteId) VALUES (? , ?, ?, ?)";
+		String sql="INSERT INTO Pizzatayte(tayteNimi, id, nimi, tayteId) VALUES (? , ?, ?, ?)";
 		
 		
 		try {
@@ -343,7 +343,7 @@ public void poistaPizzaTaytte(int id){
 	
 try {
 	
-	String sqldelete = "delete from PizzaTayte where id=?";
+	String sqldelete = "delete from Pizzatayte where id=?";
 	PreparedStatement stmtdelete = conn.prepareStatement(sqldelete);
 	stmtdelete.setInt(1, id);
 	stmtdelete.executeUpdate();
@@ -381,7 +381,7 @@ public  List<PizzaTayte> haePizzaTaytteet(int pizzaid)
 
 	try {
 
-		String sql = "select * from PizzaTayte where id= ?"	                 ;
+		String sql = "select * from Pizzatayte where id= ?"	                 ;
 					
 		PreparedStatement haku= conn.prepareStatement(sql);
 			
