@@ -80,7 +80,7 @@
        <div class="row">
         <div class="input-field col s6">
           <i class="material-icons prefix">location_on</i>
-          <input id="icon_prefix" type="text" class="validate" name="tmp">
+          <input id="icon_prefix" type="text" class="validate" name="tmp" required>
           <label for="icon_prefix">Postitoimipaikka</label>
         </div>
         <div class="input-field col s6">

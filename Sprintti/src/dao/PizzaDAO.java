@@ -14,7 +14,7 @@ import fi.omapizzeria.admin.bean.*;
 public class PizzaDAO {
 
 	private  Pizza pizza;
-	private Tayte t;
+	private Tayte t; 
 	private  List<Pizza> pizzalista, selaus;
 	
 	private int noofPizzas, nextIndex, pizzasperPage, pizzaindex;
@@ -29,7 +29,7 @@ public class PizzaDAO {
 	ConnectionFactory yhteys = new ConnectionFactory();	
 	conn = yhteys.getConnection();
 	
-	String sql="select * from Pizza natural join PizzaTayte join Tayte using (tayteId) where saatavuus<15 group by nimi;";	
+	String sql="select * from Pizza natural join Pizzatayte join Tayte using (tayteId) where saatavuus<15 group by nimi;";	
 		
 	if(saatavuusyli15==true){
 	sql="select * from Pizza natural join Pizzatayte join Tayte using (tayteId) where saatavuus<30;";	

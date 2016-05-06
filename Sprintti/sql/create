@@ -46,7 +46,7 @@ Email varchar(120)  not null,
 Puhelin Integer not null,
 osoite varchar(120)  not null,
 tmp varchar(30)  not null,
-postinro integer,
+postinro varchar(10),
 primary key (id)
 
 )

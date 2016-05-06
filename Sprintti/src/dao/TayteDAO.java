@@ -423,7 +423,7 @@ public void maaranVahennys(List<Tayte>kulutetutTaytteet){
 ConnectionFactory yhteys = new ConnectionFactory();
 Connection conn;
 conn = yhteys.getConnection();
-String sql="update tayte set  saatavuus=saatavuus-1 where tayteId=?;";
+String sql="update Tayte set  saatavuus=saatavuus-1 where tayteId=?;";
 Tayte t=null;
 try {
 	
