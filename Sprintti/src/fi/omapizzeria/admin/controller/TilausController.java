@@ -151,14 +151,7 @@ public class TilausController extends HttpServlet {
 		String etunimi = request.getParameter("etunimi");
 		String sukunimi = request.getParameter("sukunimi");
 		String numerostr = request.getParameter("numero");
-		int numero = 0;
 
-		try {
-			numero = Integer.parseInt(numerostr);
-
-		} catch (Exception e) {
-			eiNumero = true;
-		}
 		String toimosoite = request.getParameter("toimosoite");
 		String postinro = request.getParameter("postinro");
 
@@ -179,7 +172,7 @@ public class TilausController extends HttpServlet {
 			System.out.println("Asikas" + asiakasnumero);
 			if (asiakasnumero==0) {
 				asiakas = a.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti,
-								numero, toimosoite, postitmp, postinro);
+								numerostr, toimosoite, postitmp, postinro);
 				System.out.println("asiakasnro "+asiakasnumero);
 				asiakasnumero = asiakas.getId();
 				

@@ -58,21 +58,13 @@ public class LuoAsiakas extends HttpServlet {
 		String salattavaTeksti=request.getParameter("salasana");
 		String puhelinstr=request.getParameter("numero");
 		boolean kayttvahvistus=true;
-		int numero=0;
-		
-		try {
-			
-			numero=Integer.parseInt(puhelinstr);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+
 		
 		
 		AsiakasDAO asiakashallinta=new AsiakasDAO();
 		kayttvahvistus=asiakashallinta.checkUser(email);
 		if(kayttvahvistus==false){
-		KantaAsiakas kasiakas=asiakashallinta.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti, numero, toimosoite, postitmp, postinro);
+		KantaAsiakas kasiakas=asiakashallinta.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti, puhelinstr, toimosoite, postitmp, postinro);
 		
 		
 		HttpSession sessio = request.getSession(true);

@@ -16,6 +16,7 @@ import dao.AdminDao;
 import dao.PizzaDAO;
 import dao.TayteDAO;
 import fi.omapizzeria.admin.bean.Pizza;
+import fi.omapizzeria.admin.bean.PizzaTayte;
 import fi.omapizzeria.admin.bean.Tayte;
 
 /**
@@ -86,6 +87,12 @@ public class MuokkaaPizza extends HttpServlet {
 			// TODO: handle exception
 			
 					}
+		
+		
+		Boolean saatavuusyli15=false;
+		List<PizzaTayte>noSalepizzas=kanta.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
+		
+		poistaMenusta(noSalepizzas);
 		TayteDAO taytehallinta= new TayteDAO();
 		Pizza pizza=kanta.bringPizza(pizzaId);
 		Pizza p=null;
@@ -278,7 +285,26 @@ String [] taytteet=request.getParameterValues("taytteet");
 	
 	
 	
+
+	private void poistaMenusta(List<PizzaTayte>noSalepizzas){
+		PizzaDAO kanta = new PizzaDAO();
+			
+	for(int i=0; i<noSalepizzas.size(); i++)	{
+		
+	PizzaTayte pt=noSalepizzas.get(i);
+		int piiloitusid=pt.getPizzaid();
+		kanta.piilotaPizza(piiloitusid);
+		
+		
+	}
+			
+			
 	
+			
+			
+		}
+		
+		
 	
 	
 	

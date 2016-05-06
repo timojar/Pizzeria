@@ -2,7 +2,7 @@ package fi.omapizzeria.admin.bean;
 
 public class Asiakas {
 	private int id;
-	private int numero;
+	private String numero;
 	
 	private String email;
 	
@@ -12,7 +12,7 @@ public class Asiakas {
 	private String tmp;
 	private String postinro;
 
-	public Asiakas(int id,String etunimi, String sukunimi, int numero,  String email, String osoite, String tmp,
+	public Asiakas(int id,String etunimi, String sukunimi, String numero,  String email, String osoite, String tmp,
 			String postinro) {
 		this.id=id;
 		this.numero = numero;
@@ -26,7 +26,7 @@ public class Asiakas {
 
 	
 	
-	public Asiakas(int id,String etunimi, String sukunimi, int numero,  String email) {
+	public Asiakas(int id,String etunimi, String sukunimi, String numero,  String email) {
 		this.id=id;
 		this.numero = numero;
 		this.email = email;
@@ -58,11 +58,11 @@ public class Asiakas {
 		this.sukunimi = sukunimi;
 	}
 
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
