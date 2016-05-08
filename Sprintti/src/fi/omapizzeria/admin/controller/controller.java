@@ -244,6 +244,7 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 		 */
 
 		else  {
+			request.setAttribute("virhe", "K‰ytt‰j‰tunnus tai salasana on v‰‰rin!");
 			request.getRequestDispatcher("Login.jsp")
 					.forward(request, response);
 
@@ -296,8 +297,9 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 				lisaaEvasteet(request, response, logged, Kayttajanimi, Salasana);
 				
 			}
-			response.sendRedirect("/Sprintti/controller?added=true");}
+			response.sendRedirect("/Sprintti/controller");}
 			else {
+				request.setAttribute("virhe", "K‰ytt‰j‰tunnus tai salasana on v‰‰rin!");
 				request.getRequestDispatcher("Login.jsp").forward(request,
 						response);
 

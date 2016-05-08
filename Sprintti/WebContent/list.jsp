@@ -85,7 +85,16 @@
 	
 
 			<c:out value="${aloitusaika }"></c:out>
-			<c:if test="${not empty param.added}">Uuden pizzan lis‰‰minen onnistui!</c:if>
+			<c:if test="${not empty param.added}"><p><span class="onnistui">Uuden pizzan lis‰‰minen onnistui!</span></p></c:if>
+			<c:if test="${not empty param.hinta}">
+			<p><span class="eionnistunut">Laita hinta numerona. Desimaalina k‰yt‰ .-merkint‰‰</span></p></c:if>
+			
+			
+	<c:if test="${not empty param.taytemaara}">
+	
+	
+	<p><span class="eionnistunut">V‰hint‰‰n 1 t‰yte pit‰‰ olla pitsassa ja t‰ytteit‰ korkeintaan 7</span></p></c:if>
+
 
 
 			<c:forEach items="${lista }" var="pizzat">

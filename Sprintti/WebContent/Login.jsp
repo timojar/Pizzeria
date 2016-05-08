@@ -52,6 +52,7 @@
 	<br>
 	<h3>Kirjaudu sisään</h3>
 	<br>
+	<p><span class="eionnistunut"><c:out value="${virhe }"></c:out></span></p>
 	<br>
 
 	<div class="row">

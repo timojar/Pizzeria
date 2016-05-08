@@ -399,4 +399,63 @@ public class AsiakasDAO {
 		return asiakaslista;
 	};
 
+	
+	
+	
+	public void MuokkaAsiakas(int asiakasnumero, String etunimi, String sukunimi,
+			String email,  String numerostr,
+			String toimosoite, String postitmp, String postinro)
+	
+	{
+		
+		Connection conn;		
+		ConnectionFactory yhteys = new ConnectionFactory();	
+		
+				
+		conn = yhteys.getConnection();
+
+			try {
+				String sql = "Update Asiakas set Email = ?, Etunimet = ?, Sukunimi = ?, Puhelin = ?, osoite = ?, tmp = ?, postinro = ? where id = ?";
+				
+				
+				PreparedStatement stmupdate = conn.prepareStatement(sql);
+				stmupdate.setString(1, email);
+				stmupdate.setString(2, etunimi);
+				stmupdate.setString(3, sukunimi);
+				stmupdate.setString(4, numerostr);
+				stmupdate.setString(5, toimosoite);
+				stmupdate.setString(6, postitmp);
+				stmupdate.setString(7, postinro);
+				stmupdate.setInt(8, asiakasnumero);
+				stmupdate.executeUpdate();
+
+				
+				
+			}
+			
+			catch (Exception e) {
+			e.printStackTrace();
+				System.out.println("Palautus ei onnistunut");	
+				
+			}
+			
+			finally {
+				yhteys.suljeYhteys(conn);
+			}	
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

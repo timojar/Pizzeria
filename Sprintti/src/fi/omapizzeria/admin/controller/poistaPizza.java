@@ -67,7 +67,7 @@ public class poistaPizza extends HttpServlet {
 			
 		}
 
-		response.sendRedirect("/Sprintti/controller?added=true");
+		response.sendRedirect("/Sprintti/controller");
 
 	}
 

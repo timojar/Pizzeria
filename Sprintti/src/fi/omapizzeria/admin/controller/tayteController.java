@@ -34,71 +34,21 @@ public class tayteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+boolean vahvistus=false;
+		
+		HttpSession muistipizzasta= request.getSession(false);
+		
+		vahvistus= tunnistaKayttaja(request, response);
+		
+		if (vahvistus == true) {
 
-AdminDao admintiedot= new AdminDao();
-		
-		boolean vahvistus=false;
-		String Kayttajanimi="";
-		String Salasana="";
-		
-		
-		HttpSession sessio = request.getSession(false);
-		Cookie[] cookies= request.getCookies();
-		if(cookies!=null){
-			
-			for(int i=0; i<cookies.length; i++){
-				
-				
-				if("kayttunnus".equals(cookies[i].getName())){
-					Kayttajanimi=cookies[i].getValue();
-				}
-				
-				
-				if("password".equals(cookies[i].getName())){
-					Salasana=cookies[i].getValue();
-				}
-				
-				
-			}
 		}
-		System.out.println("testi2121 "+Kayttajanimi);
-		
-		if(Salasana.equals("") && Kayttajanimi.equals("")){
-		try {
-			
-	    Kayttajanimi=(String)sessio.getAttribute("tunnus");
-		Salasana=(String)sessio.getAttribute("salasana");
-		
-		
-		}
-		catch(Exception e){
-			
-		}
-		}
-		
-		try {
 
-			
-			vahvistus=admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
-				
-				if(vahvistus==true){
-					
-								
-			
-					System.out.println("Testi");
-				}
-		
-				else {
-					request.getRequestDispatcher("Login.jsp").forward(request, response);
-				}
-	
-		
+		else if (vahvistus == false) {
+			request.getRequestDispatcher("Login.jsp").forward(request,
+					response);
 		}
-		
-		catch (Exception e) {
-			e.printStackTrace();
-			request.getRequestDispatcher("Login.jsp").forward(request, response);	
-		}
+
 		
 		request.getRequestDispatcher("luoTayte.jsp").forward(request, response);
 	}
@@ -135,6 +85,67 @@ AdminDao admintiedot= new AdminDao();
 	
 	response.sendRedirect("/Sprintti/tayteController?added=true");
 	}
+	
+	
+	
+	
+	private boolean tunnistaKayttaja(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException{
+		
+		
+		boolean vahvistus = false;
+		AdminDao admintiedot = new AdminDao();
+		String Kayttajanimi = "";
+		String Salasana = "";
+		
+		HttpSession sessio = request.getSession(false);
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+
+			for (int i = 0; i < cookies.length; i++) {
+
+				if ("kayttunnus".equals(cookies[i].getName())) {
+					String logged = "logged";
+					Kayttajanimi = cookies[i].getValue();
+					request.setAttribute("logged", logged);
+					request.setAttribute("tunnus", Kayttajanimi);
+				}
+
+				if ("password".equals(cookies[i].getName())) {
+					Salasana = cookies[i].getValue();
+				}
+
+			}
+		}
+
+		if (Salasana.equals("") && Kayttajanimi.equals("")) {
+			try {
+
+				Kayttajanimi = (String) sessio.getAttribute("tunnus");
+				Salasana = (String) sessio.getAttribute("salasana");
+
+			} catch (Exception e) {
+
+			}
+		}
+
+		try {
+
+			vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
+			
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+	
+		
+		return vahvistus;
+	}
+	
+	
 
 	
 }

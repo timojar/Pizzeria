@@ -60,6 +60,10 @@ color: black;
 margin-left: 260px;
 font-weight: bold}
 
+.onnistui {color: #00ff00}
+.eionnistunut {color: #ff0000}
+
+
 #tiedot input, #tiedot p  {margin-left:500px;}
 
 

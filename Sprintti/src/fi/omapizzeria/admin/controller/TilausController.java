@@ -110,7 +110,6 @@ public class TilausController extends HttpServlet {
 		 * on yhteinen id. Asiakkaan luodessa luoAsiakas()-metodi palauttaa
 		 * KantaAsiakas-olion, josta saadan Asiakas-id.
 		 */
-		KantaAsiakas asiakas = null;
 
 		boolean eiNumero = false;
 
@@ -147,7 +146,6 @@ public class TilausController extends HttpServlet {
 			// TODO: handle exception
 		}
 
-		String salattavaTeksti = null;
 		String etunimi = request.getParameter("etunimi");
 		String sukunimi = request.getParameter("sukunimi");
 		String numerostr = request.getParameter("numero");
@@ -159,7 +157,7 @@ public class TilausController extends HttpServlet {
 		String email = request.getParameter("email");
 		String toimitustapa = request.getParameter("toimtapa");
 		String maksutapa = request.getParameter("maksutapa");
-		String asiakasstr="";
+		String asiakasstr = "";
 		asiakasstr = request.getParameter("asiakasnro");
 		int asiakasnumero = 0;
 		try {
@@ -168,41 +166,20 @@ public class TilausController extends HttpServlet {
 
 			// TODO: handle exception
 		}
-		if (eiNumero == false && ostoslista.size()>0) {
-			System.out.println("Asikas" + asiakasnumero);
-			if (asiakasnumero==0) {
-				asiakas = a.luoAsiakas(etunimi, sukunimi, email, salattavaTeksti,
-								numerostr, toimosoite, postitmp, postinro);
-				System.out.println("asiakasnro "+asiakasnumero);
-				asiakasnumero = asiakas.getId();
-				
-			}
 
-			int tilausnumero = tilauskasittely.luoTilaus(asiakasnumero,
-					tilausajankohta, toimitustapa, maksutapa, yhteishinta);
-
-			rivikasittely.luoTilausRivi(ostoslista, tilausnumero);
-			
-			ostoslista=new ArrayList<Pizza>();
-			
-			muistiostoslistasta.setAttribute("ostoslista", ostoslista);
-			request.getRequestDispatcher("kuittaus.jsp").forward(request,
-					response);
-
-			
+		if (ostoslista != null) {
+			teeTilaus(request, response, eiNumero, ostoslista, asiakasnumero,
+					etunimi, sukunimi, email, numerostr, toimosoite, postinro,
+					postitmp, toimitustapa, maksutapa, yhteishinta);
 		}
 
-		
-		
-		
-		
 		if (eiNumero == true) {
 
 			response.sendRedirect("/Sprintti/TilausController?number=true");
 
 		}
 
-		else if (ostoslista == null) {
+		else if (ostoslista == null || ostoslista.size() == 0) {
 
 			response.sendRedirect("/Sprintti/menuController?shoppingcart=true");
 
@@ -210,16 +187,55 @@ public class TilausController extends HttpServlet {
 
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	private void teeTilaus(HttpServletRequest request,
+			HttpServletResponse response, boolean eiNumero,
+			List<Pizza> ostoslista, int asiakasnumero, String etunimi,
+			String sukunimi, String email, String numerostr, String toimosoite,
+			String postinro, String postitmp, String toimitustapa,
+			String maksutapa, double yhteishinta) throws ServletException,
+			IOException {
+
+		String salattavaTeksti = null;
+		KantaAsiakas asiakas = null;
+		AsiakasDAO a = new AsiakasDAO();
+		TilausRiviDao rivikasittely = new TilausRiviDao();
+		TilausDao tilauskasittely = new TilausDao();
+		Date date = new Date();
+		SimpleDateFormat Totimestamp = new SimpleDateFormat("yyy.MM.dd hh:mm");
+		String tilausajankohta = null;
+		HttpSession muistiostoslistasta = request.getSession(false);
+
+		if (eiNumero == false && ostoslista.size() > 0) {
+			System.out.println("Asikas" + asiakasnumero);
+			if (asiakasnumero == 0) {
+				asiakas = a.luoAsiakas(etunimi, sukunimi, email,
+						salattavaTeksti, numerostr, toimosoite, postitmp,
+						postinro);
+				System.out.println("asiakasnro " + asiakasnumero);
+				asiakasnumero = asiakas.getId();
+
+			}
+
+			else if (asiakasnumero != 0) {
+				a.MuokkaAsiakas(asiakasnumero, etunimi, sukunimi, email,
+						numerostr, toimosoite, postitmp, postinro);
+			}
+
+			int tilausnumero = tilauskasittely.luoTilaus(asiakasnumero,
+					tilausajankohta, toimitustapa, maksutapa, yhteishinta);
+
+			rivikasittely.luoTilausRivi(ostoslista, tilausnumero);
+
+			ostoslista = new ArrayList<Pizza>();
+
+			muistiostoslistasta.setAttribute("ostoslista", ostoslista);
+			request.getRequestDispatcher("kuittaus.jsp").forward(request,
+					response);
+
+		}
+
+	}
+
 	private int tuoAsiakasnumero(HttpServletRequest request,
 			HttpServletResponse response) {
 
