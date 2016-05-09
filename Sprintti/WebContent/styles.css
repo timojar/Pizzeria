@@ -29,7 +29,7 @@ background-color: green				  }
 
 
 
-#sisältö  {margin-top: 150px;
+#sisalto   {margin-top: 150px;
 
 width=650px;
 	
@@ -37,25 +37,13 @@ width=650px;
 
 
 
-#pylvas {
-	background-color: green;
-		width: 160px;
-		
-		float: left;}
-		
-#pylvas {
-	background-color: green;
-		width: 160px;
-		
-		height:300px;}		
-
 h2 {text-align: center;}
 
-#sisältö input {margin-left: 360px;}
+#section  input {margin-left: 360px;}
 
-#sisältö delete {width: 50px}
+#section  delete {width: 50px}
 
-#sisältö p, #sisältö  format {font-style: serif;
+#section  p, #section   format {font-style: serif;
 color: black;
 margin-left: 260px;
 font-weight: bold}
@@ -78,6 +66,8 @@ font-weight: bold}
 #pizzat {float:left;
 margin-left: 200px}
 #add {margin-left: 100px}
+
+
 
 
 #nro {width: 40px

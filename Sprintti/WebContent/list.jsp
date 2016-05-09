@@ -69,7 +69,7 @@
 
 
 	
-		<div id=sisältö>
+		<div id="section">
 
 
 <c:forEach items="${taytteetvahissa }" var="t">
