@@ -163,7 +163,7 @@
 				</div></li>
 			<li><img src="Kuvat/Wines_3.jpg"> <!-- random image -->
 				<div class="caption center-align">
-					<h3>Aito firenzen henki</h3>
+					<h3>Aito Firenzen henki</h3>
 					<h5 class="light grey-text text-lighten-3">Nauti aidoista
 						italialaisista viineistä</h5>
 				</div></li>

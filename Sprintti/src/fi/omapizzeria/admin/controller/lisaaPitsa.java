@@ -58,16 +58,21 @@ public class lisaaPitsa extends HttpServlet {
 		boolean hintavirhe = false;
 		boolean taytevirhe=false;
 		String[] taytteet = request.getParameterValues("taytteet");
-		if(taytteet.length>7){
-			taytevirhe=true;
-		}
-
+		
 		try {
 			for (int i = 0; i < taytteet.length; i++) {
 				tayteId = Integer.parseInt(taytteet[i]);
 				taytelista.add(taytehallinata.tuoTayte(tayteId));
 
-			}}
+			}
+			
+			if(taytteet.length>7){
+				taytevirhe=true;
+			}
+
+		
+		
+		}
 		catch(NullPointerException e){
 			taytevirhe=true;
 		}
