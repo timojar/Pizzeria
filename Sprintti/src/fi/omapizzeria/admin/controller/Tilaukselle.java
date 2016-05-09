@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.text.DecimalFormat;
 
 import dao.AdminDao;
+import dao.PizzaDAO;
 import dao.TayteDAO;
 import dao.TilausDao;
 import dao.TilausRiviDao;
@@ -116,8 +117,14 @@ public class Tilaukselle extends HttpServlet {
 		Tilausrivi rivi = null;
 		String linebreak = System.getProperty("line.separator");
 		rivi = rivit.get(0);
-
+		PizzaDAO kanta = new PizzaDAO();
 		kulutaTaytteet(rivit);
+		
+	boolean	saatavuusyli15=false;
+		List<PizzaTayte>noSalepizzas=kanta.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
+		
+		poistaMenusta(noSalepizzas);
+		
 
 		for (int i = 0; i < rivit.size(); i++) {
 			rivi = rivit.get(i);
@@ -235,4 +242,34 @@ public class Tilaukselle extends HttpServlet {
 		return vahvistus;
 	}
 
+	
+	
+	
+	
+	private void poistaMenusta(List<PizzaTayte>noSalepizzas){
+		PizzaDAO kanta = new PizzaDAO();
+			
+	for(int i=0; i<noSalepizzas.size(); i++)	{
+		
+	PizzaTayte pt=noSalepizzas.get(i);
+		int piiloitusid=pt.getPizzaid();
+		kanta.piilotaPizza(piiloitusid);
+		
+		
+	}
+			
+			
+	
+			
+			
+		}
+		
+	
+	
+	
+	
+	
+	
+	
+	
 }
