@@ -97,7 +97,7 @@ boolean vahvistus=false;
 	Tayte tayte=taytehallinta.tuoTayte(tayteId);
 	
 	request.setAttribute("tayte", tayte); 
-	request.getRequestDispatcher("tayte.jsp").forward(request, response);
+	request.getRequestDispatcher("WEB-INF/tayte.jsp").forward(request, response);
 		
 	}
 

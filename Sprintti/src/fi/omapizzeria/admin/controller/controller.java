@@ -136,7 +136,7 @@ public class controller extends HttpServlet {
 		request.setAttribute("lista", pizzalista);
 
 		if (vahvistus == true) {
-			request.getRequestDispatcher("list.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/list.jsp").forward(request, response);
 		}
 
 	}

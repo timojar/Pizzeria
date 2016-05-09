@@ -50,7 +50,7 @@ boolean vahvistus=false;
 		}
 
 		
-		request.getRequestDispatcher("luoTayte.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/luoTayte.jsp").forward(request, response);
 	}
 
 	/**

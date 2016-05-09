@@ -86,7 +86,7 @@ public class Tilaukselle extends HttpServlet {
 		request.setAttribute("tilausid", tilausNro);
 		request.setAttribute("rivit", rivit);
 
-		request.getRequestDispatcher("tilaus.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/tilaus.jsp").forward(request, response);
 
 	}
 

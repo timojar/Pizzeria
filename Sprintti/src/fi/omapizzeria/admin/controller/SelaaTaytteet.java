@@ -64,7 +64,7 @@ public class SelaaTaytteet extends HttpServlet {
 		
 		request.setAttribute("taytteet", taytteet);
 		
-		request.getRequestDispatcher("taytteet.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/taytteet.jsp").forward(request, response);
 		
 		
 		

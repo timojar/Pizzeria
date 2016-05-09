@@ -95,7 +95,7 @@ for(Tilaus t : tilaukset) {
 		
 		
 		
-		request.getRequestDispatcher("tilaukset.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/tilaukset.jsp").forward(request, response);
 		
 		
 		
