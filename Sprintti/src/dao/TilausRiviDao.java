@@ -105,7 +105,7 @@ public List<Tilausrivi> haeRivit(int tilausNro){
 }
 
 
-public void poistaRiv(int tilausnumero){
+public void poistaRiv(int tilausnro){
 	
 	Connection conn;
 	
@@ -118,7 +118,7 @@ public void poistaRiv(int tilausnumero){
 try {
 	String sqldelete = "delete from TilausRivi where tilausnumero=?";
 	PreparedStatement stmtdelete = conn.prepareStatement(sqldelete);
-	stmtdelete.setInt(1, tilausnumero);
+	stmtdelete.setInt(1, tilausnro);
 	stmtdelete.executeUpdate();
 	
 	

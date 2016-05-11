@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.TilausDao;
+import dao.TilausRiviDao;
 
 /**
  * Servlet implementation class PoistaTilaus
@@ -40,7 +41,7 @@ public class PoistaTilaus extends HttpServlet {
 		
 
 		TilausDao tilauskasittely=new TilausDao();
-		
+		TilausRiviDao rivihhalinta=new TilausRiviDao();
 		String idstr=request.getParameter("id");	
 		int tilausnro=0;
 		try {
@@ -50,15 +51,14 @@ public class PoistaTilaus extends HttpServlet {
 			// TODO: handle exception
 		}
 		
-		int tilausNro=tilausnro;
+	
 	
 		String item="";
 		
 		
-		String status="maksettu";
-		
-		tilauskasittely.vahvistaTilaus(tilausnro,status);
-		;
+	
+		rivihhalinta.poistaRiv(tilausnro);
+		tilauskasittely.poistaTilaus(tilausnro);
 			
 		
 		response.sendRedirect("/Sprintti/SelaaTilauksia");	

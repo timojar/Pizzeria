@@ -304,7 +304,7 @@ public List<Tilaus>	 lajitteletilaukse(String tilauksenstatus){
 
 
 
-public void poistaTilaus(int tilausnumero){
+public void poistaTilaus(int tilausnro){
 	
 	Connection conn;
 	
@@ -317,7 +317,7 @@ public void poistaTilaus(int tilausnumero){
 try {
 	String sqldelete = "delete from Tilaus where tilausnumero=?";
 	PreparedStatement stmtdelete = conn.prepareStatement(sqldelete);
-	stmtdelete.setInt(1, tilausnumero);
+	stmtdelete.setInt(1, tilausnro);
 	stmtdelete.executeUpdate();
 	
 	
