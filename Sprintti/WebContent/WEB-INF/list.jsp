@@ -115,28 +115,15 @@
 				
 				<c:if test="${pizzat.piiloitus == 'nosale'}"> <p><span class="nosale">Ei ole myynnissä</span></p></c:if>
 
-				<%--Pizzanpoisto: Jokaisen pizzan kohdalla on poista-nappi, jota
-				painamalla lähetetään pizzan id-numero parametrina controller-servlettiin
 				
-				--%>
-<br>
-				<form action="poistaPizza" method="post" id="delete">
-					<input type="hidden" name="tunnus" value="${pizzat.id }"> <input
-						type="submit"  value="poista">
 
-				</form>
-				<br>
-
-	<%--Pizzan piiloitus: piilota-nappi lähettää Pizza id-atribuutin arvon parametrina
-	 controller-luokkaan, jossa se käännetään int-tietotyypiksi.
-	 Käännettynä se menee PizzaDAO-luokkaan, jossa pizza 
-	 saa "nosale"-arvon tietokannan piilota-kenttään. MenuDao-luokka tuo niitä pizzoja menuController-luokkaan
-	 joissa ei ole merkintää piilota kentässä. Luokka "menuController" ohjaa pizzoja ruokalistaan.
-	 
-				--%>
 		
+	
+		
+<!--Pizzan muokkaus: Muokkaa-nappia painamalla pizzaid menee paramtrina MuokkaaPizza-servletin get-metodille.
+-->
 
-			<br>
+			
 		<form action="MuokkaaPizza" method="get">
 		
 		<input type="hidden" name="muokkausid" value="${pizzat.id }">		
@@ -145,6 +132,12 @@
 		</form>
 
 			</c:forEach>
+
+
+<!--Pizzan lisäys: Lomakkeen tiedot  menee lisaaPitsa-servletille post-metodille.
+-->
+
+
 
 			<form method="post" action="lisaaPitsa" id="tiedot">
 
@@ -161,6 +154,10 @@
 			
 			<label>Valitse täytteet (max 6)</label>
 				<br>
+				
+				<!--Täytteiden listaus: checkoboxit tulevat loopissa täytelistan mukaan
+				
+				-->	
 			
 			<c:forEach items="${taytelista}" var="tayte"> 
 						
@@ -190,7 +187,9 @@
 
 <c:if test="${noofPages > 1}">
 		
-		
+<!--Paginointiruudukko: Ruudukko luodaan jos sivuja on enemmän kuin yksi. Sivua valitsemalla jsp lähettää
+parametrin servletille, joka palauttaa pizzarivit tietokannasta algrotimin mukaisesti.
+-->		
 	
  <ul class="pagination">
     <c:forEach begin="${startindex}" end ="${noofPages}" var="i">

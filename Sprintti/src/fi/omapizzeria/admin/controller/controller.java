@@ -57,37 +57,42 @@ public class controller extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		
-		 vahvistus= tunnistaKayttaja(request, response);
-		
+		vahvistus = tunnistaKayttaja(request, response);
+
 		if (vahvistus == true) {
 
 		}
 
 		else if (vahvistus == false) {
-			request.getRequestDispatcher("Login.jsp").forward(request,
-					response);
+			request.getRequestDispatcher("Login.jsp")
+					.forward(request, response);
 		}
-		boolean saatavuusyli15=true;
-		
+		boolean saatavuusyli15 = true;
+
 		PizzaDAO kanta = new PizzaDAO();
-		
-		List<PizzaTayte>lowofFillings=kanta.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
-		
-		
-		saatavuusyli15=false;
-		List<PizzaTayte>noSalepizzas=kanta.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
-		
+
+		List<PizzaTayte> lowofFillings = kanta.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
+
+		saatavuusyli15 = false;
+		List<PizzaTayte> noSalepizzas = kanta
+				.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
+
 		poistaMenusta(noSalepizzas);
-		
+
 		int noofPizzas, pizzasperPage, page, nextIndex, noofPages, startindex;
 
-		
 		TayteDAO taytehallinta = new TayteDAO();
 
+		/**
+		 * Pizzojen listaus: Haetaan pizzojen m‰‰r‰ paginointi-algoritmi‰ varten
+		 */
 		noofPizzas = kanta.getnoofPizzas();
-		pizzasperPage = 10;
+		pizzasperPage = 40;
 		page = 1;
+		
+		/**
+		 * Pizzojen listaus: Otetaan sivunumero parametrina vastaan,
+		 */
 		try {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
@@ -101,13 +106,30 @@ public class controller extends HttpServlet {
 
 		}
 
-		String v = (String) request.getAttribute("visible");
+		
 
-		System.out.println(v);
+		
 		noofPages = 0;
-		startindex = 2;
+		startindex = 1;
+		
+		/**
+		 * Pizzojen listaus: nextIndex-arvo vastaa indexi‰, mist‰ rivien kohdasta tuodaan pizzoja 
+		 * tietokannasta ja pizzasperPage-arvo vastaaa kuinka monta pizzaa tuodaan tietokannasta
+		 */
+		
+		
 		nextIndex = (page - 1) * pizzasperPage;
 		double jakojaanos = (double) noofPizzas % pizzasperPage;
+		
+		
+		/**
+		 * Paginointiruudukko: nooofPages vastaa sivujen lukukum‰‰r‰st‰.
+		 * Se saadaan jakamalla noofPizzas-arvo pizzasperPage.
+		 * T‰m‰ p‰tee ainoastaan jos jakoj‰‰nnˆs on 0 (eli  jako menee tasa)
+		 * Tapauksessa, ett‰ jako ei menis tasan esim 81/40 n‰ytt‰is vaan 2 sivua ja ylim‰‰r‰inen pizza
+		 * j‰isi n‰ytt‰m‰tt‰. Sen takia pit‰‰ lis‰t‰ 1 lis‰ksi sivum‰‰r‰‰n jos jakoj‰‰nnˆs on isomi kuin nolla
+		 */
+		
 		System.out.println("jakoj‰‰nnˆs " + jakojaanos);
 		if (jakojaanos > 0) {
 
@@ -120,15 +142,27 @@ public class controller extends HttpServlet {
 			noofPages = noofPizzas / pizzasperPage;
 		}
 
+		System.out.println("Sivum‰‰r‰ " + noofPages);
+		
+		/**
+		 * Pizzojen listaus: Haetaan kannasta pizzat listalle algoritmin mukaan ja laitetaan pizzalista
+		 * request-oliolle
+		 */
+		
 		List<Pizza> pizzalista = kanta.haePizzat(nextIndex, pizzasperPage);
+		
+		
+		/**
+		 * T‰ytteiden listaus: Haetaan kannasta t‰ytteet listalle, jotta voidaan k‰ytt‰‰ niit‰ pizzat‰ytteiden valintaan
+		 * 	 ja laitetaan lista request-oliolle
+		 */
+		
+		
 		List<Tayte> taytelista = taytehallinta.haeTaytteet();
+
 		
-		
-		if (noofPages > 1) {
-			startindex = 1;
-		}
-		
-		request.setAttribute("taytteetvahissa",lowofFillings );
+
+		request.setAttribute("taytteetvahissa", lowofFillings);
 		request.setAttribute("currentpage", page);
 		request.setAttribute("startindex", startindex);
 		request.setAttribute("taytelista", taytelista);
@@ -136,7 +170,8 @@ public class controller extends HttpServlet {
 		request.setAttribute("lista", pizzalista);
 
 		if (vahvistus == true) {
-			request.getRequestDispatcher("WEB-INF/list.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/list.jsp").forward(request,
+					response);
 		}
 
 	}
@@ -149,8 +184,6 @@ public class controller extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		
-		
 		AdminDao admintiedot = new AdminDao();
 
 		/**
@@ -161,15 +194,15 @@ public class controller extends HttpServlet {
 		String Kayttajanimi = request.getParameter("Kayttajanimi");
 		String muisti = request.getParameter("memory");
 
-		kayttvahvistus=admintiedot.checkUser(Kayttajanimi);
+		kayttvahvistus = admintiedot.checkUser(Kayttajanimi);
 		/**
 		 * Tarkistetaan onko kirjautuja admin vai k‰ytt‰j‰. Jos kirjautuja on
 		 * admin, salataan salasana ja k‰yd‰‰nn admin tunnistus l‰pi
 		 */
 
 		if (kayttvahvistus == true) {
-			
-		adminTunnistus(request, response, salattavaTeksti, Kayttajanimi);		
+
+			adminTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 		}
 
 		/**
@@ -180,27 +213,18 @@ public class controller extends HttpServlet {
 		else
 
 		{
-asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
+			asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 
 		}
 
-		
-
-		
 	}
 
-	
-	
-	
-	
-	
-	
 	private void asiakasTunnistus(HttpServletRequest request,
 			HttpServletResponse response, String salattavaTeksti,
-			String Kayttajanimi)throws ServletException, IOException {
-		KantaAsiakas k=null;
-		String etunimi=null;
-		String sukunimi=null;
+			String Kayttajanimi) throws ServletException, IOException {
+		KantaAsiakas k = null;
+		String etunimi = null;
+		String sukunimi = null;
 		AsiakasDAO asiakastiedot = new AsiakasDAO();
 		HttpSession sessio = request.getSession(false);
 		String muisti = request.getParameter("memory");
@@ -216,10 +240,10 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 
 		if (asiakasvahvistus == true) {
 
-			k=asiakastiedot.getAsiakas(Kayttajanimi);
-			etunimi=k.getEtunimi();
-			sukunimi=k.getSukunimi();
-			
+			k = asiakastiedot.getAsiakas(Kayttajanimi);
+			etunimi = k.getEtunimi();
+			sukunimi = k.getSukunimi();
+
 			sessio = request.getSession(true);
 			String logged = "logged";
 			sessio.setAttribute("asiakasnumero", k.getId());
@@ -231,20 +255,21 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 			sessio.setAttribute("salasana", Salasana);
 			if (muisti != null) {
 
-				lisaaAsiakasEvasteet(request, response, logged, Kayttajanimi, Salasana, etunimi, sukunimi, k);
+				lisaaAsiakasEvasteet(request, response, logged, Kayttajanimi,
+						Salasana, etunimi, sukunimi, k);
 
 			}
 			response.sendRedirect("/Sprintti/AsiakasController");
 
 		}
-		
 
 		/**
 		 * Jos tunnistautuminen on v‰‰rin ohtajaan takaisin login.jsp:lle
 		 */
 
-		else  {
-			request.setAttribute("virhe", "K‰ytt‰j‰tunnus tai salasana on v‰‰rin!");
+		else {
+			request.setAttribute("virhe",
+					"K‰ytt‰j‰tunnus tai salasana on v‰‰rin!");
 			request.getRequestDispatcher("Login.jsp")
 					.forward(request, response);
 
@@ -254,72 +279,52 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 
 	}
 
-	
-	
-	
-	
-	
 	private void adminTunnistus(HttpServletRequest request,
 			HttpServletResponse response, String salattavaTeksti,
-			String Kayttajanimi) throws ServletException, IOException 
-	{
-		
-		
-		
+			String Kayttajanimi) throws ServletException, IOException {
+
 		HttpSession sessio = request.getSession(false);
 		String muisti = request.getParameter("memory");
-		
+
 		AdminDao admintiedot = new AdminDao();
 
-		Salasana = admintiedot.salaaTeksti(salattavaTeksti,
-				Kayttajanimi);
-		
-		
-		vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);	
-		
-		
-		
+		Salasana = admintiedot.salaaTeksti(salattavaTeksti, Kayttajanimi);
+
+		vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
+
 		/**
 		 * Jos adminvahvistus on true luodaan sessio, johon talletetaan
 		 * asiakkaan tunnukset. Jos kirjautuja on merkinnyt muista
 		 * minut-toiminnon, tunnukset talletetaan ev‰steisiin. Ohjataan lopuksi
 		 * controller:lle.
 		 */
-		
-		
+
 		if (vahvistus == true) {
 
 			sessio = request.getSession(true);
 			sessio.setAttribute("tunnus", Kayttajanimi);
 			sessio.setAttribute("salasana", Salasana);
-			String logged="logged";
+			String logged = "logged";
 			if (muisti != null) {
 				lisaaEvasteet(request, response, logged, Kayttajanimi, Salasana);
-				
-			}
-			response.sendRedirect("/Sprintti/controller");}
-			else {
-				request.setAttribute("virhe", "K‰ytt‰j‰tunnus tai salasana on v‰‰rin!");
-				request.getRequestDispatcher("Login.jsp").forward(request,
-						response);
 
 			}
-		
+			response.sendRedirect("/Sprintti/controller");
+		} else {
+			request.setAttribute("virhe",
+					"K‰ytt‰j‰tunnus tai salasana on v‰‰rin!");
+			request.getRequestDispatcher("Login.jsp")
+					.forward(request, response);
 
-		
-	
+		}
 
-		
 	}
-	
-	
-	
-	
-	
-	private void lisaaAsiakasEvasteet (HttpServletRequest request,
-			HttpServletResponse response, String login,
-			String Kayttajanimi, String Salasana, String etunimi, String sukunimi, KantaAsiakas k) throws ServletException, IOException{
-		
+
+	private void lisaaAsiakasEvasteet(HttpServletRequest request,
+			HttpServletResponse response, String login, String Kayttajanimi,
+			String Salasana, String etunimi, String sukunimi, KantaAsiakas k)
+			throws ServletException, IOException {
+
 		Cookie ck = new Cookie("kayttunnus", Kayttajanimi);
 		ck.setMaxAge(60 * 60 * 24 * 365);
 		response.addCookie(ck);
@@ -327,36 +332,29 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 		ck = new Cookie("password", Salasana);
 		ck.setMaxAge(60 * 60 * 24 * 365);
 		response.addCookie(ck);
-		
+
 		ck = new Cookie("etunimi", etunimi);
 		ck.setMaxAge(60 * 60 * 24 * 365);
 		response.addCookie(ck);
-		
+
 		ck = new Cookie("sukunimi", sukunimi);
 		ck.setMaxAge(60 * 60 * 24 * 365);
 		response.addCookie(ck);
 
-		
-		
-		ck = new Cookie("puhelin", ""+k.getNumero());
+		ck = new Cookie("puhelin", "" + k.getNumero());
 		ck.setMaxAge(60 * 60 * 24 * 365);
 		response.addCookie(ck);
 
-		ck = new Cookie("id", ""+k.getId());
+		ck = new Cookie("id", "" + k.getId());
 		ck.setMaxAge(60 * 60 * 24 * 365);
 		response.addCookie(ck);
 
-
-		
-		
 	}
-	
-	
-	
-	private void lisaaEvasteet (HttpServletRequest request,
-			HttpServletResponse response, String login,
-			String Kayttajanimi, String Salasana) throws ServletException, IOException{
-		
+
+	private void lisaaEvasteet(HttpServletRequest request,
+			HttpServletResponse response, String login, String Kayttajanimi,
+			String Salasana) throws ServletException, IOException {
+
 		Cookie ck = new Cookie("kayttunnus", Kayttajanimi);
 		ck.setMaxAge(60 * 60 * 24 * 365);
 		response.addCookie(ck);
@@ -365,52 +363,29 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 		ck.setMaxAge(60 * 60 * 24 * 365);
 		response.addCookie(ck);
 
-		
-		
 	}
-	
-	
-	
-	
-	
-	private void poistaMenusta(List<PizzaTayte>noSalepizzas){
-		PizzaDAO kanta = new PizzaDAO();
-			
-	for(int i=0; i<noSalepizzas.size(); i++)	{
-		
-	PizzaTayte pt=noSalepizzas.get(i);
-		int piiloitusid=pt.getPizzaid();
-		kanta.piilotaPizza(piiloitusid);
-		
-		
-	}
-			
-			
-	
-			
-			
-		}
-		
-		
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	private void poistaMenusta(List<PizzaTayte> noSalepizzas) {
+		PizzaDAO kanta = new PizzaDAO();
+
+		for (int i = 0; i < noSalepizzas.size(); i++) {
+
+			PizzaTayte pt = noSalepizzas.get(i);
+			int piiloitusid = pt.getPizzaid();
+			kanta.piilotaPizza(piiloitusid);
+
+		}
+
+	}
+
 	private boolean tunnistaKayttaja(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException{
-		
-		
+			HttpServletResponse response) throws ServletException, IOException {
+
 		boolean vahvistus = false;
 		AdminDao admintiedot = new AdminDao();
 		String Kayttajanimi = "";
 		String Salasana = "";
-		
+
 		HttpSession sessio = request.getSession(false);
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
@@ -445,21 +420,15 @@ asiakasTunnistus(request, response, salattavaTeksti, Kayttajanimi);
 		try {
 
 			vahvistus = admintiedot.vahvistaTunnus(Salasana, Kayttajanimi);
-			
 
 		}
 
 		catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
-	
-		
+
 		return vahvistus;
 	}
-	
-	
-	
-	
-	
+
 }

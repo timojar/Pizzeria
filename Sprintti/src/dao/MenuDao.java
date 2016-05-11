@@ -44,7 +44,7 @@ public  List<Pizza> haePizzat()
 			while (hakutulokset.next()) {
 
 				/**
-				 * Pizzan piiloitus: haetaan kaikki pizzat myös kaikki atribuutit. Varsinkin piiloitus.atribuutti.
+				 * Pizzat ruokalistalle: haetaan kaikki pizzat myös kaikki atribuutit. Varsinkin piiloitus.atribuutti.
 				 */				
 				int id = hakutulokset.getInt("id");
 
@@ -54,7 +54,7 @@ public  List<Pizza> haePizzat()
 				String kuvaus = hakutulokset.getString("kuvaus");
 				String piilotamerkinta = hakutulokset.getString("piiloitus");
 				/**
-				 * Pizzan piiloitus: Jos piilota kenttä on tyhjä, voidaan lisätä pizza ruokalistalle.
+				 * Pizzan ruokalistalle: Jos piilota kenttä on tyhjä, voidaan lisätä pizza ruokalistalle.
 				 */			
 				
 			if (piilotamerkinta==null){

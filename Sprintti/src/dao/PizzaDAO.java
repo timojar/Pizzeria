@@ -359,6 +359,10 @@ System.out.println("Nosale");
 		conn = yhteys.getConnection();
 		int id=0;
 		String tayte=t.getTayteNimi();
+		
+		/**
+		 * Pizzan lisäys: Pizzan kuvaus saadaan algoritmeillä, jossa käydään valitut täytteet läpi.
+		 */
 		if(taytelista.size()>1){
 		for(int i=1; i<taytelista.size()-1; i++){
 			t=taytelista.get(i);
@@ -370,7 +374,9 @@ System.out.println("Nosale");
 		
 		}
 		
-		
+		/**
+		 * Pizzan lisäys: Selataan pizzat selaaPizzat()-metodilla, saadakseen uuden id:n uudelle pizzalle.
+		 */
 		
 		try {
 			

@@ -42,7 +42,9 @@ public class MuokkaaPizza extends HttpServlet {
 		
 		
 		boolean vahvistus=false;
-		
+		/**
+		 * Pizzan muokkaus: Otetaan vanha sessio k‰yttˆˆn, josta otetaan muokatun pizzan id
+		 */	
 		HttpSession muistipizzasta= request.getSession(false);
 		
 		vahvistus= tunnistaKayttaja(request, response);
@@ -59,6 +61,10 @@ public class MuokkaaPizza extends HttpServlet {
 		PizzaDAO kanta = new PizzaDAO();
 		int pizzaId=0;
 		
+		/**
+		 * Pizzan muokkaus: Otetaan pizzaid parametrina list.jsp:lt‰ vastaan. 
+		 * Jos parametri ei ole tyhj‰, luodaan uusi sessio, johon laitetaan pizzaid.
+		 */	
 	
 		String idstr=request.getParameter("muokkausid");
 		
@@ -68,6 +74,13 @@ public class MuokkaaPizza extends HttpServlet {
 		muistipizzasta.setAttribute("pizzaid", idstr);
 			
 		}
+		
+		/**
+		 * Jos parametri on tyhj‰ otetaan pizza sessiosta.
+		 * Tehd‰‰n t‰m‰ try-lohkon, jotta ohjelma ei kaadu nullpointer-poikkeukseen.
+		 * Poikkeus tapahtuu jos sessio-aika umpeutuu ja silloin selain ohjataan virhesivulle.
+		 */	
+		
 		try {
 		if(idstr==null){
 		idstr=(String) muistipizzasta.getAttribute("pizzaid");	
@@ -78,7 +91,9 @@ public class MuokkaaPizza extends HttpServlet {
 			request.getRequestDispatcher("errorpage.jsp").forward(request, response);
 		}
 		
-	
+		/**
+		 * Pizzan muokkaus: K‰‰nnet‰‰n pizzaid merkkijonosta int -muuttujaksi
+		 */	
 		try {
 			pizzaId=Integer.parseInt(idstr);
 			
@@ -94,12 +109,19 @@ public class MuokkaaPizza extends HttpServlet {
 		
 		poistaMenusta(noSalepizzas);
 		TayteDAO taytehallinta= new TayteDAO();
+		
+		
+		/**
+		 * Pizzan muokkaus: Haetaan pizza pizzaid:n avulla int-muuttujana
+		 */	
+		
 		Pizza pizza=kanta.bringPizza(pizzaId);
 		Pizza p=null;
 		List<Pizza> pizzalista=new ArrayList<Pizza>();
 		
-		
-		List<Pizza> menu=new ArrayList<Pizza>();
+		/**
+		 * Pizzan muokkaus: Lista vain yhdelle, jonka tiedot tulostetaan muokkaus.jsp:ss‰
+		 */	
 		pizzalista.add(pizza);
 		
 		List<Tayte>taytelista=taytehallinta.haeTaytteet();
