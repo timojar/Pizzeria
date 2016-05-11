@@ -53,7 +53,7 @@ public class PoistaTilaus extends HttpServlet {
 		
 	
 	
-		String item="";
+		
 		
 		
 	
