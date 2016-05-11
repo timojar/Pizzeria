@@ -105,6 +105,45 @@ public List<Tilausrivi> haeRivit(int tilausNro){
 }
 
 
+public void poistaRiv(int tilausnumero){
+	
+	Connection conn;
+	
+	ConnectionFactory yhteys = new ConnectionFactory();	
+	
+	conn = yhteys.getConnection();
+	
+	
+	
+try {
+	String sqldelete = "delete from TilausRivi where tilausnumero=?";
+	PreparedStatement stmtdelete = conn.prepareStatement(sqldelete);
+	stmtdelete.setInt(1, tilausnumero);
+	stmtdelete.executeUpdate();
+	
+	
+	
+} catch (SQLException e) {
+	// TODO: handle exception
+	
+	e.printStackTrace();
+}	
+finally {
+	
+	yhteys.suljeYhteys(conn);
+	
+	
+	
+}	
+	
+	
+	
+	
+	
+	
+	
+}
+
 
 
 }

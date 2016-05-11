@@ -302,4 +302,56 @@ public List<Tilaus>	 lajitteletilaukse(String tilauksenstatus){
 	
 }
 
+
+
+public void poistaTilaus(int tilausnumero){
+	
+	Connection conn;
+	
+	ConnectionFactory yhteys = new ConnectionFactory();	
+	
+	conn = yhteys.getConnection();
+	
+	
+	
+try {
+	String sqldelete = "delete from Tilaus where tilausnumero=?";
+	PreparedStatement stmtdelete = conn.prepareStatement(sqldelete);
+	stmtdelete.setInt(1, tilausnumero);
+	stmtdelete.executeUpdate();
+	
+	
+	
+} catch (SQLException e) {
+	// TODO: handle exception
+	
+	e.printStackTrace();
+}	
+finally {
+	
+	yhteys.suljeYhteys(conn);
+	
+	
+	
+}	
+	
+	
+	
+	
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
 }

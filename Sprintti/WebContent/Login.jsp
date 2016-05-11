@@ -60,8 +60,8 @@
 			<div class="row">
 				<div class="input-field col s3">
 					<i class="material-icons prefix">account_circle</i> <input
-						name="Kayttajanimi" type="text" length="15" class="validate"
-						required> <label for="first_name">Käyttäjänimi</label>
+						name="Kayttajanimi" type="text" length="100" class="validate"
+						required> <label for="first_name">Email</label>
 				</div>
 
 			</div>

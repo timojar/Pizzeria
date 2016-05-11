@@ -125,7 +125,23 @@
 
 
 </c:choose>
+<br>
+<c:if test="${tilauksenstatus!='maksettu' }">
 
+
+<form action="PoistaTilaus" method="post">
+
+<input type="hidden" value="${tilausid}" name="id">
+
+<button class="btn waves-effect waves-light" type="submit" name="action">Poista tilaus
+    <i class="material-icons right">send</i>
+  </button>
+</form>
+
+
+
+
+</c:if>
 
 
 
