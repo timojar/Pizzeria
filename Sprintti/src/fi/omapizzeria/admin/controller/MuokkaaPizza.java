@@ -153,6 +153,10 @@ public class MuokkaaPizza extends HttpServlet {
 		int pizzaId=0;
 		int tayteId=0;
 		String tayteNimi;
+		
+		/**
+		 * Pizzan muokkaus: otetaan parametrit vastaan
+		 */	
 		String idstr=request.getParameter("id");
 		String nimi=request.getParameter("nimi").trim();
 		String hintastr= request.getParameter("hinta").trim();
@@ -195,7 +199,7 @@ String [] taytteet=request.getParameterValues("taytteet");
 		
 		if(taytelista.size()==0){
 		
-		taytelista.add(new Tayte("kebab"));	
+		
 		
 		check=false;
 			

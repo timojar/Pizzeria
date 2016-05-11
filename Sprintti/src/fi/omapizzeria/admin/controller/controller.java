@@ -74,8 +74,7 @@ public class controller extends HttpServlet {
 		List<PizzaTayte> lowofFillings = kanta.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
 
 		saatavuusyli15 = false;
-		List<PizzaTayte> noSalepizzas = kanta
-				.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
+		List<PizzaTayte> noSalepizzas = kanta.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
 
 		poistaMenusta(noSalepizzas);
 
@@ -372,6 +371,7 @@ public class controller extends HttpServlet {
 
 			PizzaTayte pt = noSalepizzas.get(i);
 			int piiloitusid = pt.getPizzaid();
+			System.out.println("Pitäis"+piiloitusid);
 			kanta.piilotaPizza(piiloitusid);
 
 		}
