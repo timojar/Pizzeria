@@ -95,7 +95,7 @@
       <div class="row">
         <div class="input-field col s12">
          <i class="material-icons prefix">email</i>
-          <input id="email" type="email" length="20" class="validate" name="email" required>
+          <input id="email" type="email" length="120" class="validate" name="email" required>
           <label for="email">Email</label>
         </div>
       </div>
