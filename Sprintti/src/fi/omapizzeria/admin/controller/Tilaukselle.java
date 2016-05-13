@@ -118,6 +118,14 @@ public class Tilaukselle extends HttpServlet {
 		String linebreak = System.getProperty("line.separator");
 		rivi = rivit.get(0);
 		PizzaDAO kanta = new PizzaDAO();
+		/**
+		 * Inventaario: V‰hennet‰‰‰n t‰ytteen kohdalta yhden pizzan verran. Boolean-muuttuja 
+		 * saatavuusyli15 on vaan ehto, jos arvo on false dao palauttaa ryhmitellen pizzat,  joiden
+		 * saatavuus on alle 15, listaksi jota k‰ytet‰‰n pizzojen piiloitukseen.
+		 * 
+		 * Jos arvo on true, niill‰ palautetaan kaikki pizzat‰ytteet pizzoissa joiden saatavuus on alle 30.
+		 * T‰t‰ k‰ytet‰‰ Pizza listaukseen, jotta admin n‰kisi v‰hiss‰ olevat t‰ytteet ennen piiloitusta
+		 */	
 		kulutaTaytteet(rivit);
 		
 	boolean	saatavuusyli15=false;

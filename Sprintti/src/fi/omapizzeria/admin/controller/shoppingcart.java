@@ -63,6 +63,7 @@ public class shoppingcart extends HttpServlet {
 		HttpSession muistiostoslistasta= request.getSession(false);
 		PizzaDAO kanta = new PizzaDAO();
 		List<Pizza> ostoslista=null;
+		boolean noError=true;
 		
 		try { ostoslista=(List<Pizza>)muistiostoslistasta.getAttribute("ostoslista");
 			
@@ -90,7 +91,7 @@ public class shoppingcart extends HttpServlet {
 				
 			pizzaId=Integer.parseInt(idstr);
 			lkm=Integer.parseInt(lkmstr);
-			;
+			
 			}
 			
 			catch(Exception e){
@@ -122,14 +123,28 @@ public class shoppingcart extends HttpServlet {
 			
 			
 			
-			
+			try {
 			muistiostoslistasta.setAttribute("ostoslista", ostoslista);
+			}
+			catch (NullPointerException e){
+				
+			noError=false;	
+				
+			}
+			
+			
+			if(noError==true){
+			
+			response.sendRedirect("/Sprintti/shoppingcart");}
 			
 			
 			
+			else if(noError==false){
+				
+				request.getRequestDispatcher("errorpage.jsp").forward(request, response);	
+			}
 			
 			
-			response.sendRedirect("/Sprintti/shoppingcart");
 					
 			
 			}

@@ -23,7 +23,7 @@
 	media="screen,projection" />
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Insert title here</title>
+<title>Luo tayte</title>
 
 <!--Import jQuery before materialize.js-->
 	<script type="text/javascript"
@@ -58,22 +58,16 @@
 		
 		</div>
 
-	<!--  	<ul id=paavalikko>
-			<li><a href="controller">Näytä kaikki pizzat</a>
-			<li><a href="menuController">Ruokalista </a>
-			<li><a href="">Meille töihin </a>
-			<li><a href="tayteController">Luo täyte</a>
-			
-		</ul>
-		<div id="pylvas">
-		
-		<div id="column"></div>
-		
-		</div>
-
--->
+	
 <h4>Luo täyte</h4>
 <br>
+
+<c:choose>
+
+<c:when test="${not empty param.tayte }"><p><span class="onnistui">Täyte on luotu onnistuneesti!</span></p></c:when>
+
+<c:when test="${not empty param.error }"><p><span class="eionnistunut">Määrä ei ollut oikeassa numero muodossa</span></p></c:when>
+</c:choose>
 <br>
 
  <div class="row">
@@ -96,7 +90,7 @@
 			</button>
           
          
-  </button>
+ 
        
       </div>
     </form>

@@ -102,7 +102,14 @@ public class MuokkaaPizza extends HttpServlet {
 			// TODO: handle exception
 			
 					}
-		
+		/**
+		 * Inventaario: * saatavuusyli15 on vaan ehto, jos arvo on false dao palauttaa ryhmitellen pizzat,  joiden
+		 * saatavuus on alle 15, listaksi jota k‰ytet‰‰n pizzojen piiloitukseen. Admin ei pysty lis‰‰m‰‰n ruokalistaan
+		 * ennen kuin t‰ytteit‰ on v‰hint‰‰n 15
+		 * 
+		 * Jos arvo on true, niill‰ palautetaan kaikki pizzat‰ytteet pizzoissa joiden saatavuus on alle 30.
+		 * T‰t‰ k‰ytet‰‰ Pizza listaukseen, jotta admin n‰kisi v‰hiss‰ olevat t‰ytteet ennen piiloitusta
+		 */	
 		
 		Boolean saatavuusyli15=false;
 		List<PizzaTayte>noSalepizzas=kanta.naytaLopppuvatPizzatTaytteet(saatavuusyli15);
@@ -196,6 +203,12 @@ String [] taytteet=request.getParameterValues("taytteet");
 		
 		
 		}
+		
+		
+		/**
+		 * Pizzan muokkaus: Jos t‰ytteit‰ ei ole valittu check boolean-arvo
+		 *  ei anna  pizza kuvauksen muuttua
+		 */	
 		
 		if(taytelista.size()==0){
 		

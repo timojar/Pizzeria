@@ -66,7 +66,20 @@ public class controller extends HttpServlet {
 		else if (vahvistus == false) {
 			request.getRequestDispatcher("Login.jsp")
 					.forward(request, response);
+			
+			
 		}
+		
+		/**
+		 * Inventaario: V‰hennet‰‰‰n t‰ytteen kohdalta yhden pizzan verran. Boolean-muuttuja 
+		 * saatavuusyli15 on vaan ehto, jos arvo on false dao palauttaa ryhmitellen pizzat,  joiden
+		 * saatavuus on alle 15, listaksi jota k‰ytet‰‰n pizzojen piiloitukseen.
+		 * 
+		 * Jos arvo on true, niill‰ palautetaan kaikki pizzat‰ytteet pizzoissa joiden saatavuus on alle 30.
+		 * T‰t‰ k‰ytet‰‰ Pizza listaukseen, jotta admin n‰kisi v‰hiss‰ olevat t‰ytteet ennen piiloitusta
+		 */	
+		
+		
 		boolean saatavuusyli15 = true;
 
 		PizzaDAO kanta = new PizzaDAO();
@@ -310,10 +323,8 @@ public class controller extends HttpServlet {
 			}
 			response.sendRedirect("/Sprintti/controller");
 		} else {
-			request.setAttribute("virhe",
-					"K‰ytt‰j‰tunnus tai salasana on v‰‰rin!");
-			request.getRequestDispatcher("Login.jsp")
-					.forward(request, response);
+			request.setAttribute("virhe", "K‰ytt‰j‰tunnus tai salasana on v‰‰rin!");
+			request.getRequestDispatcher("Login.jsp").forward(request, response);
 
 		}
 

@@ -79,11 +79,13 @@ boolean vahvistus=false;
 	if(correct==true && nimi!=null){
 		
 	dao.luoTayte(nimi, saatavuus);	
-		
+	response.sendRedirect("/Sprintti/tayteController?tayte=true");	
 	}
 	
+	else if(correct==false){
+		response.sendRedirect("/Sprintti/tayteController?error=true");		
+	}
 	
-	response.sendRedirect("/Sprintti/tayteController?added=true");
 	}
 	
 	
