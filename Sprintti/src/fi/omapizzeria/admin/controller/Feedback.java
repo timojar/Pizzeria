@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import email.SahkoPosti;
 
 /**
+ * @Timo Jarmala
+ */
+/**
  * Servlet implementation class Feedback
  */
 @WebServlet("/Feedback")

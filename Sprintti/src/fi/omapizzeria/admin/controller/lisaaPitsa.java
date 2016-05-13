@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import dao.PizzaDAO;
 import dao.TayteDAO;
 import fi.omapizzeria.admin.bean.Tayte;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class lisaaPitsa
  */

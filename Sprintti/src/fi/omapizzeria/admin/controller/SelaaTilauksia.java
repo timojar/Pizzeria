@@ -17,7 +17,9 @@ import dao.AdminDao;
 import dao.AsiakasDAO;
 import dao.TilausDao;
 import dao.TilausRiviDao;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class SelaaTilauksia
  */

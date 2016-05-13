@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.TilausDao;
 import dao.TilausRiviDao;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class PoistaTilaus
  */

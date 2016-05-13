@@ -11,7 +11,9 @@ import java.util.List;
 
 import fi.omapizzeria.admin.bean.*;
 import salaus.Salaus;
-
+/**
+ * @Timo Jarmala
+ */
 public class AsiakasDAO {
 
 	private List<Asiakas> Asiakkaat, asiakaslista;

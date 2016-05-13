@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 import dao.AsiakasDAO;
 import fi.omapizzeria.admin.bean.Asiakas;
 import fi.omapizzeria.admin.bean.KantaAsiakas;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class LuoAsiakas
  */

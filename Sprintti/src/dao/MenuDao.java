@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fi.omapizzeria.admin.bean.Pizza;
-
+/**
+ * @Timo Jarmala
+ */
 public class MenuDao {
 	
 	private  Pizza pizza;

@@ -15,7 +15,9 @@ import dao.TilausRiviDao;
 import email.SahkoPosti;
 import fi.omapizzeria.admin.bean.Tilaus;
 import fi.omapizzeria.admin.bean.Tilausrivi;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class Maksutus
  */

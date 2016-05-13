@@ -21,7 +21,9 @@ import fi.omapizzeria.admin.bean.*;
 @WebServlet("/Taytteelle")
 public class Taytteelle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	/**
+	 * @Timo Jarmala
+	 */ 
     /**
      * @see HttpServlet#HttpServlet()
      */

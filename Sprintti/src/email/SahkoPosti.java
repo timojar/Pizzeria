@@ -5,7 +5,9 @@ import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
 
- 
+/**
+ * @Timo Jarmala
+ */
 public class SahkoPosti {
 	
 

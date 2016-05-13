@@ -11,7 +11,9 @@ import java.util.Date;
 import java.util.List;
 
 import fi.omapizzeria.admin.bean.*;
-
+/**
+ * @Timo Jarmala
+ */
 public class TilausDao {
 	
 private List<Tilaus> tilaukset;	

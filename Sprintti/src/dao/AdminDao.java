@@ -11,7 +11,9 @@ import java.util.List;
 
 import salaus.Salaus;
 import fi.omapizzeria.admin.bean.*;
-
+/**
+ * @Timo Jarmala
+ */
 public class AdminDao {
 
 	private boolean vahvistus;

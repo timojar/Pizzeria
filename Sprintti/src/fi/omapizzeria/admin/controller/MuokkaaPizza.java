@@ -18,7 +18,9 @@ import dao.TayteDAO;
 import fi.omapizzeria.admin.bean.Pizza;
 import fi.omapizzeria.admin.bean.PizzaTayte;
 import fi.omapizzeria.admin.bean.Tayte;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class MuokkaaPizza
  */

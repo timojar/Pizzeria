@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import fi.omapizzeria.admin.bean.Asiakas;
 import fi.omapizzeria.admin.bean.Pizza;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class AsiakasController
  */

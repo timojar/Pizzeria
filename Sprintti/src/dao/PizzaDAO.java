@@ -10,7 +10,9 @@ import java.util.List;
 import java.sql.PreparedStatement;
 
 import fi.omapizzeria.admin.bean.*;
-
+/**
+ * @Timo Jarmala
+ */
 public class PizzaDAO {
 
 	private  Pizza pizza;

@@ -15,7 +15,9 @@ import javax.xml.bind.ParseConversionEvent;
 import dao.MenuDao;
 import dao.PizzaDAO;
 import fi.omapizzeria.admin.bean.Pizza;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class shoppingcart
  */

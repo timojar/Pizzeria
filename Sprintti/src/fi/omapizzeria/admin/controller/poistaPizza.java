@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.PizzaDAO;
 import dao.TayteDAO;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class poistaPizza
  */

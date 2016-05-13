@@ -14,7 +14,9 @@ import javax.servlet.http.HttpSession;
 import dao.AdminDao;
 import dao.TayteDAO;
 import fi.omapizzeria.admin.bean.Tayte;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class SelaaTaytteet
  */

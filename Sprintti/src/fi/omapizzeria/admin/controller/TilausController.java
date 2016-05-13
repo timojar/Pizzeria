@@ -21,7 +21,9 @@ import dao.TilausRiviDao;
 import fi.omapizzeria.admin.bean.Asiakas;
 import fi.omapizzeria.admin.bean.KantaAsiakas;
 import fi.omapizzeria.admin.bean.Pizza;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class TilausController
  */

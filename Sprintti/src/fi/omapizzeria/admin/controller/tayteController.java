@@ -12,7 +12,9 @@ import javax.servlet.http.HttpSession;
 
 import dao.AdminDao;
 import dao.TayteDAO;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class tayteController
  */

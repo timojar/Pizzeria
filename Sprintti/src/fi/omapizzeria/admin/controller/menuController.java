@@ -17,7 +17,9 @@ import dao.AdminDao;
 import dao.MenuDao;
 import fi.omapizzeria.admin.bean.Asiakas;
 import fi.omapizzeria.admin.bean.Pizza;
-
+/**
+ * @Timo Jarmala
+ */
 
 /**
  * Servlet implementation class menuController

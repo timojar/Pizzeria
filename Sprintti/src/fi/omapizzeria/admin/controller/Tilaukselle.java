@@ -25,7 +25,9 @@ import fi.omapizzeria.admin.bean.PizzaTayte;
 import fi.omapizzeria.admin.bean.Tayte;
 import fi.omapizzeria.admin.bean.Tilaus;
 import fi.omapizzeria.admin.bean.Tilausrivi;
-
+/**
+ * @Timo Jarmala
+ */
 /**
  * Servlet implementation class Tilaukselle
  */
